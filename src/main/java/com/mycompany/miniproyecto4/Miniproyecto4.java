@@ -1,5 +1,5 @@
 /*
- * MINIPROYECTO #3
+ * MINIPROYECTO #4
  *
  * INTEGRANTES: 
  * John Freddy Belalcázar
@@ -13,9 +13,11 @@
 
 package com.mycompany.miniproyecto4;
 
+import vistas.Ppal;
+
 public class Miniproyecto4 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Ppal ventanaPpal = new Ppal("Supermercado - Universidad del Valle");
     }
 }
