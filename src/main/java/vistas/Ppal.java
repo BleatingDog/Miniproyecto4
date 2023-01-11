@@ -17,12 +17,13 @@ import controladores.GestorPpal;
 import java.awt.Color;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
+import modelos.Almacenamiento;
 
 public class Ppal extends javax.swing.JFrame {
 
-    public Ppal(String titulo) {
+    public Ppal(String titulo, Almacenamiento almacenamiento) {
         initComponents();
-        GestorPpal gestorPpal = new GestorPpal(this);
+        GestorPpal gestorPpal = new GestorPpal(this, almacenamiento);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);

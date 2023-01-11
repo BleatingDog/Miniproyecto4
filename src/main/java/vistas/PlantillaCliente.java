@@ -19,12 +19,13 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import modelos.Almacenamiento;
 
 public class PlantillaCliente extends javax.swing.JFrame {
 
-    public PlantillaCliente(String titulo, String opcion, long cedula) {
+    public PlantillaCliente(String titulo, String opcion, long cedula, Almacenamiento almacenamiento) {
         initComponents();
-        GestorPlantillaCliente gestorPlantillaCliente = new GestorPlantillaCliente(this, opcion, cedula);
+        GestorPlantillaCliente gestorPlantillaCliente = new GestorPlantillaCliente(this, opcion, cedula, almacenamiento);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);

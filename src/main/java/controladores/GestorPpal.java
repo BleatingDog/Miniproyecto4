@@ -15,15 +15,18 @@ package controladores;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import modelos.Almacenamiento;
 import vistas.GestionSupermercado;
 import vistas.Ppal;
 
 public class GestorPpal {
     
-    private Ppal vistaPpal;
+    private final Ppal vistaPpal;
+    private final Almacenamiento almacenamiento;
     
-    public GestorPpal(Ppal vistaPpal){
+    public GestorPpal(Ppal vistaPpal, Almacenamiento almacenamiento){
         this.vistaPpal = vistaPpal;
+        this.almacenamiento = almacenamiento;
         this.vistaPpal.addBtnCompraListener(new ManejadoraDeMouse());
         this.vistaPpal.addBtnVentaListener(new ManejadoraDeMouse());
         this.vistaPpal.addBtnGestionListener(new ManejadoraDeMouse());
@@ -64,7 +67,7 @@ public class GestorPpal {
     }
     
     public void irGestion(){
-        GestionSupermercado ventanaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle");
+        GestionSupermercado ventanaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle", almacenamiento);
         vistaPpal.dispose();
     }
 }

@@ -13,14 +13,15 @@
 
 package vistas;
 
-import controladores.GestorListaProductos;
+import controladores.GestorListaClientes;
+import controladores.GestorListaProveedores;
 import modelos.Almacenamiento;
 
-public class ListaProductos extends javax.swing.JFrame {
+public class ListaProveedores extends javax.swing.JFrame {
 
-    public ListaProductos(String titulo, Almacenamiento almacenamiento) {
+    public ListaProveedores(String titulo, Almacenamiento almacenamiento) {
         initComponents();
-        GestorListaProductos gestorListaProductos = new GestorListaProductos(this, almacenamiento);
+        GestorListaProveedores gestorListaProveedores = new GestorListaProveedores(this, almacenamiento);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);

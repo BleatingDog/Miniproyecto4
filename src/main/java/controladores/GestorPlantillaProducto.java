@@ -15,6 +15,7 @@ package controladores;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import modelos.Almacenamiento;
 import vistas.GestionSupermercado;
 import vistas.PlantillaProducto;
 
@@ -22,12 +23,14 @@ public class GestorPlantillaProducto {
     
     private final PlantillaProducto vistaPlantillaProducto;
     private final String opcion;
-    private int codigo;
-    
-    public GestorPlantillaProducto(PlantillaProducto vistaPlantillaProducto, String opcion, int codigo){
+    private final int codigo;
+    private final Almacenamiento almacenamiento;
+        
+    public GestorPlantillaProducto(PlantillaProducto vistaPlantillaProducto, String opcion, int codigo, Almacenamiento almacenamiento){
+        this.vistaPlantillaProducto = vistaPlantillaProducto;
         this.codigo = codigo;
         this.opcion = opcion;
-        this.vistaPlantillaProducto = vistaPlantillaProducto;
+        this.almacenamiento = almacenamiento;
         this.vistaPlantillaProducto.addBtnGeneralListener(new ManejadoraDeMouse());
         this.vistaPlantillaProducto.addBtnRegresarListener(new ManejadoraDeMouse());
     }
@@ -113,7 +116,7 @@ public class GestorPlantillaProducto {
     }
 
     private void irGestion() {
-        GestionSupermercado vistaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle");
+        GestionSupermercado vistaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle", almacenamiento);
         vistaPlantillaProducto.dispose();
     }
 

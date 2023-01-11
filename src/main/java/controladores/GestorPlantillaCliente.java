@@ -15,6 +15,7 @@ package controladores;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import modelos.Almacenamiento;
 import vistas.GestionSupermercado;
 import vistas.PlantillaCliente;
 
@@ -22,12 +23,14 @@ public class GestorPlantillaCliente {
     
     private final PlantillaCliente vistaPlantillaCliente;
     private final String opcion;
-    private long cedula;
+    private final long cedula;
+    private final Almacenamiento almacenamiento;
     
-    public GestorPlantillaCliente(PlantillaCliente vistaPlantillaCliente, String opcion, long cedula){
+    public GestorPlantillaCliente(PlantillaCliente vistaPlantillaCliente, String opcion, long cedula, Almacenamiento almacenamiento){
         this.vistaPlantillaCliente = vistaPlantillaCliente;
         this.cedula = cedula;
         this.opcion = opcion;
+        this.almacenamiento = almacenamiento;
         this.vistaPlantillaCliente.addBtnGeneralListener(new ManejadoraDeMouse());
         this.vistaPlantillaCliente.addBtnRegresarListener(new ManejadoraDeMouse());
     }
@@ -114,7 +117,7 @@ public class GestorPlantillaCliente {
     }
 
     private void irGestion() {
-        GestionSupermercado vistaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle");
+        GestionSupermercado vistaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle", almacenamiento);
         vistaPlantillaCliente.dispose();
     }
 

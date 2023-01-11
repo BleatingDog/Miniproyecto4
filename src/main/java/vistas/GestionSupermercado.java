@@ -17,12 +17,13 @@ import controladores.GestorGestionSupermercado;
 import java.awt.Color;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
+import modelos.Almacenamiento;
 
 public class GestionSupermercado extends javax.swing.JFrame {
 
-    public GestionSupermercado(String titulo) {
+    public GestionSupermercado(String titulo, Almacenamiento almacenamiento) {
         initComponents();
-        GestorGestionSupermercado gestorGestionSupermercado = new GestorGestionSupermercado(this);
+        GestorGestionSupermercado gestorGestionSupermercado = new GestorGestionSupermercado(this, almacenamiento);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);

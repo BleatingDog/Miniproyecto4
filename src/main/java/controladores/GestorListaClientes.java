@@ -14,15 +14,15 @@
 package controladores;
 
 import modelos.Almacenamiento;
-import vistas.ListaProductos;
+import vistas.ListaClientes;
 
-public class GestorListaProductos {
+public class GestorListaClientes {
     
-    private final ListaProductos vistaListaProductos;
+    private final ListaClientes vistaListaClientes;
     private final Almacenamiento almacenamiento;
 
-    public GestorListaProductos(ListaProductos vistaListaProductos, Almacenamiento almacenamiento) {
-        this.vistaListaProductos = vistaListaProductos;
+    public GestorListaClientes(ListaClientes vistaListaClientes, Almacenamiento almacenamiento) {
+        this.vistaListaClientes = vistaListaClientes;
         this.almacenamiento = almacenamiento;
     } 
 }

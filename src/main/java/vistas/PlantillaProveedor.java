@@ -18,16 +18,18 @@ import java.awt.Color;
 import java.awt.event.MouseListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTextField;
+import modelos.Almacenamiento;
 
 public class PlantillaProveedor extends javax.swing.JFrame {
 
     private DefaultListModel modeloLista = new DefaultListModel();
     
-    public PlantillaProveedor(String titulo) {
+    public PlantillaProveedor(String titulo, String opcion, long nit, Almacenamiento almacenamiento) {
         initComponents();
-        GestorPlantillaProveedor gestorPlantillaProveedor = new GestorPlantillaProveedor();
+        GestorPlantillaProveedor gestorPlantillaProveedor = new GestorPlantillaProveedor(this, opcion, nit, almacenamiento);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);
@@ -40,6 +42,14 @@ public class PlantillaProveedor extends javax.swing.JFrame {
 
     public void setModeloLista(DefaultListModel modeloLista) {
         this.modeloLista = modeloLista;
+    }
+
+    public JLabel getLblTitulo() {
+        return lblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        this.lblTitulo = lblTitulo;
     }
 
     public JButton getBtnGeneral() {
