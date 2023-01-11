@@ -17,13 +17,14 @@ import controladores.GestorPlantillaCliente;
 import java.awt.Color;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class PlantillaCliente extends javax.swing.JFrame {
 
-    public PlantillaCliente(String titulo) {
+    public PlantillaCliente(String titulo, String opcion, long cedula) {
         initComponents();
-        GestorPlantillaCliente gestorPlantillaCliente = new GestorPlantillaCliente();
+        GestorPlantillaCliente gestorPlantillaCliente = new GestorPlantillaCliente(this, opcion, cedula);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);
@@ -34,6 +35,14 @@ public class PlantillaCliente extends javax.swing.JFrame {
         return btnGeneral;
     }
 
+    public JLabel getLblTitulo() {
+        return lblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        this.lblTitulo = lblTitulo;
+    }
+    
     public void setBtnGeneral(JButton btnGeneral) {
         this.btnGeneral = btnGeneral;
     }

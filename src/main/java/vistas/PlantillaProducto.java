@@ -22,9 +22,9 @@ import javax.swing.JTextField;
 
 public class PlantillaProducto extends javax.swing.JFrame {
 
-    public PlantillaProducto(String titulo) {
+    public PlantillaProducto(String titulo, String opcion, int codigo) {
         initComponents();
-        GestorPlantillaProducto gestorPlantillaProducto = new GestorPlantillaProducto();
+        GestorPlantillaProducto gestorPlantillaProducto = new GestorPlantillaProducto(this, opcion, codigo);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);

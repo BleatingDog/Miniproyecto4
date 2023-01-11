@@ -22,7 +22,7 @@ public class Ppal extends javax.swing.JFrame {
 
     public Ppal(String titulo) {
         initComponents();
-        GestorPpal gestorPpal = new GestorPpal();
+        GestorPpal gestorPpal = new GestorPpal(this);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);
