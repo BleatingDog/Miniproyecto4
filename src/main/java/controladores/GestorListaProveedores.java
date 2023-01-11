@@ -13,8 +13,10 @@
 
 package controladores;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import modelos.Almacenamiento;
-import vistas.ListaClientes;
+import vistas.GestionSupermercado;
 import vistas.ListaProveedores;
 
 public class GestorListaProveedores {
@@ -25,5 +27,24 @@ public class GestorListaProveedores {
     public GestorListaProveedores(ListaProveedores vistaListaProveedores, Almacenamiento almacenamiento) {
         this.vistaListaProveedores = vistaListaProveedores;
         this.almacenamiento = almacenamiento;
-    } 
+        this.vistaListaProveedores.addBtnRegresarListener(new ManejadoraDeMouse());
+    }
+    
+    class ManejadoraDeMouse extends MouseAdapter{
+        
+        @Override
+        public void mouseClicked(MouseEvent e){
+            
+            if (e.getSource() == vistaListaProveedores.getBtnRegresar()){
+                if (e.getButton() == 1){
+                    irGestion();  
+                }
+            }
+        }
+    }
+    
+    public void irGestion(){
+        GestionSupermercado vistaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle", almacenamiento);
+        vistaListaProveedores.dispose();
+    }
 }

@@ -372,7 +372,7 @@ public class GestorGestionSupermercado {
                     }
                 }
                 case "Consultar" -> {
-                    irConsultarCliente();
+                    irConsultarProveedor();
                 }
             }
         } catch (NullPointerException np) {
