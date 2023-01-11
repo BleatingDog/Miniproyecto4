@@ -295,6 +295,12 @@ public class GestorGestionSupermercado {
                     UIManager.getIcon("OptionPane.questionIcon"), opciones, opciones[0]);
             switch(resp) {
                 case "Agregar" -> {
+                    if(almacenamiento.getProveedores().isEmpty){
+                        JOptionPane.showMessageDialog(null, "Antes de agregar un proveedor, "
+                                + "agregue un producto.", "Datos incompletos", 
+                                JOptionPane.ERROR_MESSAGE);                    
+                        return;
+                    }
                     irAgregarProveedor();
                 }
                 case "Actualizar" -> {
@@ -393,7 +399,7 @@ public class GestorGestionSupermercado {
     }
     
     public void irPpal() {
-        Ppal vistaPpal = new Ppal("Supermercado - Universidad del Valle");
+        Ppal vistaPpal = new Ppal("Supermercado - Universidad del Valle", almacenamiento);
         vistaGestionSupermercado.dispose();
     }
 }

@@ -145,7 +145,7 @@ public class GestionSupermercado extends javax.swing.JFrame {
         btnCliente.setText("Cliente");
         btnCliente.setFocusPainted(false);
         btnCliente.setRequestFocusEnabled(false);
-        panelFondo.add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, -1, -1));
+        panelFondo.add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 200, 120, -1));
         btnCliente.setBackground(Color.WHITE);
 
         btnProveedor.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
