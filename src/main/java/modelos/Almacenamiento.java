@@ -128,29 +128,33 @@ public class Almacenamiento {
         }
     }
 
-    /*public void anadirProducto(Producto producto) throws IOException {
+    /*public boolean anadirProducto(Producto producto) throws IOException {
         if (!productos.containsKey(producto.get())) {
             productos.put(producto.get(), producto);
             try
             {
                 hacerBackUp();
+                return true;
             } catch (IOException e) {
                 throw e;
             }
         }
+        return false;
     }
     
-    public void modificarProducto(long algo, Producto producto) throws IOException {
+    public boolean modificarProducto(long algo, Producto producto) throws IOException {
         if (!productos.containsKey(producto.get())) {
             productos.remove(algo);
             productos.put(producto.get(), producto);
             try
             {
                 hacerBackUp();
+                return true;
             } catch (IOException e) {
                 throw e;
             }
         }
+        return false;
     }
     
     public void eliminarProducto(long algo) throws IOException {
@@ -172,29 +176,33 @@ public class Almacenamiento {
         }
     }
     
-    public void anadirCliente(Cliente cliente) throws IOException {
+    public boolean anadirCliente(Cliente cliente) throws IOException {
         if (!clientes.containsKey(cliente.get())) {
             clientes.put(cliente.get(), cliente);
             try
             {
                 hacerBackUp();
+                return true;
             } catch (IOException e) {
                 throw e;
             }
         }
+        return false;
     }
     
-    public void modificarCliente(long algo, Cliente cliente) throws IOException {
+    public boolean modificarCliente(long algo, Cliente cliente) throws IOException {
         if (!clientes.containsKey(cliente.get())) {
             clientes.remove(algo);
             clientes.put(cliente.get(), cliente);
             try
             {
                 hacerBackUp();
+                return true;
             } catch (IOException e) {
                 throw e;
             }
         }
+        return false;
     }
     
     public void eliminarCliente(long aglo) throws IOException {
@@ -216,29 +224,33 @@ public class Almacenamiento {
         }
     }
     
-    public void anadirProveedor(Proveedor proveedor) throws IOException {
+    public boolean anadirProveedor(Proveedor proveedor) throws IOException {
         if (!proveedores.containsKey(proveedor.get())) {
             proveedores.put(proveedor.get(), proveedor);
             try
             {
                 hacerBackUp();
+                return true;
             } catch (IOException e) {
                 throw e;
             }
         }
+        return false;
     }
     
-    public void modificarProveedor(Long algo, Proveedor proveedor) throws IOException {
+    public boolean modificarProveedor(Long algo, Proveedor proveedor) throws IOException {
         if (!proveedores.containsKey(proveedor.get())) {
             proveedores.remove(algo);
             proveedores.put(proveedor.get(), proveedor);
             try
             {
                 hacerBackUp();
+                return true;
             } catch (IOException e) {
                 throw e;
             }
         }
+        return false;
     }
     
     public void eliminarProveedor(Long algo) throws IOException {
@@ -260,29 +272,33 @@ public class Almacenamiento {
         }
     }
     
-    public void anadirVenta(Venta venta) throws IOException {
+    public boolean anadirVenta(Venta venta) throws IOException {
         if (!ventas.containsKey(venta.get())) {
             ventas.put(venta.get(), venta);
             try
             {
                 hacerBackUp();
+                return true;
             } catch (IOException e) {
                 throw e;
             }
         }
+        return false;
     }
     
-    public void modificarVenta(Long algo, Venta venta) throws IOException {
+    public boolean modificarVenta(Long algo, Venta venta) throws IOException {
         if (!ventas.containsKey(venta.get())) {
             ventas.remove(algo);
             ventas.put(venta.get(), venta);
             try
             {
                 hacerBackUp();
+                return true;
             } catch (IOException e) {
                 throw e;
             }
         }
+        return false;
     }
     
     public void eliminarVenta(Long algo) throws IOException {
