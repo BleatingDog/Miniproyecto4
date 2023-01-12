@@ -13,12 +13,15 @@
 
 package controladores;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import modelos.Almacenamiento;
 import vistas.GestionSupermercado;
 import vistas.PlantillaProveedor;
@@ -37,6 +40,7 @@ public class GestorPlantillaProveedor {
         this.almacenamiento = almacenamiento;
         this.vistaPlantillaProveedor.addBtnGeneralListener(new ManejadoraDeMouse());
         this.vistaPlantillaProveedor.addBtnRegresarListener(new ManejadoraDeMouse());
+        verificarNumero(vistaPlantillaProveedor.getTxtNit());
     }
     
     public void modificarPlantilla(){
@@ -84,6 +88,12 @@ public class GestorPlantillaProveedor {
                     eliminarProveedor();
                 }
             }
+            
+            if (e.getSource() == vistaPlantillaProveedor.getBtnRegresar()){
+                if (e.getButton() == 1){
+                    irGestion();
+                }
+            }
         }
     }
     
@@ -96,7 +106,7 @@ public class GestorPlantillaProveedor {
         String nombre = vistaPlantillaProveedor.getTxtNombre().getText();
         long nitNuevo = Long.parseLong(vistaPlantillaProveedor.getTxtNit().getText());
         List<String> listaProductos = vistaPlantillaProveedor.getListaProductos().getSelectedValuesList();
-        ArrayList<Productos> misProductos = new ArrayList(listaProductos);
+        ArrayList<Producto> misProductos = new ArrayList(listaProductos);
         
         //Creando el proveedor
         Proveedor proveedor = new Proveedor(nombre, nitNuevo, misProductos);
@@ -115,16 +125,58 @@ public class GestorPlantillaProveedor {
     }
 
     public void actualizarProveedor() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(validarCamposVacios()){
+            JOptionPane.showMessageDialog(null, "Llene todos los campos requeridos antes de continuar.", "Datos incompletos", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        //Obteniendo los datos de la ventana
+        String nombreNuevo = vistaPlantillaProveedor.getTxtNombre().getText();
+        long nitNuevo = Long.parseLong(vistaPlantillaProveedor.getTxtNit().getText());
+        List<String> listaProductos = vistaPlantillaProveedor.getListaProductos().getSelectedValuesList();
+        ArrayList<Producto> misProductos = new ArrayList(listaProductos);
+        
+        //Creando el proveedor
+        Proveedor proveedor = new Proveedor(nombreNuevo, nitNuevo, misProductos);
+        
+        try {
+            //Actualizando el proveedor
+            if (almacenamiento.anadirProveedor(proveedor)){
+                JOptionPane.showMessageDialog(null, "Proveedor actualizar con éxito", "Resultado de actualizar", JOptionPane.INFORMATION_MESSAGE);
+                irGestion();
+            } else {
+                JOptionPane.showMessageDialog(null, "Ya existe un proveedor con ese número de NIT", "Resultado de actualizar", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error al agregar: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void eliminarProveedor() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //Eliminando el proveedor
+        try{
+            almacenamiento.eliminarProveedor(nit);
+            JOptionPane.showMessageDialog(null, "Proveedor eliminado con éxito", "Resultado de eliminar", JOptionPane.INFORMATION_MESSAGE);
+            irGestion();
+        } catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error al eliminar: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void irGestion() {
         GestionSupermercado vistaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle", almacenamiento);
         vistaPlantillaProveedor.dispose();
+    }
+    
+    public final void verificarNumero(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) | Character.isSpaceChar(c)){
+                    e.consume();
+                }
+            }
+        });
     }
     
     public boolean validarCamposVacios(){

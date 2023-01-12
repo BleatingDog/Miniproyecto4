@@ -13,8 +13,11 @@
 
 package controladores;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
 import modelos.Almacenamiento;
 import vistas.GestionSupermercado;
 import vistas.PlantillaProducto;
@@ -33,6 +36,8 @@ public class GestorPlantillaProducto {
         this.almacenamiento = almacenamiento;
         this.vistaPlantillaProducto.addBtnGeneralListener(new ManejadoraDeMouse());
         this.vistaPlantillaProducto.addBtnRegresarListener(new ManejadoraDeMouse());
+        verificarTexto(vistaPlantillaProducto.getTxtNombre());
+        verificarNumero(vistaPlantillaProducto.getTxtPrecio());
     }
     
     public void modificarPlantilla(){
@@ -80,6 +85,12 @@ public class GestorPlantillaProducto {
                     eliminarProducto();
                 }
             }
+            
+            if (e.getSource() == vistaPlantillaProducto.getBtnRegresar()){
+                if (e.getButton() == 1){
+                    irGestion();
+                }
+            }
         }
     }
     
@@ -98,5 +109,31 @@ public class GestorPlantillaProducto {
     public void irGestion() {
         GestionSupermercado vistaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle", almacenamiento);
         vistaPlantillaProducto.dispose();
+    }
+    
+    public final void verificarTexto(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if (Character.isAlphabetic(c) | Character.isSpaceChar(c)){
+                    e.setKeyChar(c);
+                } else {
+                    e.consume();
+                }
+            }
+        });
+    }
+    
+    public final void verificarNumero(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) | Character.isSpaceChar(c)){
+                    e.consume();
+                }
+            }
+        });
     }
 }

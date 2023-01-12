@@ -13,10 +13,13 @@
 
 package controladores;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import modelos.Almacenamiento;
 import vistas.GestionSupermercado;
 import vistas.PlantillaCliente;
@@ -35,6 +38,9 @@ public class GestorPlantillaCliente {
         this.almacenamiento = almacenamiento;
         this.vistaPlantillaCliente.addBtnGeneralListener(new ManejadoraDeMouse());
         this.vistaPlantillaCliente.addBtnRegresarListener(new ManejadoraDeMouse());
+        verificarNumero(vistaPlantillaCliente.getTxtCedula());
+        verificarNumero(vistaPlantillaCliente.getTxtTelefono());
+        verificarTexto(vistaPlantillaCliente.getTxtNombre());
     }
     
     public void modificarPlantilla(){
@@ -80,6 +86,12 @@ public class GestorPlantillaCliente {
             if (e.getSource() == vistaPlantillaCliente.getBtnGeneral() && "Eliminar".equals(opcion)){
                 if (e.getButton() == 1){
                     eliminarCliente();
+                }
+            }
+            
+            if (e.getSource() == vistaPlantillaCliente.getBtnRegresar()){
+                if (e.getButton() == 1){
+                    irGestion();
                 }
             }
         }
@@ -152,6 +164,30 @@ public class GestorPlantillaCliente {
         vistaPlantillaCliente.dispose();
     }
 
+    public final void verificarNumero(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) | Character.isSpaceChar(c)){
+                    e.consume();
+                }
+            }
+        });
+    }
+    
+    public final void verificarTexto(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if (!Character.isAlphabetic(c)){
+                    e.consume();
+                }
+            }
+        });
+    }
+    
     public boolean validarCamposVacios(){
         boolean error = false;
         if(vistaPlantillaCliente.getTxtNombre().getText().isBlank())
