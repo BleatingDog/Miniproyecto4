@@ -15,6 +15,8 @@ package controladores;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import modelos.Almacenamiento;
 import vistas.GestionSupermercado;
 import vistas.PlantillaCliente;
@@ -45,26 +47,17 @@ public class GestorPlantillaCliente {
                 plantillaEliminarCliente();
                 
             }
-            case "Consultar" -> {
-                plantillaConsultarCliente();
-                
-            }
         }
     }
 
-    private void plantillaActualizarCliente() {
+    public void plantillaActualizarCliente() {
         vistaPlantillaCliente.getLblTitulo().setText("Actualizar cliente");
         vistaPlantillaCliente.getBtnGeneral().setText("Actualizar");
     }
 
-    private void plantillaEliminarCliente() {
+    public void plantillaEliminarCliente() {
         vistaPlantillaCliente.getLblTitulo().setText("Eliminar cliente");
         vistaPlantillaCliente.getBtnGeneral().setText("Eliminar");
-    }
-
-    private void plantillaConsultarCliente() {
-        vistaPlantillaCliente.getLblTitulo().setText("Consultar cliente");
-        vistaPlantillaCliente.getBtnGeneral().setText("Consultar");
     }
     
     class ManejadoraDeMouse extends MouseAdapter{
@@ -89,39 +82,84 @@ public class GestorPlantillaCliente {
                     eliminarCliente();
                 }
             }
-            
-            if (e.getSource() == vistaPlantillaCliente.getBtnRegresar() && !"Consultar".equals(opcion)){
-                if (e.getButton() == 1){
-                    irGestion();  
-                }
-            } 
-            if (e.getSource() == vistaPlantillaCliente.getBtnRegresar() && "Consultar".equals(opcion)) {
-                if (e.getButton() == 1){
-                    irListaDeClientes();
-                }
-            }
         }
-
     }
     
-    private void agregarCliente() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void agregarCliente() {
+        if(validarCamposVacios()){
+            JOptionPane.showMessageDialog(null, "Llene todos los campos requeridos antes de continuar.", "Datos incompletos", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        //Obteniendo los datos de la ventana
+        String nombre = vistaPlantillaCliente.getTxtNombre().getText();
+        long cedulaNueva = Long.parseLong(vistaPlantillaCliente.getTxtCedula().getText());
+        long telefono = Long.parseLong(vistaPlantillaCliente.getTxtTelefono().getText());
+
+        //Estableciendo los datos obtenidos al modelo
+        Cliente cliente = new Cliente(nombre, cedulaNueva, telefono);
+        try {
+            //Agregando el afiliado
+            if (almacenamiento.anadirCliente(cliente)){
+                JOptionPane.showMessageDialog(null, "Cliente agregado con éxito", "Resultado de agregar", JOptionPane.INFORMATION_MESSAGE);
+                irGestion();
+            } else {
+                JOptionPane.showMessageDialog(null, "Ya existe una persona con ese número de cédula", "Resultado de agregar", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error al agregar: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    private void actualizarCliente() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void actualizarCliente() {
+        if(validarCamposVacios()){
+            JOptionPane.showMessageDialog(null, "Llene todos los campos requeridos antes de continuar.", "Datos incompletos", JOptionPane.ERROR_MESSAGE);            
+            return;
+        }
+        //Obteniendo los datos
+        String nombre = vistaPlantillaCliente.getTxtNombre().getText();
+        long cedulaNueva = Long.parseLong(vistaPlantillaCliente.getTxtCedula().getText());
+        long telefono = Long.parseLong(vistaPlantillaCliente.getTxtTelefono().getText());
+        
+        //Estableciendo los datos obtenidos al modelo
+        Cliente cliente = new Cliente(nombre, cedulaNueva, telefono);
+
+        //Verifica si no existe una cédula duplicada y modifica el cliente
+        try {
+            if(almacenamiento.modificarCliente(cedula, cliente)){
+                JOptionPane.showMessageDialog(null, "Cliente actualizado con éxito", "Resultado de actualizar", JOptionPane.INFORMATION_MESSAGE);
+                irGestion();            
+            } else {
+                JOptionPane.showMessageDialog(null, "Ya existe un cliente con esa cédula", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    private void eliminarCliente() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void eliminarCliente() {
+        //Eliminando el cliente
+        try{
+            almacenamiento.eliminarCliente(cedula);
+            JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito", "Resultado de eliminar", JOptionPane.INFORMATION_MESSAGE);
+            irGestion();
+        } catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error al eliminar: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    private void irGestion() {
+    public void irGestion() {
         GestionSupermercado vistaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle", almacenamiento);
         vistaPlantillaCliente.dispose();
     }
 
-    private void irListaDeClientes() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean validarCamposVacios(){
+        boolean error = false;
+        if(vistaPlantillaCliente.getTxtNombre().getText().isBlank())
+            error = true;
+        if(vistaPlantillaCliente.getTxtCedula().getText().isBlank())
+            error = true;
+        if(vistaPlantillaCliente.getTxtTelefono().getText().isBlank())
+            error = true;
+        return error;
     }
 }

@@ -45,10 +45,6 @@ public class GestorPlantillaProducto {
                 plantillaEliminarProducto();
                 
             }
-            case "Consultar" -> {
-                plantillaConsultarProducto();
-                
-            }
         }
     }
 
@@ -62,11 +58,6 @@ public class GestorPlantillaProducto {
         vistaPlantillaProducto.getBtnGeneral().setText("Eliminar");
     }
 
-    public void plantillaConsultarProducto() {
-        vistaPlantillaProducto.getLblTitulo().setText("Consultar producto");
-        vistaPlantillaProducto.getBtnGeneral().setText("Consultar");
-    }
-    
     class ManejadoraDeMouse extends MouseAdapter{
         
         @Override
@@ -89,38 +80,23 @@ public class GestorPlantillaProducto {
                     eliminarProducto();
                 }
             }
-            
-            if (e.getSource() == vistaPlantillaProducto.getBtnRegresar() && !"Consultar".equals(opcion)){
-                if (e.getButton() == 1){
-                    irGestion();  
-                }
-            } 
-            if (e.getSource() == vistaPlantillaProducto.getBtnRegresar() && "Consultar".equals(opcion)) {
-                if (e.getButton() == 1){
-                    irListaDeProductos();
-                }
-            }
         }
     }
     
-    private void agregarProducto() {
+    public void agregarProducto() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private void actualizarProducto() {
+    public void actualizarProducto() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private void eliminarProducto() {
+    public void eliminarProducto() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private void irGestion() {
+    public void irGestion() {
         GestionSupermercado vistaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle", almacenamiento);
         vistaPlantillaProducto.dispose();
-    }
-
-    private void irListaDeProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
