@@ -27,6 +27,7 @@ public class GestorPlantillaProducto {
     private final PlantillaProducto vistaPlantillaProducto;
     private final String opcion;
     private final int codigo;
+    private long codigoAsignado;
     private final Almacenamiento almacenamiento;
         
     public GestorPlantillaProducto(PlantillaProducto vistaPlantillaProducto, String opcion, int codigo, Almacenamiento almacenamiento){
@@ -36,6 +37,10 @@ public class GestorPlantillaProducto {
         this.almacenamiento = almacenamiento;
         this.vistaPlantillaProducto.addBtnGeneralListener(new ManejadoraDeMouse());
         this.vistaPlantillaProducto.addBtnRegresarListener(new ManejadoraDeMouse());
+        modificarPlantilla();
+        if("Agendar".equals(opcion)){
+            asignarCodigoProducto();
+        }
         verificarTexto(vistaPlantillaProducto.getTxtNombre());
         verificarNumero(vistaPlantillaProducto.getTxtPrecio());
     }
@@ -109,6 +114,15 @@ public class GestorPlantillaProducto {
     public void irGestion() {
         GestionSupermercado vistaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle", almacenamiento);
         vistaPlantillaProducto.dispose();
+    }
+    
+    public void asignarCodigoProducto() {
+        long miCodigoProducto = 1;
+        while (almacenamiento.getProductos().containsKey(miCodigoProducto)) {
+            miCodigoProducto += 1;
+        }
+        codigoAsignado = miCodigoProducto;
+        vistaPlantillaProducto.getTxtCodigo().setText(String.valueOf(codigoAsignado));
     }
     
     public final void verificarTexto(JTextField a){
