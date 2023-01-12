@@ -21,6 +21,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import modelos.Almacenamiento;
+import modelos.Cliente;
 import vistas.GestionSupermercado;
 import vistas.PlantillaCliente;
 
@@ -59,6 +60,7 @@ public class GestorPlantillaCliente {
     public void plantillaActualizarCliente() {
         vistaPlantillaCliente.getLblTitulo().setText("Actualizar cliente");
         vistaPlantillaCliente.getBtnGeneral().setText("Actualizar");
+        vistaPlantillaCliente.getTxtCedula().setEditable(false);
     }
 
     public void plantillaEliminarCliente() {
@@ -108,7 +110,7 @@ public class GestorPlantillaCliente {
         long telefono = Long.parseLong(vistaPlantillaCliente.getTxtTelefono().getText());
 
         //Estableciendo los datos obtenidos al modelo
-        Cliente cliente = new Cliente(nombre, cedulaNueva, telefono);
+        Cliente cliente = new Cliente(cedulaNueva, nombre, telefono);
         try {
             //Agregando el afiliado
             if (almacenamiento.anadirCliente(cliente)){
@@ -132,8 +134,8 @@ public class GestorPlantillaCliente {
         long cedulaNueva = Long.parseLong(vistaPlantillaCliente.getTxtCedula().getText());
         long telefono = Long.parseLong(vistaPlantillaCliente.getTxtTelefono().getText());
         
-        //Estableciendo los datos obtenidos al modelo
-        Cliente cliente = new Cliente(nombre, cedulaNueva, telefono);
+        //Creando el cliente con los nuevos datos
+        Cliente cliente = new Cliente(cedulaNueva, nombre, telefono);
 
         //Verifica si no existe una cédula duplicada y modifica el cliente
         try {

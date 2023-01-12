@@ -17,8 +17,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import modelos.Almacenamiento;
+import modelos.Producto;
 import vistas.GestionSupermercado;
 import vistas.PlantillaProducto;
 
@@ -100,15 +103,63 @@ public class GestorPlantillaProducto {
     }
     
     public void agregarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(validarCamposVacios()){
+            JOptionPane.showMessageDialog(null, "Llene todos los campos requeridos antes de continuar.", "Datos incompletos", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        //Obteniendo los datos de la ventana
+        String nombre = vistaPlantillaProducto.getTxtNombre().getText();
+        int precioNuevo = Integer.parseInt(vistaPlantillaProducto.getTxtPrecio().getText());
+        long numeroCodigo = Long.parseLong(vistaPlantillaProducto.getTxtCodigo().getText());
+        //Estableciendo los datos obtenidos al modelo
+        Producto producto = new Producto(numeroCodigo, nombre, precioNuevo);
+        try {
+            //Agregando el producto
+            if (almacenamiento.anadirProducto(producto)){ //Posiblemente nunca entre al else
+                JOptionPane.showMessageDialog(null, "Producto agregado con éxito", "Resultado de agregar", JOptionPane.INFORMATION_MESSAGE);
+                irGestion();
+            } else {
+                JOptionPane.showMessageDialog(null, "Ya existe una producto con ese código", "Resultado de agregar", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error al agregar: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void actualizarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(validarCamposVacios()){
+            JOptionPane.showMessageDialog(null, "Llene todos los campos requeridos antes de continuar.", "Datos incompletos", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        //Obteniendo los datos de la ventana
+        String nombre = vistaPlantillaProducto.getTxtNombre().getText();
+        int precioNuevo = Integer.parseInt(vistaPlantillaProducto.getTxtPrecio().getText());
+        long numeroCodigo = Long.valueOf(codigo);
+        
+        //Creando el producto con los nuevos datos
+        Producto producto = new Producto(numeroCodigo, nombre, precioNuevo);
+        try {
+            //Actualizando el producto
+            if (almacenamiento.actualizarProducto(codigo, producto)){ //Posiblemente nunca entre al else
+                JOptionPane.showMessageDialog(null, "Producto actualizado con éxito", "Resultado de actualizar", JOptionPane.INFORMATION_MESSAGE);
+                irGestion();
+            } else {
+                JOptionPane.showMessageDialog(null, "Ya existe una producto con ese código", "Resultado de actualizar", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error al agregar: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void eliminarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //Eliminando el producto
+        try{
+            almacenamiento.eliminarProducto(codigo);
+            JOptionPane.showMessageDialog(null, "Producto eliminado con éxito", "Resultado de eliminar", JOptionPane.INFORMATION_MESSAGE);
+            irGestion();
+        } catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error al eliminar: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void irGestion() {
@@ -149,5 +200,14 @@ public class GestorPlantillaProducto {
                 }
             }
         });
+    }
+    
+    public boolean validarCamposVacios(){
+        boolean error = false;
+        if(vistaPlantillaProducto.getTxtNombre().getText().isBlank())
+            error = true;
+        if(vistaPlantillaProducto.getTxtPrecio().getText().isBlank())
+            error = true;
+        return error;
     }
 }

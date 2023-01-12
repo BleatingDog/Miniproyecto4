@@ -23,6 +23,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import modelos.Almacenamiento;
+import modelos.Producto;
+import modelos.Proveedor;
 import vistas.GestionSupermercado;
 import vistas.PlantillaProveedor;
 
@@ -59,6 +61,7 @@ public class GestorPlantillaProveedor {
     private void plantillaActualizarProveedor() {
         vistaPlantillaProveedor.getLblTitulo().setText("Actualizar proveedor");
         vistaPlantillaProveedor.getBtnGeneral().setText("Actualizar");
+        vistaPlantillaProveedor.getTxtNit().setEditable(false);
     }
 
     private void plantillaEliminarProveedor() {
@@ -109,7 +112,7 @@ public class GestorPlantillaProveedor {
         ArrayList<Producto> misProductos = new ArrayList(listaProductos);
         
         //Creando el proveedor
-        Proveedor proveedor = new Proveedor(nombre, nitNuevo, misProductos);
+        Proveedor proveedor = new Proveedor(nitNuevo, nombre, misProductos);
         
         try {
             //Agregando el proveedor
@@ -135,12 +138,12 @@ public class GestorPlantillaProveedor {
         List<String> listaProductos = vistaPlantillaProveedor.getListaProductos().getSelectedValuesList();
         ArrayList<Producto> misProductos = new ArrayList(listaProductos);
         
-        //Creando el proveedor
-        Proveedor proveedor = new Proveedor(nombreNuevo, nitNuevo, misProductos);
+        //Creando el proveedor con los nuevos datos
+        Proveedor proveedor = new Proveedor(nitNuevo, nombreNuevo, misProductos);
         
         try {
             //Actualizando el proveedor
-            if (almacenamiento.anadirProveedor(proveedor)){
+            if (almacenamiento.actualizarProveedor(nit, proveedor)){
                 JOptionPane.showMessageDialog(null, "Proveedor actualizar con éxito", "Resultado de actualizar", JOptionPane.INFORMATION_MESSAGE);
                 irGestion();
             } else {

@@ -15,11 +15,11 @@ package modelos;
 
 public class Cliente {
     
-    private Long cedula;
+    private long cedula;
     private String nombre;
-    private int telefono;
+    private long telefono;
 
-    public Cliente(Long cedula, String nombre, int telefono) {
+    public Cliente(long cedula, String nombre, long telefono) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -41,13 +41,11 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public int getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
-    
-    
 }
