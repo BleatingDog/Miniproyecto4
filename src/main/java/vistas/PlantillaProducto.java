@@ -130,6 +130,7 @@ public class PlantillaProducto extends javax.swing.JFrame {
         lblCodigo.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
         lblCodigo.setText("Código");
 
+        txtCodigo.setEditable(false);
         txtCodigo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 

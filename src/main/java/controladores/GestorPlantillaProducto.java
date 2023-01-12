@@ -13,8 +13,11 @@
 
 package controladores;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
 import modelos.Almacenamiento;
 import vistas.GestionSupermercado;
 import vistas.PlantillaProducto;
@@ -33,6 +36,8 @@ public class GestorPlantillaProducto {
         this.almacenamiento = almacenamiento;
         this.vistaPlantillaProducto.addBtnGeneralListener(new ManejadoraDeMouse());
         this.vistaPlantillaProducto.addBtnRegresarListener(new ManejadoraDeMouse());
+        verificarTexto(vistaPlantillaProducto.getTxtNombre());
+        verificarNumero(vistaPlantillaProducto.getTxtPrecio());
     }
     
     public void modificarPlantilla(){
@@ -43,10 +48,6 @@ public class GestorPlantillaProducto {
             }
             case "Eliminar" -> {
                 plantillaEliminarProducto();
-                
-            }
-            case "Consultar" -> {
-                plantillaConsultarProducto();
                 
             }
         }
@@ -62,11 +63,6 @@ public class GestorPlantillaProducto {
         vistaPlantillaProducto.getBtnGeneral().setText("Eliminar");
     }
 
-    public void plantillaConsultarProducto() {
-        vistaPlantillaProducto.getLblTitulo().setText("Consultar producto");
-        vistaPlantillaProducto.getBtnGeneral().setText("Consultar");
-    }
-    
     class ManejadoraDeMouse extends MouseAdapter{
         
         @Override
@@ -90,37 +86,54 @@ public class GestorPlantillaProducto {
                 }
             }
             
-            if (e.getSource() == vistaPlantillaProducto.getBtnRegresar() && !"Consultar".equals(opcion)){
+            if (e.getSource() == vistaPlantillaProducto.getBtnRegresar()){
                 if (e.getButton() == 1){
-                    irGestion();  
-                }
-            } 
-            if (e.getSource() == vistaPlantillaProducto.getBtnRegresar() && "Consultar".equals(opcion)) {
-                if (e.getButton() == 1){
-                    irListaDeProductos();
+                    irGestion();
                 }
             }
         }
     }
     
-    private void agregarProducto() {
+    public void agregarProducto() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private void actualizarProducto() {
+    public void actualizarProducto() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private void eliminarProducto() {
+    public void eliminarProducto() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private void irGestion() {
+    public void irGestion() {
         GestionSupermercado vistaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle", almacenamiento);
         vistaPlantillaProducto.dispose();
     }
-
-    private void irListaDeProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    public final void verificarTexto(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if (Character.isAlphabetic(c) | Character.isSpaceChar(c)){
+                    e.setKeyChar(c);
+                } else {
+                    e.consume();
+                }
+            }
+        });
+    }
+    
+    public final void verificarNumero(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) | Character.isSpaceChar(c)){
+                    e.consume();
+                }
+            }
+        });
     }
 }
