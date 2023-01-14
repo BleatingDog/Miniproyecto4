@@ -10,25 +10,26 @@
  *
  * PROFESOR: Luis Yohany Romo Portilla 
  */
-
 package controladores;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import modelos.Almacenamiento;
 import vistas.CompraProductos;
 import vistas.Ppal;
+import vistas.VentaProductos;
 
 
-public class GestorCompraProductos {
-    private final CompraProductos vistaCompraProductos;
+public class GestorVentaProductos {
+    private final VentaProductos vistaVentaProductos;
     private final Almacenamiento almacenamiento; 
     
-    public GestorCompraProductos(CompraProductos vistaCompraProductos, Almacenamiento almacenamiento){
-        this.vistaCompraProductos = vistaCompraProductos;
+    public GestorVentaProductos(VentaProductos vistaVentaProductos, Almacenamiento almacenamiento){
+        this.vistaVentaProductos = vistaVentaProductos;
         this.almacenamiento = almacenamiento;
-        this.vistaCompraProductos.addBtnRegresarListener(new ManejadoraDeMouse());
-        this.vistaCompraProductos.addBtnAgregarListener(new ManejadoraDeMouse());
-        this.vistaCompraProductos.addBtnIrCarritoListener(new ManejadoraDeMouse());
+        this.vistaVentaProductos.addBtnRegresarListener(new ManejadoraDeMouse());
+        this.vistaVentaProductos.addBtnAgregarListener(new ManejadoraDeMouse());
+        this.vistaVentaProductos.addBtnIrCarritoListener(new ManejadoraDeMouse());
     }
     
     class ManejadoraDeMouse extends MouseAdapter{
@@ -36,19 +37,19 @@ public class GestorCompraProductos {
         @Override
         public void mouseClicked(MouseEvent e){
             
-            if (e.getSource() == vistaCompraProductos.getBtnRegresar()){
+            if (e.getSource() == vistaVentaProductos.getBtnRegresar()){
                 if (e.getButton() == 1){
                     irPpal();
                 }
             }
 
-            if (e.getSource() == vistaCompraProductos.getBtnAgregar()){
+            if (e.getSource() == vistaVentaProductos.getBtnAgregar()){
                 if (e.getButton() == 1){
-                    AgregarAlCarritoCompra();
+                    AgregarAlCarritoVenta();
                 }
             }
             
-            if (e.getSource() == vistaCompraProductos.getBtnIrCarrito()){
+            if (e.getSource() == vistaVentaProductos.getBtnIrCarrito()){
                 if (e.getButton() == 1){
                     IrCarritoCompra();
                 }
@@ -57,7 +58,7 @@ public class GestorCompraProductos {
 
     }
     
-public void AgregarAlCarritoCompra() {
+public void AgregarAlCarritoVenta() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -67,6 +68,6 @@ public void AgregarAlCarritoCompra() {
  
     public void irPpal() {
         Ppal vistaPpal = new Ppal("Supermercado - Universidad del Valle", almacenamiento);
-        vistaCompraProductos.dispose();
+        vistaVentaProductos.dispose();
     }
 }

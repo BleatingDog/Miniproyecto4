@@ -96,7 +96,7 @@ public class Ppal extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lblTitulo1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(lblTitulo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +105,7 @@ public class Ppal extends javax.swing.JFrame {
                 .addComponent(lblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTitulo1)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelFondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 170));
@@ -124,7 +124,12 @@ public class Ppal extends javax.swing.JFrame {
         btnGestion.setText("Gestión de supermercado");
         btnGestion.setFocusPainted(false);
         btnGestion.setRequestFocusEnabled(false);
-        panelFondo.add(btnGestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, -1, -1));
+        btnGestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestionActionPerformed(evt);
+            }
+        });
+        panelFondo.add(btnGestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, -1, -1));
         btnGestion.setBackground(Color.WHITE);
 
         btnVenta.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
@@ -147,6 +152,10 @@ public class Ppal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGestionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCompra;
