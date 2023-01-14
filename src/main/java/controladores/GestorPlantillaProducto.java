@@ -62,13 +62,30 @@ public class GestorPlantillaProducto {
     }
 
     public void plantillaActualizarProducto() {
+        
         vistaPlantillaProducto.getLblTitulo().setText("Actualizar producto");
         vistaPlantillaProducto.getBtnGeneral().setText("Actualizar");
+        
+        //Ingresando datos del producto en la ventana
+        vistaPlantillaProducto.getTxtCodigo().setText(String.valueOf(codigo));
+        vistaPlantillaProducto.getTxtNombre().setText(almacenamiento.getProductos().get(codigo).getNombre());
+        vistaPlantillaProducto.getTxtPrecio().setText(almacenamiento.getProductos().get(codigo).getPrecio());
+        
     }
 
     public void plantillaEliminarProducto() {
         vistaPlantillaProducto.getLblTitulo().setText("Eliminar producto");
         vistaPlantillaProducto.getBtnGeneral().setText("Eliminar");
+        
+        //Ingresando datos del producto en la ventana
+        vistaPlantillaProducto.getTxtCodigo().setText(String.valueOf(codigo));
+        vistaPlantillaProducto.getTxtNombre().setText(almacenamiento.getProductos().get(codigo).getNombre());
+        vistaPlantillaProducto.getTxtPrecio().setText(almacenamiento.getProductos().get(codigo).getPrecio());
+        
+        //Desactivando campos
+        vistaPlantillaProducto.getTxtCodigo().setEditable(false);
+        vistaPlantillaProducto.getTxtNombre().setEditable(false);
+        vistaPlantillaProducto.getTxtPrecio().setEditable(false);
     }
 
     class ManejadoraDeMouse extends MouseAdapter{

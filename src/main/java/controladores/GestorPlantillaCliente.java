@@ -58,14 +58,36 @@ public class GestorPlantillaCliente {
     }
 
     public void plantillaActualizarCliente() {
+        //Modificando título y botón general
         vistaPlantillaCliente.getLblTitulo().setText("Actualizar cliente");
         vistaPlantillaCliente.getBtnGeneral().setText("Actualizar");
+        
+        //Desactivando campo cédula
         vistaPlantillaCliente.getTxtCedula().setEditable(false);
+        
+        //Ingresando los datos del cliente
+        Cliente miCliente = almacenamiento.getClientes().get(cedula);
+        vistaPlantillaCliente.getTxtNombre().setText(miCliente.getNombre());
+        vistaPlantillaCliente.getTxtCedula().setText(String.valueOf(miCliente.getCedula()));
+        vistaPlantillaCliente.getTxtTelefono().setText(String.valueOf(miCliente.getTelefono()));
     }
 
     public void plantillaEliminarCliente() {
+        
+        //Modificando título y botón general
         vistaPlantillaCliente.getLblTitulo().setText("Eliminar cliente");
         vistaPlantillaCliente.getBtnGeneral().setText("Eliminar");
+        
+        //Desactivando campos
+        vistaPlantillaCliente.getTxtNombre().setEditable(false);
+        vistaPlantillaCliente.getTxtCedula().setEditable(false);
+        vistaPlantillaCliente.getTxtTelefono().setEditable(false);
+        
+        //Ingresando datos del cliente
+        Cliente miCliente = almacenamiento.getClientes().get(cedula);
+        vistaPlantillaCliente.getTxtNombre().setText(miCliente.getNombre());
+        vistaPlantillaCliente.getTxtCedula().setText(String.valueOf(miCliente.getCedula()));
+        vistaPlantillaCliente.getTxtTelefono().setText(String.valueOf(miCliente.getTelefono()));
     }
     
     class ManejadoraDeMouse extends MouseAdapter{
@@ -109,10 +131,10 @@ public class GestorPlantillaCliente {
         long cedulaNueva = Long.parseLong(vistaPlantillaCliente.getTxtCedula().getText());
         long telefono = Long.parseLong(vistaPlantillaCliente.getTxtTelefono().getText());
 
-        //Estableciendo los datos obtenidos al modelo
+        //Creando el cliente
         Cliente cliente = new Cliente(cedulaNueva, nombre, telefono);
         try {
-            //Agregando el afiliado
+            //Agregando al cliente
             if (almacenamiento.anadirCliente(cliente)){
                 JOptionPane.showMessageDialog(null, "Cliente agregado con éxito", "Resultado de agregar", JOptionPane.INFORMATION_MESSAGE);
                 irGestion();
@@ -129,13 +151,13 @@ public class GestorPlantillaCliente {
             JOptionPane.showMessageDialog(null, "Llene todos los campos requeridos antes de continuar.", "Datos incompletos", JOptionPane.ERROR_MESSAGE);            
             return;
         }
-        //Obteniendo los datos
+        
+        //Obteniendo los datos de la ventana
         String nombre = vistaPlantillaCliente.getTxtNombre().getText();
-        long cedulaNueva = Long.parseLong(vistaPlantillaCliente.getTxtCedula().getText());
         long telefono = Long.parseLong(vistaPlantillaCliente.getTxtTelefono().getText());
         
         //Creando el cliente con los nuevos datos
-        Cliente cliente = new Cliente(cedulaNueva, nombre, telefono);
+        Cliente cliente = new Cliente(cedula, nombre, telefono);
 
         //Verifica si no existe una cédula duplicada y modifica el cliente
         try {

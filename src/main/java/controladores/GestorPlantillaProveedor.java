@@ -58,17 +58,53 @@ public class GestorPlantillaProveedor {
         }
     }
 
-    private void plantillaActualizarProveedor() {
+    public void plantillaActualizarProveedor() {
+        //Modificando título y botón general
         vistaPlantillaProveedor.getLblTitulo().setText("Actualizar proveedor");
         vistaPlantillaProveedor.getBtnGeneral().setText("Actualizar");
+        
+        //Desactivando campo de NIT
         vistaPlantillaProveedor.getTxtNit().setEditable(false);
+        ingresarDatosProveedor();        
     }
 
-    private void plantillaEliminarProveedor() {
+    public void plantillaEliminarProveedor() {
+        
+        //Modificando título y botón general
         vistaPlantillaProveedor.getLblTitulo().setText("Eliminar proveedor");
         vistaPlantillaProveedor.getBtnGeneral().setText("Eliminar");
+        
+        //Desactivando campos
+        vistaPlantillaProveedor.getTxtNombre().setEditable(false);
+        vistaPlantillaProveedor.getTxtNit().setEditable(false);
+        ingresarDatosProveedor();
     }
     
+    public void ingresarDatosProveedor(){
+        
+        Proveedor miProveedor = almacenamiento.getProveedores().get(nit);
+        
+        //Ingresando los datos del proveedor en la ventana
+        vistaPlantillaProveedor.getTxtNombre().setText(miProveedor.getNombre());
+        vistaPlantillaProveedor.getTxtNit().setText(String.valueOf(miProveedor.getNIT()));
+        
+        //Hacer que se seleccionen los servicios del medico
+        ArrayList <Integer> seleccionados = new ArrayList();
+        for(int i = 0; i<miProveedor.getProductos().size(); i++){
+            String servicio = "";
+            servicio += miProveedor.getProductos().get(i);
+            for(int o = 0; o<vistaPlantillaProveedor.getListaProductos().getModel().getSize(); o++){
+                if(servicio.equals(vistaPlantillaProveedor.getListaProductos().getModel().getElementAt(o))){
+                    seleccionados.add(o);
+                }
+            }
+        }
+        int[] indices = new int[seleccionados.size()];
+        for (int i = 0; i<seleccionados.size(); i++) {
+            indices[i] = seleccionados.get(i);
+        }
+        vistaPlantillaProveedor.getListaProductos().setSelectedIndices(indices);
+    }
     class ManejadoraDeMouse extends MouseAdapter{
         
         @Override
@@ -134,12 +170,11 @@ public class GestorPlantillaProveedor {
         }
         //Obteniendo los datos de la ventana
         String nombreNuevo = vistaPlantillaProveedor.getTxtNombre().getText();
-        long nitNuevo = Long.parseLong(vistaPlantillaProveedor.getTxtNit().getText());
         List<String> listaProductos = vistaPlantillaProveedor.getListaProductos().getSelectedValuesList();
         ArrayList<Producto> misProductos = new ArrayList(listaProductos);
         
         //Creando el proveedor con los nuevos datos
-        Proveedor proveedor = new Proveedor(nitNuevo, nombreNuevo, misProductos);
+        Proveedor proveedor = new Proveedor(nit, nombreNuevo, misProductos);
         
         try {
             //Actualizando el proveedor
