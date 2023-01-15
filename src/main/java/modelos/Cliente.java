@@ -17,9 +17,9 @@ public class Cliente {
     
     private long cedula;
     private String nombre;
-    private long telefono;
+    private int telefono;
 
-    public Cliente(long cedula, String nombre, long telefono) {
+    public Cliente(long cedula, String nombre, int telefono) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -41,7 +41,7 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public long getTelefono() {
+    public int getTelefono() {
         return telefono;
     }
 

@@ -23,6 +23,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Almacenamiento {
     
@@ -89,48 +90,10 @@ public class Almacenamiento {
             throw e;
         }
     }
-    
-    public boolean hacerBackUp(File ruta) throws IOException{
-        
-        try
-        {
-            OutputStream os = new FileOutputStream(ruta);
-            ObjectOutputStream oos = new ObjectOutputStream(os);
 
-            oos.writeObject(productos);
-            oos.writeObject(clientes);
-            oos.writeObject(proveedores);
-            oos.writeObject(ventas);
-
-            oos.close();
-            return true;
-        } catch (IOException e) {
-            throw e;
-        }
-    }
-    
-    public boolean restaurarDatos(File ruta) throws IOException, ClassNotFoundException {
-        
-        try
-        {
-            InputStream is = new FileInputStream(ruta);
-            ObjectInputStream ois = new ObjectInputStream(is);
-
-            productos = (HashMap) ois.readObject();
-            clientes = (HashMap) ois.readObject();
-            proveedores = (HashMap) ois.readObject();
-            ventas = (HashMap) ois.readObject();
-
-            ois.close();
-            return true;
-        } catch(IOException | ClassNotFoundException e) {
-            throw e;
-        }
-    }
-
-    /*public boolean anadirProducto(Producto producto) throws IOException {
-        if (!productos.containsKey(producto.get())) {
-            productos.put(producto.get(), producto);
+    public boolean anadirProducto(Producto producto) throws IOException {
+        if (!productos.containsKey(producto.getCodigo())) {
+            productos.put(producto.getCodigo(), producto);
             try
             {
                 hacerBackUp();
@@ -142,10 +105,11 @@ public class Almacenamiento {
         return false;
     }
     
-    public boolean modificarProducto(long algo, Producto producto) throws IOException {
-        if (!productos.containsKey(producto.get())) {
-            productos.remove(algo);
-            productos.put(producto.get(), producto);
+    public boolean modificarProducto(Producto cambiosProducto) throws IOException {
+        if (!productos.containsKey(cambiosProducto.getCodigo())) {
+            Producto producto = productos.get(cambiosProducto.getCodigo());
+            producto.setNombre(cambiosProducto.getNombre());
+            producto.setPrecio(cambiosProducto.getPrecio());
             try
             {
                 hacerBackUp();
@@ -157,28 +121,42 @@ public class Almacenamiento {
         return false;
     }
     
-    public void eliminarProducto(long algo) throws IOException {
-        Producto producto = productos.get(algo);
-        productos.remove(algo);
+    public boolean eliminarProducto(long codigo) throws IOException {
+        boolean sePuedeEliminar = true;
         
         //Medidas de eliminación
-        for (int i=0; i<citas.size(); i++) {
-            Cita cita = citas.get(i);
-            if (cita.getAfiliado() == afiliado) {
-                citas.remove(i);
+        Iterator iteradorVentas = ventas.entrySet().iterator();
+        while (iteradorVentas.hasNext()) {
+            HashMap.Entry <Long, Venta> mapa = (HashMap.Entry) iteradorVentas.next();
+            Venta venta = mapa.getValue();
+            if (venta.getInformacionDelProducto().containsKey(codigo)) {
+                sePuedeEliminar = false;
             }
         }
-        try
-        {
-            hacerBackUp();
-        } catch (IOException e) {
-            throw e;
+        Iterator iteradorProveedores = proveedores.entrySet().iterator();
+        while (iteradorProveedores.hasNext()) {
+            HashMap.Entry <Long, Proveedor> mapa = (HashMap.Entry) iteradorProveedores.next();
+            Proveedor proveedor = mapa.getValue();
+            if (proveedor.getProductos().contains(productos.get(codigo))) {
+                sePuedeEliminar = false;
+            }
         }
+        if (sePuedeEliminar) {
+            productos.remove(codigo);
+            try
+            {
+                hacerBackUp();
+                return true;
+            } catch (IOException e) {
+                throw e;
+            }
+        }
+        return false;
     }
     
     public boolean anadirCliente(Cliente cliente) throws IOException {
-        if (!clientes.containsKey(cliente.get())) {
-            clientes.put(cliente.get(), cliente);
+        if (!clientes.containsKey(cliente.getCedula())) {
+            clientes.put(cliente.getCedula(), cliente);
             try
             {
                 hacerBackUp();
@@ -190,10 +168,11 @@ public class Almacenamiento {
         return false;
     }
     
-    public boolean modificarCliente(long algo, Cliente cliente) throws IOException {
-        if (!clientes.containsKey(cliente.get())) {
-            clientes.remove(algo);
-            clientes.put(cliente.get(), cliente);
+    public boolean modificarCliente(Cliente cambiosCliente) throws IOException {
+        if (!clientes.containsKey(cambiosCliente.getCedula())) {
+            Cliente cliente = clientes.get(cambiosCliente.getCedula());
+            cliente.setNombre(cambiosCliente.getNombre());
+            cliente.setTelefono(cambiosCliente.getTelefono());
             try
             {
                 hacerBackUp();
@@ -205,28 +184,34 @@ public class Almacenamiento {
         return false;
     }
     
-    public void eliminarCliente(long aglo) throws IOException {
-        Cliente cliente = clientes.get(algo);
-        clientes.remove(algo);
+    public boolean eliminarCliente(long cedula) throws IOException {
+        boolean sePuedeEliminar = true;
         
         //Medidas de eliminación
-        for (int i=0; i<citas.size(); i++) {
-            Cita cita = citas.get(i);
-            if (cita.getMedico() == medico) {
-                citas.remove(i);
+        Iterator iteradorVentas = ventas.entrySet().iterator();
+        while (iteradorVentas.hasNext()) {
+            HashMap.Entry <Long, Venta> mapa = (HashMap.Entry) iteradorVentas.next();
+            Venta venta = mapa.getValue();
+            if (venta.getCliente().getCedula()==cedula) {
+                sePuedeEliminar = false;
             }
         }
-        try
-        {
-            hacerBackUp();
-        } catch (IOException e) {
-            throw e;
+        if (sePuedeEliminar) {
+            clientes.remove(cedula);
+            try
+            {
+                hacerBackUp();
+                return true;
+            } catch (IOException e) {
+                throw e;
+            }
         }
+        return false;
     }
     
     public boolean anadirProveedor(Proveedor proveedor) throws IOException {
-        if (!proveedores.containsKey(proveedor.get())) {
-            proveedores.put(proveedor.get(), proveedor);
+        if (!proveedores.containsKey(proveedor.getNIT())) {
+            proveedores.put(proveedor.getNIT(), proveedor);
             try
             {
                 hacerBackUp();
@@ -238,10 +223,11 @@ public class Almacenamiento {
         return false;
     }
     
-    public boolean modificarProveedor(Long algo, Proveedor proveedor) throws IOException {
-        if (!proveedores.containsKey(proveedor.get())) {
-            proveedores.remove(algo);
-            proveedores.put(proveedor.get(), proveedor);
+    public boolean modificarProveedor(Proveedor cambiosProveedor) throws IOException {
+        if (!proveedores.containsKey(cambiosProveedor.getNIT())) {
+            Proveedor proveedor = proveedores.get(cambiosProveedor.getNIT());
+            proveedor.setNombre(cambiosProveedor.getNombre());
+            proveedor.setProductos(cambiosProveedor.getProductos());
             try
             {
                 hacerBackUp();
@@ -253,17 +239,8 @@ public class Almacenamiento {
         return false;
     }
     
-    public void eliminarProveedor(Long algo) throws IOException {
-        Proveedor proveedor = proveedores.get(algo);
-        proveedores.remove(algo);
-        
-        //Medidas de eliminación
-        for (int i=0; i<citas.size(); i++) {
-            Cita cita = citas.get(i);
-            if (cita.getConsultorio() == consultorio) {
-                citas.remove(i);
-            }
-        }
+    public void eliminarProveedor(Long NIT) throws IOException {
+        proveedores.remove(NIT);
         try
         {
             hacerBackUp();
@@ -273,8 +250,8 @@ public class Almacenamiento {
     }
     
     public boolean anadirVenta(Venta venta) throws IOException {
-        if (!ventas.containsKey(venta.get())) {
-            ventas.put(venta.get(), venta);
+        if (!ventas.containsKey(venta.getnFactura())) {
+            ventas.put(venta.getnFactura(), venta);
             try
             {
                 hacerBackUp();
@@ -285,39 +262,33 @@ public class Almacenamiento {
         }
         return false;
     }
-    
-    public boolean modificarVenta(Long algo, Venta venta) throws IOException {
-        if (!ventas.containsKey(venta.get())) {
-            ventas.remove(algo);
-            ventas.put(venta.get(), venta);
-            try
-            {
-                hacerBackUp();
-                return true;
-            } catch (IOException e) {
-                throw e;
-            }
-        }
-        return false;
+
+    public HashMap<Long, Producto> getProductos() {
+        return productos;
     }
-    
-    public void eliminarVenta(Long algo) throws IOException {
-        Venta venta = ventas.get(algo);
-        ventas.remove(algo);
-        
-        //Medidas de eliminación
-        for (int i=0; i<citas.size(); i++) {
-            Cita cita = citas.get(i);
-            if (cita.getConsultorio() == consultorio) {
-                citas.remove(i);
-            }
-        }
-        try
-        {
-            hacerBackUp();
-        } catch (IOException e) {
-            throw e;
-        }
-    }*/
+
+    public void setProductos(HashMap<Long, Producto> productos) {
+        this.productos = productos;
+    }
+
+    public HashMap<Long, Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(HashMap<Long, Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    public HashMap<Long, Proveedor> getProveedores() {
+        return proveedores;
+    }
+
+    public void setProveedores(HashMap<Long, Proveedor> proveedores) {
+        this.proveedores = proveedores;
+    }
+
+    public HashMap<Long, Venta> getVentas() {
+        return ventas;
+    }
     
 }
