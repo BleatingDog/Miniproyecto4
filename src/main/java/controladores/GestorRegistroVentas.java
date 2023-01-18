@@ -16,8 +16,8 @@ package controladores;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import modelos.Almacenamiento;
-import vistas.GestionSupermercado;
 import vistas.RegistroVentas;
+import vistas.VentaProductos;
 
 public class GestorRegistroVentas {
     
@@ -27,7 +27,8 @@ public class GestorRegistroVentas {
     public GestorRegistroVentas(RegistroVentas vistaRegistroVentas, Almacenamiento almacenamiento) {
         this.vistaRegistroVentas = vistaRegistroVentas;
         this.almacenamiento = almacenamiento;
-        this.vistaRegistroVentas.addBtnRegresarListener(new ManejadoraDeMouse());
+        this.vistaRegistroVentas.addBtngetBtnRegresarVentaListener(new ManejadoraDeMouse());
+        this.vistaRegistroVentas.addBtnFinalizarVentaListener(new ManejadoraDeMouse());
     }
     
     class ManejadoraDeMouse extends MouseAdapter{
@@ -35,16 +36,26 @@ public class GestorRegistroVentas {
         @Override
         public void mouseClicked(MouseEvent e){
             
-            if (e.getSource() == vistaRegistroVentas.getBtnRegresar()){
+            if (e.getSource() == vistaRegistroVentas.getBtnRegresarVenta()){
                 if (e.getButton() == 1){
-                    irGestion();  
+                    irVentaProductos();  
+                }
+            }
+            
+            if (e.getSource() == vistaRegistroVentas.getBtnFinalizarVenta()){
+                if (e.getButton() == 1){
+                    irFinalizarVenta();  
                 }
             }
         }
     }
     
-    public void irGestion(){
-        GestionSupermercado vistaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle", almacenamiento);
+    public void irVentaProductos(){
+        VentaProductos vistaVentaProductos = new VentaProductos("Venta de Productos", almacenamiento);
         vistaRegistroVentas.dispose();
     }
+    
+    public void irFinalizarVenta() {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
 }
