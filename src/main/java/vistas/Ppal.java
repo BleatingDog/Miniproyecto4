@@ -47,14 +47,14 @@ public class Ppal extends javax.swing.JFrame {
     }
 
     public JButton getBtnVenta() {
-        return btnVenta;
+        return btnRegistroCompras;
     }
 
     public void setBtnVenta(JButton btnVenta) {
-        this.btnVenta = btnVenta;
+        this.btnRegistroCompras = btnVenta;
     }
     public void addBtnVentaListener(MouseListener listenerBotones){
-        btnVenta.addMouseListener(listenerBotones);
+        btnRegistroCompras.addMouseListener(listenerBotones);
     }
     
     public void addBtnCompraListener(MouseListener listenerBotones){
@@ -74,7 +74,9 @@ public class Ppal extends javax.swing.JFrame {
         separador = new javax.swing.JSeparator();
         btnCompra = new javax.swing.JButton();
         btnGestion = new javax.swing.JButton();
+        btnRegistroCompras = new javax.swing.JButton();
         btnVenta = new javax.swing.JButton();
+        btnRegistroVentas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,7 +119,7 @@ public class Ppal extends javax.swing.JFrame {
         btnCompra.setText("Compra de productos");
         btnCompra.setFocusPainted(false);
         btnCompra.setRequestFocusEnabled(false);
-        panelFondo.add(btnCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, -1, -1));
+        panelFondo.add(btnCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
         btnCompra.setBackground(Color.WHITE);
 
         btnGestion.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
@@ -129,15 +131,29 @@ public class Ppal extends javax.swing.JFrame {
                 btnGestionActionPerformed(evt);
             }
         });
-        panelFondo.add(btnGestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, -1, -1));
+        panelFondo.add(btnGestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, -1, -1));
         btnGestion.setBackground(Color.WHITE);
+
+        btnRegistroCompras.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        btnRegistroCompras.setText("Registro de compras");
+        btnRegistroCompras.setFocusPainted(false);
+        btnRegistroCompras.setRequestFocusEnabled(false);
+        panelFondo.add(btnRegistroCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, -1, -1));
+        btnRegistroCompras.setBackground(Color.WHITE);
 
         btnVenta.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         btnVenta.setText("Venta de productos");
         btnVenta.setFocusPainted(false);
         btnVenta.setRequestFocusEnabled(false);
-        panelFondo.add(btnVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, -1, -1));
+        panelFondo.add(btnVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
         btnVenta.setBackground(Color.WHITE);
+
+        btnRegistroVentas.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        btnRegistroVentas.setText("Registro de ventas");
+        btnRegistroVentas.setFocusPainted(false);
+        btnRegistroVentas.setRequestFocusEnabled(false);
+        panelFondo.add(btnRegistroVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, -1, -1));
+        btnRegistroVentas.setBackground(Color.WHITE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,6 +176,8 @@ public class Ppal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCompra;
     private javax.swing.JButton btnGestion;
+    private javax.swing.JButton btnRegistroCompras;
+    private javax.swing.JButton btnRegistroVentas;
     private javax.swing.JButton btnVenta;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblTitulo;
