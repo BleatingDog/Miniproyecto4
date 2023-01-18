@@ -178,7 +178,7 @@ public class GestorPlantillaProveedor {
         
         try {
             //Actualizando el proveedor
-            if (almacenamiento.actualizarProveedor(nit, proveedor)){
+            if (almacenamiento.modificarProveedor(nit, proveedor)){
                 JOptionPane.showMessageDialog(null, "Proveedor actualizar con éxito", "Resultado de actualizar", JOptionPane.INFORMATION_MESSAGE);
                 irGestion();
             } else {

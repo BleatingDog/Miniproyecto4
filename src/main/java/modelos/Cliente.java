@@ -13,13 +13,15 @@
 
 package modelos;
 
-public class Cliente {
+import java.io.Serializable;
+
+public class Cliente implements Serializable{
     
     private long cedula;
     private String nombre;
-    private int telefono;
+    private long telefono;
 
-    public Cliente(long cedula, String nombre, int telefono) {
+    public Cliente(long cedula, String nombre, long telefono) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -41,11 +43,11 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public int getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 }

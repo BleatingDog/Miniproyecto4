@@ -105,8 +105,8 @@ public class Almacenamiento {
         return false;
     }
     
-    public boolean modificarProducto(Producto cambiosProducto) throws IOException {
-        if (!productos.containsKey(cambiosProducto.getCodigo())) {
+    public boolean modificarProducto(long codigo,Producto cambiosProducto) throws IOException {
+        if (!productos.containsKey(cambiosProducto.getCodigo()) || cambiosProducto.getCodigo().equals(codigo)) {
             Producto producto = productos.get(cambiosProducto.getCodigo());
             producto.setNombre(cambiosProducto.getNombre());
             producto.setPrecio(cambiosProducto.getPrecio());
@@ -168,8 +168,8 @@ public class Almacenamiento {
         return false;
     }
     
-    public boolean modificarCliente(Cliente cambiosCliente) throws IOException {
-        if (!clientes.containsKey(cambiosCliente.getCedula())) {
+    public boolean modificarCliente(long cedula,Cliente cambiosCliente) throws IOException {
+        if (!clientes.containsKey(cambiosCliente.getCedula()) || cambiosCliente.getCedula().equals(cedula)) {
             Cliente cliente = clientes.get(cambiosCliente.getCedula());
             cliente.setNombre(cambiosCliente.getNombre());
             cliente.setTelefono(cambiosCliente.getTelefono());
@@ -192,7 +192,7 @@ public class Almacenamiento {
         while (iteradorVentas.hasNext()) {
             HashMap.Entry <Long, Venta> mapa = (HashMap.Entry) iteradorVentas.next();
             Venta venta = mapa.getValue();
-            if (venta.getCliente().getCedula()==cedula) {
+            if (venta.getCliente().getCedula() == cedula) {
                 sePuedeEliminar = false;
             }
         }
@@ -223,8 +223,8 @@ public class Almacenamiento {
         return false;
     }
     
-    public boolean modificarProveedor(Proveedor cambiosProveedor) throws IOException {
-        if (!proveedores.containsKey(cambiosProveedor.getNIT())) {
+    public boolean modificarProveedor(long nit, Proveedor cambiosProveedor) throws IOException {
+        if (!proveedores.containsKey(cambiosProveedor.getNIT()) || cambiosProveedor.getNIT().equals(nit)) {
             Proveedor proveedor = proveedores.get(cambiosProveedor.getNIT());
             proveedor.setNombre(cambiosProveedor.getNombre());
             proveedor.setProductos(cambiosProveedor.getProductos());

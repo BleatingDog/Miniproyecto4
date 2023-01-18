@@ -13,9 +13,10 @@
 
 package modelos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Proveedor {
+public class Proveedor implements Serializable{
     
     private Long NIT;
     private String nombre;

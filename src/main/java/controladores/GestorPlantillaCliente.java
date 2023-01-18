@@ -37,6 +37,7 @@ public class GestorPlantillaCliente {
         this.cedula = cedula;
         this.opcion = opcion;
         this.almacenamiento = almacenamiento;
+        modificarPlantilla();
         this.vistaPlantillaCliente.addBtnGeneralListener(new ManejadoraDeMouse());
         this.vistaPlantillaCliente.addBtnRegresarListener(new ManejadoraDeMouse());
         verificarNumero(vistaPlantillaCliente.getTxtCedula());
@@ -161,7 +162,7 @@ public class GestorPlantillaCliente {
 
         //Verifica si no existe una cédula duplicada y modifica el cliente
         try {
-            if(almacenamiento.modificarCliente(cedula, cliente)){
+            if(almacenamiento.modificarCliente(cedula ,cliente)){
                 JOptionPane.showMessageDialog(null, "Cliente actualizado con éxito", "Resultado de actualizar", JOptionPane.INFORMATION_MESSAGE);
                 irGestion();            
             } else {

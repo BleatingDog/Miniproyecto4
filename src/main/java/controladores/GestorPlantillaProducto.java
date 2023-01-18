@@ -29,11 +29,11 @@ public class GestorPlantillaProducto {
     
     private final PlantillaProducto vistaPlantillaProducto;
     private final String opcion;
-    private final int codigo;
+    private final long codigo;
     private long codigoAsignado;
     private final Almacenamiento almacenamiento;
         
-    public GestorPlantillaProducto(PlantillaProducto vistaPlantillaProducto, String opcion, int codigo, Almacenamiento almacenamiento){
+    public GestorPlantillaProducto(PlantillaProducto vistaPlantillaProducto, String opcion, long codigo, Almacenamiento almacenamiento){
         this.vistaPlantillaProducto = vistaPlantillaProducto;
         this.codigo = codigo;
         this.opcion = opcion;
@@ -41,7 +41,7 @@ public class GestorPlantillaProducto {
         this.vistaPlantillaProducto.addBtnGeneralListener(new ManejadoraDeMouse());
         this.vistaPlantillaProducto.addBtnRegresarListener(new ManejadoraDeMouse());
         modificarPlantilla();
-        if("Agendar".equals(opcion)){
+        if("Agregar".equals(opcion)){
             asignarCodigoProducto();
         }
         verificarTexto(vistaPlantillaProducto.getTxtNombre());
@@ -60,7 +60,10 @@ public class GestorPlantillaProducto {
             }
         }
     }
-
+/*
+    public void plantillaAgregarProducto(){
+        vistaPlantillaProducto.getTxtCodigo().setText(String.valueOf(codigoAsignado));
+    }*/
     public void plantillaActualizarProducto() {
         
         vistaPlantillaProducto.getLblTitulo().setText("Actualizar producto");
@@ -69,7 +72,7 @@ public class GestorPlantillaProducto {
         //Ingresando datos del producto en la ventana
         vistaPlantillaProducto.getTxtCodigo().setText(String.valueOf(codigo));
         vistaPlantillaProducto.getTxtNombre().setText(almacenamiento.getProductos().get(codigo).getNombre());
-        vistaPlantillaProducto.getTxtPrecio().setText(almacenamiento.getProductos().get(codigo).getPrecio());
+        vistaPlantillaProducto.getTxtPrecio().setText(String.valueOf(almacenamiento.getProductos().get(codigo).getPrecio()));
         
     }
 
@@ -80,7 +83,7 @@ public class GestorPlantillaProducto {
         //Ingresando datos del producto en la ventana
         vistaPlantillaProducto.getTxtCodigo().setText(String.valueOf(codigo));
         vistaPlantillaProducto.getTxtNombre().setText(almacenamiento.getProductos().get(codigo).getNombre());
-        vistaPlantillaProducto.getTxtPrecio().setText(almacenamiento.getProductos().get(codigo).getPrecio());
+        vistaPlantillaProducto.getTxtPrecio().setText(String.valueOf(almacenamiento.getProductos().get(codigo).getPrecio()));
         
         //Desactivando campos
         vistaPlantillaProducto.getTxtCodigo().setEditable(false);
@@ -121,7 +124,8 @@ public class GestorPlantillaProducto {
     
     public void agregarProducto() {
         if(validarCamposVacios()){
-            JOptionPane.showMessageDialog(null, "Llene todos los campos requeridos antes de continuar.", "Datos incompletos", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Llene todos los campos requeridos antes de continuar.", "Datos incompletos", 
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
         //Obteniendo los datos de la ventana
@@ -133,10 +137,12 @@ public class GestorPlantillaProducto {
         try {
             //Agregando el producto
             if (almacenamiento.anadirProducto(producto)){ //Posiblemente nunca entre al else
-                JOptionPane.showMessageDialog(null, "Producto agregado con éxito", "Resultado de agregar", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Producto agregado con éxito", "Resultado de agregar", 
+                        JOptionPane.INFORMATION_MESSAGE);
                 irGestion();
             } else {
-                JOptionPane.showMessageDialog(null, "Ya existe una producto con ese código", "Resultado de agregar", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Ya existe una producto con ese código", "Resultado de agregar", 
+                        JOptionPane.ERROR_MESSAGE);
             }
         } catch(IOException e){
             JOptionPane.showMessageDialog(null, "Error al agregar: " + e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -145,23 +151,25 @@ public class GestorPlantillaProducto {
 
     public void actualizarProducto() {
         if(validarCamposVacios()){
-            JOptionPane.showMessageDialog(null, "Llene todos los campos requeridos antes de continuar.", "Datos incompletos", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Llene todos los campos requeridos antes de continuar.", "Datos incompletos", 
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
         //Obteniendo los datos de la ventana
-        String nombre = vistaPlantillaProducto.getTxtNombre().getText();
+        String nombreNuevo = vistaPlantillaProducto.getTxtNombre().getText();
         int precioNuevo = Integer.parseInt(vistaPlantillaProducto.getTxtPrecio().getText());
-        long numeroCodigo = Long.valueOf(codigo);
         
         //Creando el producto con los nuevos datos
-        Producto producto = new Producto(numeroCodigo, nombre, precioNuevo);
+        Producto producto = new Producto(codigo, nombreNuevo, precioNuevo);
         try {
             //Actualizando el producto
-            if (almacenamiento.actualizarProducto(codigo, producto)){ //Posiblemente nunca entre al else
-                JOptionPane.showMessageDialog(null, "Producto actualizado con éxito", "Resultado de actualizar", JOptionPane.INFORMATION_MESSAGE);
+            if (almacenamiento.modificarProducto(codigo, producto)){
+                JOptionPane.showMessageDialog(null, "Producto actualizado con éxito", "Resultado de actualizar", 
+                        JOptionPane.INFORMATION_MESSAGE);
                 irGestion();
             } else {
-                JOptionPane.showMessageDialog(null, "Ya existe una producto con ese código", "Resultado de actualizar", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Ya existe una producto con ese código", "Resultado de actualizar", 
+                        JOptionPane.ERROR_MESSAGE);
             }
         } catch(IOException e){
             JOptionPane.showMessageDialog(null, "Error al agregar: " + e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -171,9 +179,15 @@ public class GestorPlantillaProducto {
     public void eliminarProducto() {
         //Eliminando el producto
         try{
-            almacenamiento.eliminarProducto(codigo);
-            JOptionPane.showMessageDialog(null, "Producto eliminado con éxito", "Resultado de eliminar", JOptionPane.INFORMATION_MESSAGE);
-            irGestion();
+            if(almacenamiento.eliminarProducto(codigo)){
+               JOptionPane.showMessageDialog(null, "Producto eliminado con éxito", "Resultado de eliminar", 
+                       JOptionPane.INFORMATION_MESSAGE);
+            irGestion(); 
+            } else {
+                JOptionPane.showMessageDialog(null, "No se puede eliminar el producto porque"
+                        + "", "Resultado de actualizar", JOptionPane.ERROR_MESSAGE);                
+            }
+            
         } catch(IOException e){
             JOptionPane.showMessageDialog(null, "Error al eliminar: " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -191,6 +205,7 @@ public class GestorPlantillaProducto {
         }
         codigoAsignado = miCodigoProducto;
         vistaPlantillaProducto.getTxtCodigo().setText(String.valueOf(codigoAsignado));
+        System.out.println("hola");
     }
     
     public final void verificarTexto(JTextField a){

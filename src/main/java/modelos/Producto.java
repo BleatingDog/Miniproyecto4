@@ -13,14 +13,16 @@
 
 package modelos;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable{
     
-    private Long codigo;
+    private long codigo;
     private String nombre;
     private int precio;
     private int cantidad;
 
-    public Producto(Long codigo, String nombre, int precio) {
+    public Producto(long codigo, String nombre, int precio) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precio = precio;

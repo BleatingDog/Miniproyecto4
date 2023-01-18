@@ -23,7 +23,7 @@ import modelos.Almacenamiento;
 
 public class PlantillaProducto extends javax.swing.JFrame {
 
-    public PlantillaProducto(String titulo, String opcion, int codigo, Almacenamiento almacenamiento) {
+    public PlantillaProducto(String titulo, String opcion, long codigo, Almacenamiento almacenamiento) {
         initComponents();
         GestorPlantillaProducto gestorPlantillaProducto = new GestorPlantillaProducto(this, opcion, codigo, almacenamiento);
         setVisible(true);

@@ -13,10 +13,11 @@
 
 package modelos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Venta {
+public class Venta implements Serializable{
     
     private Long nFactura;
     private Cliente cliente;

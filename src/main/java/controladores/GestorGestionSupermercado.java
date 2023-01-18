@@ -198,7 +198,7 @@ public class GestorGestionSupermercado {
                                 "<html><p style = \" font:12px; \">Ingrese el código del producto "
                                 + "a actualizar</p></html>", "Actualizar producto", 
                                 JOptionPane.DEFAULT_OPTION);
-                        int codigo;
+                        long codigo;
                         if (codigoABuscar.isBlank()){
                             JOptionPane.showMessageDialog(vistaGestionSupermercado, 
                                     "<html><p style = \" font:12px; \">Por favor ingrese un "
@@ -207,7 +207,7 @@ public class GestorGestionSupermercado {
                             return;
                         }
                         try{
-                            codigo = Integer.parseInt(codigoABuscar);
+                            codigo = Long.parseLong(codigoABuscar);
                         } catch (NumberFormatException e) {
                             JOptionPane.showMessageDialog(null, "Por favor ingrese un código "
                                     + "válido", "Error", JOptionPane.ERROR_MESSAGE);
@@ -232,7 +232,7 @@ public class GestorGestionSupermercado {
                                 "<html><p style = \" font:12px; \">Ingrese el código del producto "
                                 + "a eliminar</p></html>", "Eliminar producto", 
                                 JOptionPane.DEFAULT_OPTION);
-                        int codigo;
+                        long codigo;
                         if (codigoABuscar.isBlank()){
                             JOptionPane.showMessageDialog(vistaGestionSupermercado, 
                                     "<html><p style = \" font:12px; \">Por favor ingrese un "
@@ -241,7 +241,7 @@ public class GestorGestionSupermercado {
                             return;
                         }
                         try{
-                            codigo = Integer.parseInt(codigoABuscar);
+                            codigo = Long.parseLong(codigoABuscar);
                         } catch (NumberFormatException e) {
                             JOptionPane.showMessageDialog(null, "Por favor ingrese un código "
                                     + "válido", "Error", JOptionPane.ERROR_MESSAGE);
@@ -274,11 +274,11 @@ public class GestorGestionSupermercado {
         vistaGestionSupermercado.dispose();
     }
     
-    public void irActualizarProducto(int codigo){
+    public void irActualizarProducto(long codigo){
         PlantillaProducto vistaPlantillaProducto = new PlantillaProducto("Supermercado - Universidad del Valle", "Actualizar", codigo, almacenamiento);
         vistaGestionSupermercado.dispose();
     }
-    public void irEliminarProducto(int codigo){
+    public void irEliminarProducto(long codigo){
         PlantillaProducto vistaPlantillaProducto = new PlantillaProducto("Supermercado - Universidad del Valle", "Eliminar", codigo, almacenamiento);
         vistaGestionSupermercado.dispose();
     }
@@ -295,9 +295,9 @@ public class GestorGestionSupermercado {
                     UIManager.getIcon("OptionPane.questionIcon"), opciones, opciones[0]);
             switch(resp) {
                 case "Agregar" -> {
-                    if(almacenamiento.getProveedores().isEmpty){
+                    if(almacenamiento.getProductos().isEmpty()){
                         JOptionPane.showMessageDialog(null, "Antes de agregar un proveedor, "
-                                + "agregue un producto.", "Datos incompletos", 
+                                + "agregue un producto.", "Datos requeridos", 
                                 JOptionPane.ERROR_MESSAGE);                    
                         return;
                     }
