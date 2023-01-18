@@ -15,8 +15,8 @@ package controladores;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import modelos.Almacenamiento;
-import vistas.CompraProductos;
 import vistas.Ppal;
+import vistas.RegistroVentas;
 import vistas.VentaProductos;
 
 
@@ -51,7 +51,7 @@ public class GestorVentaProductos {
             
             if (e.getSource() == vistaVentaProductos.getBtnIrCarrito()){
                 if (e.getButton() == 1){
-                    irCarritoCompra();
+                    irCarritoVenta();
                 }
             }
         }
@@ -67,8 +67,9 @@ public class GestorVentaProductos {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public void irCarritoCompra() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void irCarritoVenta() {
+        RegistroVentas vistaRegistroVentas = new RegistroVentas("Registro de Ventas", almacenamiento);
+        vistaVentaProductos.dispose();
     }
  
     public void irPpal() {
