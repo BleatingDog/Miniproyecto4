@@ -163,7 +163,7 @@ public class GestorPlantillaProducto {
         Producto producto = new Producto(codigo, nombreNuevo, precioNuevo);
         try {
             //Actualizando el producto
-            if (almacenamiento.modificarProducto(codigo, producto)){
+            if (almacenamiento.modificarProducto(producto)){
                 JOptionPane.showMessageDialog(null, "Producto actualizado con éxito", "Resultado de actualizar", 
                         JOptionPane.INFORMATION_MESSAGE);
                 irGestion();

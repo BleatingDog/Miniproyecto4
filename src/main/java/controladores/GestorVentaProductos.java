@@ -45,24 +45,28 @@ public class GestorVentaProductos {
 
             if (e.getSource() == vistaVentaProductos.getBtnAgregar()){
                 if (e.getButton() == 1){
-                    AgregarAlCarritoVenta();
+                    agregarAlCarritoVenta();
                 }
             }
             
             if (e.getSource() == vistaVentaProductos.getBtnIrCarrito()){
                 if (e.getButton() == 1){
-                    IrCarritoCompra();
+                    irCarritoCompra();
                 }
             }
         }
 
     }
     
-public void AgregarAlCarritoVenta() {
+    //Ingresa al comboBox los productos disponibles
+    public void produtosDisponibles(){
+        vistaVentaProductos.limpiarProductosCombo();
+    }
+    public void agregarAlCarritoVenta() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public void IrCarritoCompra() {
+    public void irCarritoCompra() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
  

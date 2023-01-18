@@ -19,6 +19,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -32,32 +34,57 @@ public class GestorPlantillaProveedor {
     
     private final PlantillaProveedor vistaPlantillaProveedor;
     private final String opcion;
-    private long nit;
+    private final long nit;
     private final Almacenamiento almacenamiento;
     
     public GestorPlantillaProveedor(PlantillaProveedor vistaPlantillaProveedor, String opcion, long nit, Almacenamiento almacenamiento) {
         this.vistaPlantillaProveedor = vistaPlantillaProveedor;
         this.opcion = opcion;
         this.nit = nit;
+        System.out.println("Marca 2");
+        traerProductos();
+        System.out.println("Marca 3");
+        modificarPlantilla();
+        System.out.println("Plantilla modificada");
         this.almacenamiento = almacenamiento;
         this.vistaPlantillaProveedor.addBtnGeneralListener(new ManejadoraDeMouse());
         this.vistaPlantillaProveedor.addBtnRegresarListener(new ManejadoraDeMouse());
         verificarNumero(vistaPlantillaProveedor.getTxtNit());
     }
     
-    public void modificarPlantilla(){
+    public final void modificarPlantilla(){
         switch(opcion){
             case "Actualizar" -> {
-                
                 plantillaActualizarProveedor();
             }
             case "Eliminar" -> {
                 plantillaEliminarProveedor();
-                
             }
         }
     }
 
+    public void traerProductos() {
+        //Lista de todos los productos agregados previamente
+        ArrayList<String> allProducts = new ArrayList();
+        System.out.println("hey");
+        System.out.println(almacenamiento.getProductos().get(nit).getNombre());
+        System.out.println("hoe");
+        Iterator iteradorProductos = almacenamiento.getProductos().entrySet().iterator();
+        System.out.println("HOLA???");
+        while (iteradorProductos.hasNext()) {
+            System.out.println("hola?");
+            HashMap.Entry <Long, Producto> mapa = (HashMap.Entry) iteradorProductos.next();
+            
+            String productoStr = "";
+            productoStr = mapa.getValue().getNombre();
+            System.out.println("hi");
+            //productoStr += producto.getNombre();
+            allProducts.add(productoStr);
+            System.out.println(productoStr);
+        }
+        vistaPlantillaProveedor.agregarProductos(allProducts);
+    }
+    
     public void plantillaActualizarProveedor() {
         //Modificando título y botón general
         vistaPlantillaProveedor.getLblTitulo().setText("Actualizar proveedor");
@@ -88,12 +115,12 @@ public class GestorPlantillaProveedor {
         vistaPlantillaProveedor.getTxtNombre().setText(miProveedor.getNombre());
         vistaPlantillaProveedor.getTxtNit().setText(String.valueOf(miProveedor.getNIT()));
         
-        //Hacer que se seleccionen los servicios del medico
+        //Hacer que se seleccionen los productos del proveedor
         ArrayList <Integer> seleccionados = new ArrayList();
         for(int i = 0; i<miProveedor.getProductos().size(); i++){
             String servicio = "";
             servicio += miProveedor.getProductos().get(i);
-            for(int o = 0; o<vistaPlantillaProveedor.getListaProductos().getModel().getSize(); o++){
+            for(int o = 0; o < vistaPlantillaProveedor.getListaProductos().getModel().getSize(); o++){
                 if(servicio.equals(vistaPlantillaProveedor.getListaProductos().getModel().getElementAt(o))){
                     seleccionados.add(o);
                 }
@@ -178,7 +205,7 @@ public class GestorPlantillaProveedor {
         
         try {
             //Actualizando el proveedor
-            if (almacenamiento.modificarProveedor(nit, proveedor)){
+            if (almacenamiento.modificarProveedor(proveedor)){
                 JOptionPane.showMessageDialog(null, "Proveedor actualizar con éxito", "Resultado de actualizar", JOptionPane.INFORMATION_MESSAGE);
                 irGestion();
             } else {

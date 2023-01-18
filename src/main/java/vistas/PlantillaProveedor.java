@@ -16,6 +16,7 @@ package vistas;
 import controladores.GestorPlantillaProveedor;
 import java.awt.Color;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -29,6 +30,7 @@ public class PlantillaProveedor extends javax.swing.JFrame {
     
     public PlantillaProveedor(String titulo, String opcion, long nit, Almacenamiento almacenamiento) {
         initComponents();
+        System.out.println("Marca 1");
         GestorPlantillaProveedor gestorPlantillaProveedor = new GestorPlantillaProveedor(this, opcion, nit, almacenamiento);
         setVisible(true);
         setTitle(titulo);
@@ -36,6 +38,11 @@ public class PlantillaProveedor extends javax.swing.JFrame {
         setResizable(false);
     }
 
+    public void agregarProductos(ArrayList<String> productos){
+        System.out.println("Funcion agregar Productos");
+        modeloLista.addAll(productos);
+    }
+    
     public DefaultListModel getModeloLista() {
         return modeloLista;
     }
