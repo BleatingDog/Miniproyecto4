@@ -162,7 +162,7 @@ public class GestorPlantillaCliente {
 
         //Verifica si no existe una cédula duplicada y modifica el cliente
         try {
-            if(almacenamiento.modificarCliente(cedula ,cliente)){
+            if(almacenamiento.modificarCliente(cliente)){
                 JOptionPane.showMessageDialog(null, "Cliente actualizado con éxito", "Resultado de actualizar", JOptionPane.INFORMATION_MESSAGE);
                 irGestion();            
             } else {

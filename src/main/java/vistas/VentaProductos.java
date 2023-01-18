@@ -16,14 +16,24 @@ package vistas;
 import controladores.GestorVentaProductos;
 import java.awt.Color;
 import java.awt.event.MouseListener;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import modelos.Almacenamiento;
 
 public class VentaProductos extends javax.swing.JFrame {
 
+    private DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
+    Object[] parametrosSpinner = establecerCantidadProducto();
+    int value = (Integer)parametrosSpinner[0];
+    int min = (Integer)parametrosSpinner[1];
+    int max = (Integer)parametrosSpinner[2];
+    int step = (Integer)parametrosSpinner[3];
+    private SpinnerNumberModel modeloSpinner = new SpinnerNumberModel(value, min, max, step);
+    
     public VentaProductos(String titulo, Almacenamiento almacenamiento) {
         initComponents();
         GestorVentaProductos gestorVentaProductos = new GestorVentaProductos(this,almacenamiento);
@@ -33,7 +43,28 @@ public class VentaProductos extends javax.swing.JFrame {
         setResizable(false);
     }
 
+    public Object[] establecerCantidadProducto(){
+        Object[] parametros = new Object[4];
+        
+        Integer value = 1;
+        Integer min = 1;
+        Integer max = 1000; //Cantidad de existencias del producto
+        Integer step = 1;
+        
+        parametros[0] = value;
+        parametros[1] = min;
+        parametros[2] = max;
+        parametros[3] = step;
+        return parametros;
+        
+    }
+    public void anadirProductosCombo(String fila){
+        modeloCombo.addElement(fila);
+    }
     
+    public void limpiarProductosCombo(){
+        modeloCombo.removeAllElements();
+    }
     public JComboBox<String> getJComboBox2() {
         return jComboBox2;
     }
@@ -139,14 +170,14 @@ public class VentaProductos extends javax.swing.JFrame {
         btnRegresar.setFocusPainted(false);
         btnRegresar.setRequestFocusEnabled(false);
         panelFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 170, 40));
-        btnIrCarrito.setBackground(Color.WHITE);
+        btnRegresar.setBackground(Color.WHITE);
 
         btnAgregar.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         btnAgregar.setText("Agregar al Carrito");
         btnAgregar.setFocusPainted(false);
         btnAgregar.setRequestFocusEnabled(false);
         panelFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 410, 210, 40));
-        btnIrCarrito.setBackground(Color.WHITE);
+        btnAgregar.setBackground(Color.WHITE);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Información compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
@@ -197,12 +228,13 @@ public class VentaProductos extends javax.swing.JFrame {
         panelFondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 610, 160));
 
         lblNombre3.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
-        lblNombre3.setText("Nombre del CLiente");
-        panelFondo.add(lblNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        lblNombre3.setText("Cliente");
+        panelFondo.add(lblNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
+        jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelFondo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 460, 40));
+        panelFondo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 510, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

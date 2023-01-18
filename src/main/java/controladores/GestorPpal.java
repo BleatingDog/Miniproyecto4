@@ -102,7 +102,7 @@ public class GestorPpal {
     }
     
     public void irCompraDeProductos(){
-        CompraProductos ventanaCompraProductos = new CompraProductos("Compra de Productos",almacenamiento);
+        CompraProductos ventanaCompraProductos = new CompraProductos("Supermercado - Universidad del Valle",almacenamiento);
         vistaPpal.dispose();
     }
     

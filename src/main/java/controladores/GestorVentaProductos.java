@@ -15,8 +15,8 @@ package controladores;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import modelos.Almacenamiento;
-import vistas.CompraProductos;
 import vistas.Ppal;
+import vistas.RegistroVentas;
 import vistas.VentaProductos;
 
 
@@ -45,25 +45,31 @@ public class GestorVentaProductos {
 
             if (e.getSource() == vistaVentaProductos.getBtnAgregar()){
                 if (e.getButton() == 1){
-                    AgregarAlCarritoVenta();
+                    agregarAlCarritoVenta();
                 }
             }
             
             if (e.getSource() == vistaVentaProductos.getBtnIrCarrito()){
                 if (e.getButton() == 1){
-                    IrCarritoCompra();
+                    irCarritoVenta();
                 }
             }
         }
 
     }
     
-public void AgregarAlCarritoVenta() {
+    //Ingresa al comboBox los productos disponibles
+    public void produtosDisponibles(){
+        vistaVentaProductos.limpiarProductosCombo();
+    }
+    
+    public void agregarAlCarritoVenta() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public void IrCarritoCompra() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void irCarritoVenta() {
+        RegistroVentas vistaRegistroVentas = new RegistroVentas("Registro de Ventas", almacenamiento);
+        vistaVentaProductos.dispose();
     }
  
     public void irPpal() {
