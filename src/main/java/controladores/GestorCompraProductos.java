@@ -12,23 +12,38 @@
  */
 
 package controladores;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import modelos.Almacenamiento;
+import modelos.Producto;
+import modelos.Proveedor;
 import vistas.CompraProductos;
 import vistas.Ppal;
 
 
-public class GestorCompraProductos {
+public final class GestorCompraProductos {
     private final CompraProductos vistaCompraProductos;
-    private final Almacenamiento almacenamiento; 
+    private final Almacenamiento almacenamiento;
+    private ArrayList<Object[]> opcionComboProducto;
+    private ArrayList<Object[]> opcionComboProveedor;
     
     public GestorCompraProductos(CompraProductos vistaCompraProductos, Almacenamiento almacenamiento){
         this.vistaCompraProductos = vistaCompraProductos;
         this.almacenamiento = almacenamiento;
+        productosDisponibles();
+        proveedoresDelProducto();
         this.vistaCompraProductos.addBtnRegresarListener(new ManejadoraDeMouse());
         this.vistaCompraProductos.addBtnAgregarListener(new ManejadoraDeMouse());
         this.vistaCompraProductos.addBtnIrCarritoListener(new ManejadoraDeMouse());
+        this.vistaCompraProductos.addProductoComboListener(new ManejadoraDeLista());
+        this.vistaCompraProductos.addProveedorComboListener(new ManejadoraDeLista());
     }
     
     class ManejadoraDeMouse extends MouseAdapter{
@@ -54,10 +69,89 @@ public class GestorCompraProductos {
                 }
             }
         }
-
     }
     
-public void AgregarAlCarritoCompra() {
+    class ManejadoraDeLista implements ItemListener {
+
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+            if(e.getSource() == vistaCompraProductos.getComboProducto()){
+                vistaCompraProductos.reiniciarSpinner();
+                proveedoresDelProducto();
+            }
+            if(e.getSource() == vistaCompraProductos.getComboProveedor()){
+                vistaCompraProductos.reiniciarSpinner();
+            }
+        }
+    }
+    
+    //Ingresa al comboBox los productos disponibles
+    public final void productosDisponibles(){
+        vistaCompraProductos.limpiarProductosCombo();
+        opcionComboProducto = new ArrayList();
+        Iterator iteradorProductos = almacenamiento.getProductos().entrySet().iterator();
+        while (iteradorProductos.hasNext()) {
+            //Producto producto = (Producto) iteradorProductos.next();
+            HashMap.Entry <Long, Producto> mapa = (HashMap.Entry) iteradorProductos.next();
+            Producto producto = mapa.getValue();
+            String productoStr;
+            productoStr = mapa.getValue().getNombre();
+            Object[] productoEscogido = new Object[1];
+            productoEscogido[0] = producto;
+            opcionComboProducto.add(productoEscogido);
+            vistaCompraProductos.anadirProductosCombo(productoStr);
+        }
+    }
+    
+    //Ingresa al comboBox los proveedores que ofrecen ese producto
+    public void proveedoresDelProducto(){
+        vistaCompraProductos.limpiarProveedoresCombo();
+        opcionComboProveedor = new ArrayList();
+        Iterator i = almacenamiento.getProveedores().entrySet().iterator();
+        //ArrayList<Proveedor> misProveedores = new ArrayList();
+        Producto miProducto = obtenerProductoEscogido();
+        while(i.hasNext()) {
+            HashMap.Entry <Long, Proveedor> mapa = (HashMap.Entry) i.next();
+            Proveedor proveedor = mapa.getValue();
+            ArrayList<Producto> productoDelProveedor = proveedor.getProductos();
+            //Obteniendo los proveedores que ofrecen el producto escogido
+            for (int o = 0; o < productoDelProveedor.size(); o++){
+                if (String.valueOf(productoDelProveedor.get(o)).equals(miProducto.getNombre())) {
+                    //misProveedores.add(proveedor);
+                    Object[] proveedorEscogido = new Object[1];
+                    proveedorEscogido[0] = proveedor;
+                    opcionComboProveedor.add(proveedorEscogido);
+                    vistaCompraProductos.anadirProveedoresCombo(proveedor.getNombre());
+                }
+            }
+        }
+        
+        if(vistaCompraProductos.getComboProveedor().getModel().getSize() == 0){
+            System.out.println("Eyou");
+            JOptionPane.showMessageDialog(null, "<html><p style = \" font:12px; \">No hay "
+                    + "proveedores que ofrezcan el producto.</p></html>", "Aviso", 
+                    JOptionPane.OK_OPTION, UIManager.getIcon("OptionPane.informationIcon"));
+            vistaCompraProductos.getComboProveedor().setEnabled(false);
+            vistaCompraProductos.getBtnAgregar().setEnabled(false);
+            vistaCompraProductos.getSpinner().setEnabled(false);
+        } else {
+            vistaCompraProductos.getComboProveedor().setEnabled(true);
+            vistaCompraProductos.getBtnAgregar().setEnabled(true);
+            vistaCompraProductos.getSpinner().setEnabled(true);
+        }
+    }
+    
+    public Producto obtenerProductoEscogido() {
+        int opcionElegida = vistaCompraProductos.getComboProducto().getSelectedIndex();
+        vistaCompraProductos.getComboProveedor().setEnabled(true);
+        return (Producto)opcionComboProducto.get(opcionElegida)[0];
+    }
+    
+    public Proveedor obtenerProveedorEscogido() {
+        int opcionElegida = vistaCompraProductos.getComboProveedor().getSelectedIndex();
+        return (Proveedor)opcionComboProveedor.get(opcionElegida)[0];
+    }
+    public void AgregarAlCarritoCompra() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

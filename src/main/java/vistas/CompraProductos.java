@@ -15,14 +15,25 @@ package vistas;
 
 import controladores.GestorCompraProductos;
 import java.awt.Color;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseListener;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import modelos.Almacenamiento;
 
 public class CompraProductos extends javax.swing.JFrame {
 
+    private DefaultComboBoxModel modeloComboProducto = new DefaultComboBoxModel();
+    private DefaultComboBoxModel modeloComboProveedor = new DefaultComboBoxModel();
+    Integer value = 1;
+    Integer min = 1;
+    Integer max = 1000;
+    Integer step = 1;
+    private SpinnerNumberModel modeloSpinner = new SpinnerNumberModel(value, min, max, step);
+    
     public CompraProductos(String titulo, Almacenamiento almacenamiento) {
         initComponents();
         GestorCompraProductos gestorCompraProductos = new GestorCompraProductos(this,almacenamiento);
@@ -32,25 +43,52 @@ public class CompraProductos extends javax.swing.JFrame {
         setResizable(false);
     }
 
-    public JComboBox<String> getJComboBox1() {
-        return jComboBox1;
-    }
-    public void setJComboBox1(JComboBox<String> jComboBox1) {
-        this.jComboBox1 = jComboBox1;
+    public DefaultComboBoxModel getModeloComboProducto() {
+        return modeloComboProducto;
     }
     
-    public JComboBox<String> getJComboBox2() {
-        return jComboBox2;
+    public void reiniciarSpinner(){
+        modeloSpinner.setValue(1);
     }
-    public void setJComboBox2(JComboBox<String> jComboBox2) {
-        this.jComboBox2 = jComboBox2;
+    
+    public void anadirProductosCombo(String producto){
+        modeloComboProducto.addElement(producto);
+    }
+    
+    public void anadirProveedoresCombo(String proveedor){
+        modeloComboProveedor.addElement(proveedor);
+    }
+    
+    public void limpiarProductosCombo(){
+        modeloComboProducto.removeAllElements();
+    }
+    
+    public void limpiarProveedoresCombo(){
+        modeloComboProveedor.removeAllElements();
     }
 
-    public JSpinner getJSpinner1() {
-        return jSpinner1;
+    public JComboBox<String> getComboProducto() {
+        return comboProducto;
     }
-    public void setJSpinner2(JSpinner jSpinner1) {
-        this.jSpinner1 = jSpinner1;
+
+    public void setComboProducto(JComboBox<String> comboProducto) {
+        this.comboProducto = comboProducto;
+    }
+
+    public JComboBox<String> getComboProveedor() {
+        return comboProveedor;
+    }
+
+    public void setComboProveedor(JComboBox<String> comboProveedor) {
+        this.comboProveedor = comboProveedor;
+    }
+    
+    
+    public JSpinner getSpinner() {
+        return spinner;
+    }
+    public void setSpinner(JSpinner spinner) {
+        this.spinner = spinner;
     }
     
     public JButton getBtnAgregar() {
@@ -74,7 +112,6 @@ public class CompraProductos extends javax.swing.JFrame {
         this.btnIrCarrito = btnIrCarrito;
     }
     
-    
     //Listeners
     public void addBtnIrCarritoListener(MouseListener listenerBotones){
         btnIrCarrito.addMouseListener(listenerBotones);
@@ -85,6 +122,13 @@ public class CompraProductos extends javax.swing.JFrame {
     public void addBtnAgregarListener(MouseListener listenerBotones){
         btnAgregar.addMouseListener(listenerBotones);
     }
+    public void addProductoComboListener(ItemListener listenerCombo){
+        comboProducto.addItemListener(listenerCombo);
+    }
+    public void addProveedorComboListener(ItemListener listenerCombo){
+        comboProveedor.addItemListener(listenerCombo);
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -96,9 +140,9 @@ public class CompraProductos extends javax.swing.JFrame {
         lblNombre = new javax.swing.JLabel();
         lblNombre1 = new javax.swing.JLabel();
         lblNombre2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jSpinner1 = new javax.swing.JSpinner();
+        comboProveedor = new javax.swing.JComboBox<>();
+        comboProducto = new javax.swing.JComboBox<>();
+        spinner = new javax.swing.JSpinner();
         btnRegresar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         btnIrCarrito = new javax.swing.JButton();
@@ -144,17 +188,18 @@ public class CompraProductos extends javax.swing.JFrame {
         lblNombre2.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
         lblNombre2.setText("Proveedor");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        comboProveedor.setModel(modeloComboProveedor);
+        comboProveedor.setAutoscrolls(true);
+        comboProveedor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jComboBox2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        comboProducto.setModel(modeloComboProducto);
+        comboProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        comboProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jSpinner1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 0, null, 1));
-        jSpinner1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jSpinner1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        spinner.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        spinner.setModel(modeloSpinner);
+        spinner.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        spinner.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -168,9 +213,9 @@ public class CompraProductos extends javax.swing.JFrame {
                     .addComponent(lblNombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61))
         );
         jPanel2Layout.setVerticalGroup(
@@ -179,15 +224,15 @@ public class CompraProductos extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2))
+                    .addComponent(comboProducto))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNombre2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNombre1)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
         );
 
@@ -203,7 +248,7 @@ public class CompraProductos extends javax.swing.JFrame {
             }
         });
         panelFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 170, 40));
-        btnAgregar.setBackground(Color.WHITE);
+        btnRegresar.setBackground(Color.WHITE);
 
         btnAgregar.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         btnAgregar.setText("Agregar al carrito");
@@ -219,6 +264,7 @@ public class CompraProductos extends javax.swing.JFrame {
 
         btnIrCarrito.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         btnIrCarrito.setText("Ir al Carrito");
+        btnIrCarrito.setEnabled(false);
         btnIrCarrito.setFocusPainted(false);
         btnIrCarrito.setRequestFocusEnabled(false);
         btnIrCarrito.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +273,7 @@ public class CompraProductos extends javax.swing.JFrame {
             }
         });
         panelFondo.add(btnIrCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 410, 170, 40));
-        btnAgregar.setBackground(Color.WHITE);
+        btnIrCarrito.setBackground(Color.WHITE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -261,16 +307,16 @@ public class CompraProductos extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnIrCarrito;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> comboProducto;
+    private javax.swing.JComboBox<String> comboProveedor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
     private javax.swing.JLabel lblNombre2;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JSeparator separador;
+    private javax.swing.JSpinner spinner;
     // End of variables declaration//GEN-END:variables
 }

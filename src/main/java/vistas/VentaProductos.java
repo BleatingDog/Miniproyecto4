@@ -21,11 +21,18 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import modelos.Almacenamiento;
 
 public class VentaProductos extends javax.swing.JFrame {
 
     private DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
+    Object[] parametrosSpinner = establecerCantidadProducto();
+    int value = (Integer)parametrosSpinner[0];
+    int min = (Integer)parametrosSpinner[1];
+    int max = (Integer)parametrosSpinner[2];
+    int step = (Integer)parametrosSpinner[3];
+    private SpinnerNumberModel modeloSpinner = new SpinnerNumberModel(value, min, max, step);
     
     public VentaProductos(String titulo, Almacenamiento almacenamiento) {
         initComponents();
@@ -36,6 +43,21 @@ public class VentaProductos extends javax.swing.JFrame {
         setResizable(false);
     }
 
+    public Object[] establecerCantidadProducto(){
+        Object[] parametros = new Object[4];
+        
+        Integer value = 1;
+        Integer min = 1;
+        Integer max = 1000; //Cantidad de existencias del producto
+        Integer step = 1;
+        
+        parametros[0] = value;
+        parametros[1] = min;
+        parametros[2] = max;
+        parametros[3] = step;
+        return parametros;
+        
+    }
     public void anadirProductosCombo(String fila){
         modeloCombo.addElement(fila);
     }
