@@ -30,7 +30,6 @@ public class PlantillaProveedor extends javax.swing.JFrame {
     
     public PlantillaProveedor(String titulo, String opcion, long nit, Almacenamiento almacenamiento) {
         initComponents();
-        System.out.println("Marca 1");
         GestorPlantillaProveedor gestorPlantillaProveedor = new GestorPlantillaProveedor(this, opcion, nit, almacenamiento);
         setVisible(true);
         setTitle(titulo);
@@ -39,7 +38,6 @@ public class PlantillaProveedor extends javax.swing.JFrame {
     }
 
     public void agregarProductos(ArrayList<String> productos){
-        System.out.println("Funcion agregar Productos");
         modeloLista.addAll(productos);
     }
     

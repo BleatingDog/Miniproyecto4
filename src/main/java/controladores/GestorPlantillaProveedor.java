@@ -41,12 +41,9 @@ public class GestorPlantillaProveedor {
         this.vistaPlantillaProveedor = vistaPlantillaProveedor;
         this.opcion = opcion;
         this.nit = nit;
-        System.out.println("Marca 2");
-        traerProductos();
-        System.out.println("Marca 3");
-        modificarPlantilla();
-        System.out.println("Plantilla modificada");
         this.almacenamiento = almacenamiento;
+        traerProductos();
+        modificarPlantilla();
         this.vistaPlantillaProveedor.addBtnGeneralListener(new ManejadoraDeMouse());
         this.vistaPlantillaProveedor.addBtnRegresarListener(new ManejadoraDeMouse());
         verificarNumero(vistaPlantillaProveedor.getTxtNit());
@@ -66,21 +63,12 @@ public class GestorPlantillaProveedor {
     public void traerProductos() {
         //Lista de todos los productos agregados previamente
         ArrayList<String> allProducts = new ArrayList();
-        System.out.println("hey");
-        System.out.println(almacenamiento.getProductos().get(nit).getNombre());
-        System.out.println("hoe");
         Iterator iteradorProductos = almacenamiento.getProductos().entrySet().iterator();
-        System.out.println("HOLA???");
         while (iteradorProductos.hasNext()) {
-            System.out.println("hola?");
             HashMap.Entry <Long, Producto> mapa = (HashMap.Entry) iteradorProductos.next();
-            
-            String productoStr = "";
+            String productoStr;
             productoStr = mapa.getValue().getNombre();
-            System.out.println("hi");
-            //productoStr += producto.getNombre();
             allProducts.add(productoStr);
-            System.out.println(productoStr);
         }
         vistaPlantillaProveedor.agregarProductos(allProducts);
     }
@@ -104,6 +92,7 @@ public class GestorPlantillaProveedor {
         //Desactivando campos
         vistaPlantillaProveedor.getTxtNombre().setEditable(false);
         vistaPlantillaProveedor.getTxtNit().setEditable(false);
+        vistaPlantillaProveedor.getListaProductos().setEnabled(false);
         ingresarDatosProveedor();
     }
     
