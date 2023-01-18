@@ -13,7 +13,6 @@
 
 package modelos;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -105,8 +104,8 @@ public class Almacenamiento {
         return false;
     }
     
-    public boolean modificarProducto(long codigo,Producto cambiosProducto) throws IOException {
-        if (!productos.containsKey(cambiosProducto.getCodigo()) || cambiosProducto.getCodigo().equals(codigo)) {
+    public boolean modificarProducto(Producto cambiosProducto) throws IOException {
+        if (productos.containsKey(cambiosProducto.getCodigo())) {
             Producto producto = productos.get(cambiosProducto.getCodigo());
             producto.setNombre(cambiosProducto.getNombre());
             producto.setPrecio(cambiosProducto.getPrecio());
@@ -168,8 +167,8 @@ public class Almacenamiento {
         return false;
     }
     
-    public boolean modificarCliente(long cedula,Cliente cambiosCliente) throws IOException {
-        if (!clientes.containsKey(cambiosCliente.getCedula()) || cambiosCliente.getCedula().equals(cedula)) {
+    public boolean modificarCliente(Cliente cambiosCliente) throws IOException {
+        if (clientes.containsKey(cambiosCliente.getCedula())) {
             Cliente cliente = clientes.get(cambiosCliente.getCedula());
             cliente.setNombre(cambiosCliente.getNombre());
             cliente.setTelefono(cambiosCliente.getTelefono());
@@ -223,8 +222,8 @@ public class Almacenamiento {
         return false;
     }
     
-    public boolean modificarProveedor(long nit, Proveedor cambiosProveedor) throws IOException {
-        if (!proveedores.containsKey(cambiosProveedor.getNIT()) || cambiosProveedor.getNIT().equals(nit)) {
+    public boolean modificarProveedor(Proveedor cambiosProveedor) throws IOException {
+        if (proveedores.containsKey(cambiosProveedor.getNIT())) {
             Proveedor proveedor = proveedores.get(cambiosProveedor.getNIT());
             proveedor.setNombre(cambiosProveedor.getNombre());
             proveedor.setProductos(cambiosProveedor.getProductos());
