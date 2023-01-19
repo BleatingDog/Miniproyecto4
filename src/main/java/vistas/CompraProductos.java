@@ -28,10 +28,12 @@ public class CompraProductos extends javax.swing.JFrame {
 
     private DefaultComboBoxModel modeloComboProducto = new DefaultComboBoxModel();
     private DefaultComboBoxModel modeloComboProveedor = new DefaultComboBoxModel();
-    Integer value = 1;
-    Integer min = 1;
-    Integer max = 1000;
-    Integer step = 1;
+    
+    Object[] parametrosSpinner = establecerCantidadProducto();
+    private int value = (Integer)parametrosSpinner[0];
+    private int min = (Integer)parametrosSpinner[1];
+    private int max = (Integer)parametrosSpinner[2];
+    private int step = (Integer)parametrosSpinner[3];
     private SpinnerNumberModel modeloSpinner = new SpinnerNumberModel(value, min, max, step);
     
     public CompraProductos(String titulo, Almacenamiento almacenamiento) {
@@ -43,6 +45,22 @@ public class CompraProductos extends javax.swing.JFrame {
         setResizable(false);
     }
 
+    public Object[] establecerCantidadProducto(){
+        Object[] parametros = new Object[4];
+        
+        Integer value = 1;
+        Integer min = 1;
+        Integer max = 1000; //Cantidad de existencias del producto
+        Integer step = 1;
+        
+        parametros[0] = value;
+        parametros[1] = min;
+        parametros[2] = max;
+        parametros[3] = step;
+        return parametros;
+        
+    }
+    
     public DefaultComboBoxModel getModeloComboProducto() {
         return modeloComboProducto;
     }
