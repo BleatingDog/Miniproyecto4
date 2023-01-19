@@ -40,8 +40,9 @@ public class ListaVentas extends javax.swing.JFrame {
     }
     
     public final void llenarColumnas(){
-        modeloTabla.addColumn("Cliente");
-        modeloTabla.addColumn("Numero de factura");
+        modeloTabla.addColumn("Cédula");
+        modeloTabla.addColumn("N.° factura");
+        modeloTabla.addColumn("Fecha de compra");
         modeloTabla.addColumn("Precio total");
     }
 

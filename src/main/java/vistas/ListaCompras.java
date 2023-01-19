@@ -41,7 +41,8 @@ public class ListaCompras extends javax.swing.JFrame {
     
     public final void llenarColumnas(){
         modeloTabla.addColumn("Proveedor");
-        modeloTabla.addColumn("Numero de factura");
+        modeloTabla.addColumn("N.° factura");
+        modeloTabla.addColumn("Fecha de compra");
         modeloTabla.addColumn("Precio total");
     }
 
