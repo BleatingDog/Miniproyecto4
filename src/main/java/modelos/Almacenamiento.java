@@ -30,6 +30,7 @@ public class Almacenamiento {
     private HashMap <Long, Cliente> clientes;
     private HashMap <Long, Proveedor> proveedores;
     private HashMap <Long, Venta> ventas;
+    private HashMap <Long, Compra> compras;
     
     public Almacenamiento () throws IOException, ClassNotFoundException {
         try
@@ -51,6 +52,7 @@ public class Almacenamiento {
             oos.writeObject(clientes);
             oos.writeObject(proveedores);
             oos.writeObject(ventas);
+            oos.writeObject(compras);
             
             oos.close();
             return true;
@@ -70,6 +72,7 @@ public class Almacenamiento {
             clientes = (HashMap) ois.readObject();
             proveedores = (HashMap) ois.readObject();
             ventas = (HashMap) ois.readObject();
+            compras = (HashMap) ois.readObject();
             
             ois.close();
             return true;
@@ -78,6 +81,7 @@ public class Almacenamiento {
             clientes = new HashMap();
             proveedores = new HashMap();
             ventas = new HashMap();
+            compras = new HashMap();
             try
             {
                 hacerBackUp();
@@ -238,19 +242,48 @@ public class Almacenamiento {
         return false;
     }
     
-    public void eliminarProveedor(Long NIT) throws IOException {
-        proveedores.remove(NIT);
-        try
-        {
-            hacerBackUp();
-        } catch (IOException e) {
-            throw e;
+    public boolean eliminarProveedor(Long NIT) throws IOException {
+        boolean sePuedeEliminar = true;
+        
+        //Medidas de eliminación
+        Iterator iteradorCompras = compras.entrySet().iterator();
+        while (iteradorCompras.hasNext()) {
+            HashMap.Entry <Long, Compra> mapa = (HashMap.Entry) iteradorCompras.next();
+            Compra compra = mapa.getValue();
+            if (compra.getProveedor().getNIT().equals(NIT)) {
+                sePuedeEliminar = false;
+            }
         }
+        if (sePuedeEliminar) {
+            proveedores.remove(NIT);
+            try
+            {
+                hacerBackUp();
+                return true;
+            } catch (IOException e) {
+                throw e;
+            }
+        }
+        return false;
     }
     
     public boolean anadirVenta(Venta venta) throws IOException {
         if (!ventas.containsKey(venta.getnFactura())) {
             ventas.put(venta.getnFactura(), venta);
+            try
+            {
+                hacerBackUp();
+                return true;
+            } catch (IOException e) {
+                throw e;
+            }
+        }
+        return false;
+    }
+    
+    public boolean anadirCompra(Compra compra) throws IOException {
+        if (!compras.containsKey(compra.getnFactura())) {
+            compras.put(compra.getnFactura(), compra);
             try
             {
                 hacerBackUp();
@@ -288,6 +321,10 @@ public class Almacenamiento {
 
     public HashMap<Long, Venta> getVentas() {
         return ventas;
+    }
+    
+    public HashMap<Long, Compra> getCompras() {
+        return compras;
     }
     
 }
