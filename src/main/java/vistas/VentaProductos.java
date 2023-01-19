@@ -15,11 +15,11 @@ package vistas;
 
 import controladores.GestorVentaProductos;
 import java.awt.Color;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import modelos.Almacenamiento;
@@ -65,39 +65,49 @@ public class VentaProductos extends javax.swing.JFrame {
     public void limpiarProductosCombo(){
         modeloCombo.removeAllElements();
     }
-    public JComboBox<String> getJComboBox2() {
-        return jComboBox2;
-    }
-    public void setJComboBox2(JComboBox<String> jComboBox2) {
-        this.jComboBox2 = jComboBox2;
-    }
 
-    public JSpinner getJSpinner1() {
-        return jSpinner1;
-    }
-    public void setJSpinner2(JSpinner jSpinner1) {
-        this.jSpinner1 = jSpinner1;
-    }
-    
-    public JButton getBtnIrCarrito() {
-        return btnIrCarrito;
-    }
-    public void setBtnIrCarrito(JButton BtnIrCarrito) {
-        this.btnIrCarrito = BtnIrCarrito;
-    }
-    
-    public JButton getBtnRegresar() {
-        return btnRegresar;
-    }
-    public void setBtnRegresar(JButton btnRegresar) {
-        this.btnRegresar = btnRegresar;
+    public void reiniciarSpinner(){
+        modeloSpinner.setValue(min);
     }
     
     public JButton getBtnAgregar() {
         return btnAgregar;
     }
-    public void setBtnAgregar(JButton BtnAgregar) {
-        this.btnAgregar = BtnAgregar;
+
+    public void setBtnAgregar(JButton btnAgregar) {
+        this.btnAgregar = btnAgregar;
+    }
+
+    public JButton getBtnIrCarrito() {
+        return btnIrCarrito;
+    }
+
+    public void setBtnIrCarrito(JButton btnIrCarrito) {
+        this.btnIrCarrito = btnIrCarrito;
+    }
+
+    public JButton getBtnRegresar() {
+        return btnRegresar;
+    }
+
+    public void setBtnRegresar(JButton btnRegresar) {
+        this.btnRegresar = btnRegresar;
+    }
+
+    public JComboBox<String> getComboProducto() {
+        return comboProducto;
+    }
+
+    public void setComboProducto(JComboBox<String> comboProducto) {
+        this.comboProducto = comboProducto;
+    }
+
+    public JTextField getTxtCliente() {
+        return txtCliente;
+    }
+
+    public void setTxtCliente(JTextField txtCliente) {
+        this.txtCliente = txtCliente;
     }
     
     //Listeners
@@ -110,6 +120,10 @@ public class VentaProductos extends javax.swing.JFrame {
     public void addBtnAgregarListener(MouseListener listenerBotones){
         btnAgregar.addMouseListener(listenerBotones);
     }
+    
+    public void addComboListener(ItemListener listenerCombo){
+        comboProducto.addItemListener(listenerCombo);
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -121,12 +135,12 @@ public class VentaProductos extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        lblNombre = new javax.swing.JLabel();
-        lblNombre1 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jSpinner1 = new javax.swing.JSpinner();
-        lblNombre3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lblProducto = new javax.swing.JLabel();
+        lblCantidad = new javax.swing.JLabel();
+        comboProducto = new javax.swing.JComboBox<>();
+        spinner = new javax.swing.JSpinner();
+        lblCliente = new javax.swing.JLabel();
+        txtCliente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -159,6 +173,7 @@ public class VentaProductos extends javax.swing.JFrame {
 
         btnIrCarrito.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         btnIrCarrito.setText("Ir al Carrito");
+        btnIrCarrito.setEnabled(false);
         btnIrCarrito.setFocusPainted(false);
         btnIrCarrito.setRequestFocusEnabled(false);
         panelFondo.add(btnIrCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 410, 170, 40));
@@ -181,19 +196,19 @@ public class VentaProductos extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Información compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
-        lblNombre.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
-        lblNombre.setText("Producto");
+        lblProducto.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
+        lblProducto.setText("Producto");
 
-        lblNombre1.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
-        lblNombre1.setText("Cantidad");
+        lblCantidad.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
+        lblCantidad.setText("Cantidad");
 
-        jComboBox2.setModel(modeloCombo);
-        jComboBox2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        comboProducto.setModel(modeloCombo);
+        comboProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jSpinner1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 0, null, 1));
-        jSpinner1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jSpinner1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        spinner.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        spinner.setModel(modeloSpinner);
+        spinner.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        spinner.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -202,12 +217,12 @@ public class VentaProductos extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNombre1)
-                    .addComponent(lblNombre))
+                    .addComponent(lblCantidad)
+                    .addComponent(lblProducto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61))
         );
         jPanel2Layout.setVerticalGroup(
@@ -215,25 +230,25 @@ public class VentaProductos extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2))
+                    .addComponent(lblProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboProducto))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNombre1)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCantidad)
+                    .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
         panelFondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 610, 160));
 
-        lblNombre3.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
-        lblNombre3.setText("Cliente");
-        panelFondo.add(lblNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+        lblCliente.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
+        lblCliente.setText("Cliente");
+        panelFondo.add(lblCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelFondo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 510, 40));
+        txtCliente.setEditable(false);
+        txtCliente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        panelFondo.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 510, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -255,16 +270,16 @@ public class VentaProductos extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnIrCarrito;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> comboProducto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblNombre1;
-    private javax.swing.JLabel lblNombre3;
+    private javax.swing.JLabel lblCantidad;
+    private javax.swing.JLabel lblCliente;
+    private javax.swing.JLabel lblProducto;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JSeparator separador;
+    private javax.swing.JSpinner spinner;
+    private javax.swing.JTextField txtCliente;
     // End of variables declaration//GEN-END:variables
 }

@@ -52,7 +52,6 @@ public class GestorPpal {
           
             if (e.getSource() == vistaPpal.getBtnCompra()){
                 if (e.getButton() == 1){
-                    System.out.println("buenas");
                     irCompraDeProductos();
                 }
             }
@@ -79,6 +78,13 @@ public class GestorPpal {
     
     public void ventaDeProductos(){
        try{
+           if(almacenamiento.getProductos().isEmpty() || almacenamiento.getProveedores().isEmpty()){
+                JOptionPane.showMessageDialog(vistaPpal, 
+                        "<html><p style = \" font:12px; \">Agregue por lo menos 1 producto y 1 proveedor</p></html>", 
+                        "Error", JOptionPane.OK_OPTION, 
+                        UIManager.getIcon("OptionPane.errorIcon"));
+                return;
+            }
             String cedulaABuscar = (String) JOptionPane.showInputDialog(vistaPpal, 
                     "<html><p style = \" font:14px; \">Ingrese la cédula del cliente </p></html>", "Datos requeridos", 
                     JOptionPane.DEFAULT_OPTION);
@@ -108,6 +114,7 @@ public class GestorPpal {
                         UIManager.getIcon("OptionPane.errorIcon"));
                 return;
             }
+            
             irVentaDeProductos(cedula);
         } catch (NullPointerException np) {
 

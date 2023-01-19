@@ -91,7 +91,6 @@ public final class GestorCompraProductos {
         opcionComboProducto = new ArrayList();
         Iterator iteradorProductos = almacenamiento.getProductos().entrySet().iterator();
         while (iteradorProductos.hasNext()) {
-            //Producto producto = (Producto) iteradorProductos.next();
             HashMap.Entry <Long, Producto> mapa = (HashMap.Entry) iteradorProductos.next();
             Producto producto = mapa.getValue();
             String productoStr;

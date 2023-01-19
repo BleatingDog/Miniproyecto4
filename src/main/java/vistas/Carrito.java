@@ -29,11 +29,11 @@ public class Carrito extends javax.swing.JFrame {
     private final DefaultTableModel modeloTabla = new DefaultTableModel();
     private JTableHeader th;
     
-    public Carrito(String titulo, Almacenamiento almacenamiento) {
+    public Carrito(String titulo, long cedula, Almacenamiento almacenamiento) {
         llenarColumnas();
         initComponents();
         diseñoTabla();
-        GestorCarrito gestorCarrito = new GestorCarrito(this, almacenamiento);
+        GestorCarrito gestorCarrito = new GestorCarrito(this, cedula, almacenamiento);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);

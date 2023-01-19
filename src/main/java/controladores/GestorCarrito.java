@@ -23,10 +23,11 @@ public class GestorCarrito {
     
     private final Carrito vistaCarrito;
     private final Almacenamiento almacenamiento;
-
-    public GestorCarrito(Carrito vistaCarrito, Almacenamiento almacenamiento) {
+    private final long cedula;
+    public GestorCarrito(Carrito vistaCarrito, long cedula, Almacenamiento almacenamiento) {
         this.vistaCarrito = vistaCarrito;
         this.almacenamiento = almacenamiento;
+        this.cedula = cedula;
         this.vistaCarrito.addBtngetBtnRegresarVentaListener(new ManejadoraDeMouse());
         this.vistaCarrito.addBtnFinalizarVentaListener(new ManejadoraDeMouse());
     }
