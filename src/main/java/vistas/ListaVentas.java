@@ -95,6 +95,7 @@ public class ListaVentas extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         btnRegresar = new javax.swing.JButton();
         panelBanner = new javax.swing.JPanel();
+        btnConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,7 +122,7 @@ public class ListaVentas extends javax.swing.JFrame {
         btnRegresar.setText("Regresar");
         btnRegresar.setFocusPainted(false);
         btnRegresar.setRequestFocusEnabled(false);
-        panelFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(383, 462, -1, -1));
+        panelFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 460, -1, -1));
         btnRegresar.setBackground(Color.WHITE);
 
         panelBanner.setForeground(new java.awt.Color(204, 204, 204));
@@ -139,6 +140,13 @@ public class ListaVentas extends javax.swing.JFrame {
 
         panelFondo.add(panelBanner, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 110));
 
+        btnConsultar.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        btnConsultar.setText("Consultar");
+        btnConsultar.setFocusPainted(false);
+        btnConsultar.setRequestFocusEnabled(false);
+        panelFondo.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 460, -1, -1));
+        btnRegresar.setBackground(Color.WHITE);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,6 +162,7 @@ public class ListaVentas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblTitulo;
