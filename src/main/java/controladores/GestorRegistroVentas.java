@@ -23,10 +23,12 @@ public class GestorRegistroVentas {
     
     private final RegistroVentas vistaRegistroVentas;
     private final Almacenamiento almacenamiento;
-
-    public GestorRegistroVentas(RegistroVentas vistaRegistroVentas, Almacenamiento almacenamiento) {
+    private final long cedula;
+    
+    public GestorRegistroVentas(RegistroVentas vistaRegistroVentas, long cedula, Almacenamiento almacenamiento) {
         this.vistaRegistroVentas = vistaRegistroVentas;
         this.almacenamiento = almacenamiento;
+        this.cedula = cedula;
         this.vistaRegistroVentas.addBtngetBtnRegresarVentaListener(new ManejadoraDeMouse());
         this.vistaRegistroVentas.addBtnFinalizarVentaListener(new ManejadoraDeMouse());
     }
@@ -51,7 +53,7 @@ public class GestorRegistroVentas {
     }
     
     public void irVentaProductos(){
-        VentaProductos vistaVentaProductos = new VentaProductos("Venta de Productos", almacenamiento);
+        VentaProductos vistaVentaProductos = new VentaProductos("Venta de Productos", 0, almacenamiento);
         vistaRegistroVentas.dispose();
     }
     

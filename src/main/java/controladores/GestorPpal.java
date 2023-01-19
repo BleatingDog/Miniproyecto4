@@ -31,43 +31,58 @@ public class GestorPpal {
     public GestorPpal(Ppal vistaPpal, Almacenamiento almacenamiento){
         this.vistaPpal = vistaPpal;
         this.almacenamiento = almacenamiento;
+        
+        //Añadiendo listeners
         this.vistaPpal.addBtnCompraListener(new ManejadoraDeMouse());
         this.vistaPpal.addBtnVentaListener(new ManejadoraDeMouse());
         this.vistaPpal.addBtnGestionListener(new ManejadoraDeMouse());
+        this.vistaPpal.addBtnRegistroComprasListener(new ManejadoraDeMouse());
+        this.vistaPpal.addBtnRegistroVentasListener(new ManejadoraDeMouse());
     }
     
     class ManejadoraDeMouse extends MouseAdapter{
         
         @Override
         public void mouseClicked(MouseEvent e){
-          if (e.getSource() == vistaPpal.getBtnVenta()){
-                if (e.getButton() == 1){
-                    irVentaDeProductos();
-                }
-          }
+            if (e.getSource() == vistaPpal.getBtnVenta()){
+                  if (e.getButton() == 1){
+                      ventaDeProductos();
+                  }
+            }
           
-          if (e.getSource() == vistaPpal.getBtnCompra()){
+            if (e.getSource() == vistaPpal.getBtnCompra()){
                 if (e.getButton() == 1){
+                    System.out.println("buenas");
                     irCompraDeProductos();
                 }
-          }
-          
-          if (e.getSource() == vistaPpal.getBtnGestion()){
+            }
+
+            if (e.getSource() == vistaPpal.getBtnGestion()){
                 if (e.getButton() == 1){
                     irGestion();
                 }
-          }
+            }
+
+            if (e.getSource() == vistaPpal.getBtnRegistroCompras()){
+                if (e.getButton() == 1){
+                    irRegistroCompras();
+                }
+            }
+            
+            if (e.getSource() == vistaPpal.getBtnRegistroCompras()){
+                if (e.getButton() == 1){
+                    irRegistroVentas();
+                }
+            }
         }
     }
     
-    public void irVentaDeProductos(){
+    public void ventaDeProductos(){
        try{
             String cedulaABuscar = (String) JOptionPane.showInputDialog(vistaPpal, 
-                    "<html><p style = \" font:14px; \">Ingrese la cédula del cliente </p></html>", "Cedula cliente", 
+                    "<html><p style = \" font:14px; \">Ingrese la cédula del cliente </p></html>", "Datos requeridos", 
                     JOptionPane.DEFAULT_OPTION);
-            long cedula;
             
-
             if (cedulaABuscar.isBlank()){
                 JOptionPane.showMessageDialog(vistaPpal, 
                         "<html><p style = \" font:14px; \">Por favor ingrese una "
@@ -75,6 +90,8 @@ public class GestorPpal {
                         UIManager.getIcon("OptionPane.errorIcon"));
                 return;
             }
+            
+            long cedula;
             try{
                 cedula = Long.parseLong(cedulaABuscar);
             } catch (NumberFormatException e) {
@@ -83,26 +100,35 @@ public class GestorPpal {
                 return;  
             }
             
-            VentaProductos ventanaVentaProducto = new VentaProductos("Venta Poductos",almacenamiento);            
-
-            /*if(!almacenamiento.getClientes().containsKey(cedula)){
+            if(!almacenamiento.getClientes().containsKey(cedula)){
                 JOptionPane.showMessageDialog(vistaPpal, 
                         "<html><p style = \" font:12px; \">No se encontró ningún "
                         + "cliente registrado con esa cédula</p></html>", 
                         "Cliente no encontrado", JOptionPane.OK_OPTION, 
                         UIManager.getIcon("OptionPane.errorIcon"));
                 return;
-            }*/
-            
-            } catch (NullPointerException np) {
-
             }
-        
+            irVentaDeProductos(cedula);
+        } catch (NullPointerException np) {
+
+        }
+    }
+    
+    public void irVentaDeProductos(long cedula){
+        VentaProductos vistaVentaProductos = new VentaProductos("Supermercado - Universidad del Valle", cedula, almacenamiento);
         vistaPpal.dispose();
     }
     
+    public void irRegistroCompras() {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void irRegistroVentas() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
     public void irCompraDeProductos(){
-        CompraProductos ventanaCompraProductos = new CompraProductos("Supermercado - Universidad del Valle",almacenamiento);
+        CompraProductos vistaCompraProductos = new CompraProductos("Supermercado - Universidad del Valle",almacenamiento);
         vistaPpal.dispose();
     }
     

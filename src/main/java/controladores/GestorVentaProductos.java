@@ -21,12 +21,15 @@ import vistas.VentaProductos;
 
 
 public class GestorVentaProductos {
+    
     private final VentaProductos vistaVentaProductos;
     private final Almacenamiento almacenamiento; 
+    private final long cedula;
     
-    public GestorVentaProductos(VentaProductos vistaVentaProductos, Almacenamiento almacenamiento){
+    public GestorVentaProductos(VentaProductos vistaVentaProductos, long cedula, Almacenamiento almacenamiento){
         this.vistaVentaProductos = vistaVentaProductos;
         this.almacenamiento = almacenamiento;
+        this.cedula = cedula;
         this.vistaVentaProductos.addBtnRegresarListener(new ManejadoraDeMouse());
         this.vistaVentaProductos.addBtnAgregarListener(new ManejadoraDeMouse());
         this.vistaVentaProductos.addBtnIrCarritoListener(new ManejadoraDeMouse());

@@ -29,11 +29,11 @@ public class RegistroVentas extends javax.swing.JFrame {
     private final DefaultTableModel modeloTabla = new DefaultTableModel();
     private JTableHeader th;
     
-    public RegistroVentas(String titulo, Almacenamiento almacenamiento) {
+    public RegistroVentas(String titulo, long cedula, Almacenamiento almacenamiento) {
         llenarColumnas();
         initComponents();
         diseñoTabla();
-        GestorRegistroVentas gestorRegistroVentas = new GestorRegistroVentas(this, almacenamiento);
+        GestorRegistroVentas gestorRegistroVentas = new GestorRegistroVentas(this, cedula, almacenamiento);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);

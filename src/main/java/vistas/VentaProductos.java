@@ -34,9 +34,9 @@ public class VentaProductos extends javax.swing.JFrame {
     int step = (Integer)parametrosSpinner[3];
     private SpinnerNumberModel modeloSpinner = new SpinnerNumberModel(value, min, max, step);
     
-    public VentaProductos(String titulo, Almacenamiento almacenamiento) {
+    public VentaProductos(String titulo, long cedula, Almacenamiento almacenamiento) {
         initComponents();
-        GestorVentaProductos gestorVentaProductos = new GestorVentaProductos(this,almacenamiento);
+        GestorVentaProductos gestorVentaProductos = new GestorVentaProductos(this, cedula, almacenamiento);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);
@@ -99,7 +99,6 @@ public class VentaProductos extends javax.swing.JFrame {
     public void setBtnAgregar(JButton BtnAgregar) {
         this.btnAgregar = BtnAgregar;
     }
-    
     
     //Listeners
     public void addBtnIrCarritoListener(MouseListener listenerBotones){
@@ -188,7 +187,7 @@ public class VentaProductos extends javax.swing.JFrame {
         lblNombre1.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
         lblNombre1.setText("Cantidad");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(modeloCombo);
         jComboBox2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jSpinner1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -229,12 +228,12 @@ public class VentaProductos extends javax.swing.JFrame {
 
         lblNombre3.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
         lblNombre3.setText("Cliente");
-        panelFondo.add(lblNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+        panelFondo.add(lblNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelFondo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 510, 40));
+        panelFondo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 510, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
