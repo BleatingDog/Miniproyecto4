@@ -24,6 +24,7 @@ import javax.swing.UIManager;
 import modelos.Almacenamiento;
 import modelos.Producto;
 import modelos.Proveedor;
+import vistas.Carrito;
 import vistas.CompraProductos;
 import vistas.Ppal;
 
@@ -59,13 +60,13 @@ public final class GestorCompraProductos {
 
             if (e.getSource() == vistaCompraProductos.getBtnAgregar()){
                 if (e.getButton() == 1){
-                    AgregarAlCarritoCompra();
+                    agregarAlCarritoCompra();
                 }
             }
             
             if (e.getSource() == vistaCompraProductos.getBtnIrCarrito()){
                 if (e.getButton() == 1){
-                    IrCarritoCompra();
+                    irCarritoCompra();
                 }
             }
         }
@@ -150,12 +151,13 @@ public final class GestorCompraProductos {
         int opcionElegida = vistaCompraProductos.getComboProveedor().getSelectedIndex();
         return (Proveedor)opcionComboProveedor.get(opcionElegida)[0];
     }
-    public void AgregarAlCarritoCompra() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void agregarAlCarritoCompra() {
+        vistaCompraProductos.getBtnIrCarrito().setEnabled(true);
     }
 
-    public void IrCarritoCompra() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void irCarritoCompra() {
+        Carrito vistaCarrito = new Carrito("Registro de Ventas", obtenerProveedorEscogido().getNIT(), "Compra", almacenamiento);
+        vistaCompraProductos.dispose();
     }
  
     public void irPpal() {

@@ -103,12 +103,12 @@ public class Carrito extends javax.swing.JFrame {
         this.txtTotal = txtTotal;
     }
 
-    public JButton getBtnRegresarVenta() {
-        return btnRegresarVenta;
+    public JButton getBtnRegresar() {
+        return btnRegresar;
     }
 
-    public void setBtnRegresarVenta(JButton btnRegresarVenta) {
-        this.btnRegresarVenta = btnRegresarVenta;
+    public void setBtnRegresar(JButton btnRegresar) {
+        this.btnRegresar = btnRegresar;
     }
     
     public JButton getBtnFinalizarVenta() {
@@ -127,8 +127,8 @@ public class Carrito extends javax.swing.JFrame {
         this.tablaContenido = tablaContenido;
     }
     
-    public void addBtngetBtnRegresarVentaListener(MouseListener listenerBotones){
-        btnRegresarVenta.addMouseListener(listenerBotones);
+    public void addBtnRegresarVentaListener(MouseListener listenerBotones){
+        btnRegresar.addMouseListener(listenerBotones);
     }
     
     public void addBtnFinalizarVentaListener(MouseListener listenerBotones){
@@ -145,7 +145,7 @@ public class Carrito extends javax.swing.JFrame {
 
         panelFondo = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
-        btnRegresarVenta = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
         panelBanner = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblTitulo2 = new javax.swing.JLabel();
@@ -168,17 +168,17 @@ public class Carrito extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         panelFondo.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 570, 860, 20));
 
-        btnRegresarVenta.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
-        btnRegresarVenta.setText("Regresar");
-        btnRegresarVenta.setFocusPainted(false);
-        btnRegresarVenta.setRequestFocusEnabled(false);
-        btnRegresarVenta.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        btnRegresar.setText("Regresar");
+        btnRegresar.setFocusPainted(false);
+        btnRegresar.setRequestFocusEnabled(false);
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarVentaActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
-        panelFondo.add(btnRegresarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 150, -1));
-        btnRegresarVenta.setBackground(Color.WHITE);
+        panelFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 150, -1));
+        btnRegresar.setBackground(Color.WHITE);
 
         panelBanner.setForeground(new java.awt.Color(204, 204, 204));
 
@@ -225,7 +225,7 @@ public class Carrito extends javax.swing.JFrame {
             }
         });
         panelFondo.add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 510, -1, -1));
-        btnRegresarVenta.setBackground(Color.WHITE);
+        btnFinalizarVenta.setBackground(Color.WHITE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -233,6 +233,7 @@ public class Carrito extends javax.swing.JFrame {
         lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTotal.setText("Total venta : ");
 
+        txtTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTotal.setText("$$$$$$$$$$$$$$$$");
         txtTotal.setBorder(null);
@@ -259,7 +260,8 @@ public class Carrito extends javax.swing.JFrame {
 
         panelFondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 850, 30));
 
-        txtNombre.setEnabled(false);
+        txtNombre.setEditable(false);
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
@@ -287,7 +289,7 @@ public class Carrito extends javax.swing.JFrame {
             }
         });
         panelFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 510, -1, -1));
-        btnRegresarVenta.setBackground(Color.WHITE);
+        btnEliminar.setBackground(Color.WHITE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -303,9 +305,9 @@ public class Carrito extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegresarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarVentaActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegresarVentaActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnFinalizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarVentaActionPerformed
         // TODO add your handling code here:
@@ -322,7 +324,7 @@ public class Carrito extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnFinalizarVenta;
-    private javax.swing.JButton btnRegresarVenta;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblNombre;

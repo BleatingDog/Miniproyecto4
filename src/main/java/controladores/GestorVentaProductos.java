@@ -100,11 +100,11 @@ public class GestorVentaProductos {
         }
     }
     public void agregarAlCarritoVenta() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        vistaVentaProductos.getBtnIrCarrito().setEnabled(true);
     }
 
     public void irCarritoVenta(long cedulaCliente) {
-        Carrito vistaCarrito = new Carrito("Registro de Ventas", cedulaCliente, almacenamiento);
+        Carrito vistaCarrito = new Carrito("Registro de Ventas", cedulaCliente, "Venta", almacenamiento);
         vistaVentaProductos.dispose();
     }
  

@@ -17,6 +17,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import modelos.Almacenamiento;
 import vistas.Carrito;
+import vistas.CompraProductos;
 import vistas.VentaProductos;
 
 public class GestorCarrito {
@@ -31,7 +32,7 @@ public class GestorCarrito {
         this.identificador = identificador;
         this.opcion = opcion;
         modificarPlantilla();
-        this.vistaCarrito.addBtngetBtnRegresarVentaListener(new ManejadoraDeMouse());
+        this.vistaCarrito.addBtnRegresarVentaListener(new ManejadoraDeMouse());
         this.vistaCarrito.addBtnFinalizarVentaListener(new ManejadoraDeMouse());
         this.vistaCarrito.addBtnEliminarListener(new ManejadoraDeMouse());
     }
@@ -67,9 +68,15 @@ public class GestorCarrito {
         @Override
         public void mouseClicked(MouseEvent e){
             
-            if (e.getSource() == vistaCarrito.getBtnRegresarVenta()){
+            if (e.getSource() == vistaCarrito.getBtnRegresar() && opcion.equals("Venta")){
                 if (e.getButton() == 1){
                     irVentaProductos();  
+                }
+            }
+            
+            if (e.getSource() == vistaCarrito.getBtnRegresar() && opcion.equals("Compra")){
+                if (e.getButton() == 1){
+                    irCompraProductos();  
                 }
             }
             
@@ -89,6 +96,11 @@ public class GestorCarrito {
     
     public void irVentaProductos(){
         VentaProductos vistaVentaProductos = new VentaProductos("Supermercado - Universidad del Valle", identificador, almacenamiento);
+        vistaCarrito.dispose();
+    }
+    
+    public void irCompraProductos(){
+        CompraProductos vistaCompraProductos = new CompraProductos("Supermercado - Universidad del Valle", almacenamiento);
         vistaCarrito.dispose();
     }
     
