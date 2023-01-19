@@ -33,7 +33,7 @@ public class Carrito extends javax.swing.JFrame {
         llenarColumnas();
         initComponents();
         diseñoTabla();
-        GestorCarrito gestorRegistroVentas = new GestorCarrito(this, almacenamiento);
+        GestorCarrito gestorCarrito = new GestorCarrito(this, almacenamiento);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);

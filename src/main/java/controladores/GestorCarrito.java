@@ -51,7 +51,7 @@ public class GestorCarrito {
     }
     
     public void irVentaProductos(){
-        VentaProductos vistaVentaProductos = new VentaProductos("Venta de Productos", almacenamiento);
+        VentaProductos vistaVentaProductos = new VentaProductos("Venta de Productos", 0, almacenamiento);
         vistaCarrito.dispose();
     }
     

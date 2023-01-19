@@ -22,7 +22,7 @@ public class Miniproyecto4 {
     public static void main(String[] args) {
         try {
             Almacenamiento almacenamiento = new Almacenamiento();
-            Ppal ventanaPpal = new Ppal("Supermercado - Universidad del Valle", almacenamiento);    
+            Ppal vistaPpal = new Ppal("Supermercado - Universidad del Valle", almacenamiento);    
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }

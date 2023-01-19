@@ -30,6 +30,22 @@ public class Ppal extends javax.swing.JFrame {
         setResizable(false);
     }
 
+    public JButton getBtnRegistroCompras() {
+        return btnRegistroCompras;
+    }
+
+    public void setBtnRegistroCompras(JButton btnRegistroCompras) {
+        this.btnRegistroCompras = btnRegistroCompras;
+    }
+
+    public JButton getBtnRegistroVentas() {
+        return btnRegistroVentas;
+    }
+
+    public void setBtnRegistroVentas(JButton btnRegistroVentas) {
+        this.btnRegistroVentas = btnRegistroVentas;
+    }
+    
     public JButton getBtnCompra() {
         return btnCompra;
     }
@@ -47,14 +63,15 @@ public class Ppal extends javax.swing.JFrame {
     }
 
     public JButton getBtnVenta() {
-        return btnRegistroCompras;
+        return btnVenta;
     }
 
     public void setBtnVenta(JButton btnVenta) {
-        this.btnRegistroCompras = btnVenta;
+        this.btnVenta = btnVenta;
     }
+    
     public void addBtnVentaListener(MouseListener listenerBotones){
-        btnRegistroCompras.addMouseListener(listenerBotones);
+        btnVenta.addMouseListener(listenerBotones);
     }
     
     public void addBtnCompraListener(MouseListener listenerBotones){
@@ -63,6 +80,13 @@ public class Ppal extends javax.swing.JFrame {
     
     public void addBtnGestionListener(MouseListener listenerBotones){
         btnGestion.addMouseListener(listenerBotones);
+    }
+    
+    public void addBtnRegistroVentasListener(MouseListener listenerBotones){
+        btnRegistroVentas.addMouseListener(listenerBotones);
+    }
+    public void addBtnRegistroComprasListener(MouseListener listenerBotones){
+        btnRegistroCompras.addMouseListener(listenerBotones);
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -75,8 +99,8 @@ public class Ppal extends javax.swing.JFrame {
         btnCompra = new javax.swing.JButton();
         btnGestion = new javax.swing.JButton();
         btnRegistroCompras = new javax.swing.JButton();
-        btnVenta = new javax.swing.JButton();
         btnRegistroVentas = new javax.swing.JButton();
+        btnVenta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -141,19 +165,19 @@ public class Ppal extends javax.swing.JFrame {
         panelFondo.add(btnRegistroCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, -1, -1));
         btnRegistroCompras.setBackground(Color.WHITE);
 
-        btnVenta.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
-        btnVenta.setText("Venta de productos");
-        btnVenta.setFocusPainted(false);
-        btnVenta.setRequestFocusEnabled(false);
-        panelFondo.add(btnVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
-        btnVenta.setBackground(Color.WHITE);
-
         btnRegistroVentas.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         btnRegistroVentas.setText("Registro de ventas");
         btnRegistroVentas.setFocusPainted(false);
         btnRegistroVentas.setRequestFocusEnabled(false);
         panelFondo.add(btnRegistroVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, -1, -1));
         btnRegistroVentas.setBackground(Color.WHITE);
+
+        btnVenta.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        btnVenta.setText("Venta de productos");
+        btnVenta.setFocusPainted(false);
+        btnVenta.setRequestFocusEnabled(false);
+        panelFondo.add(btnVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
+        btnVenta.setBackground(Color.WHITE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

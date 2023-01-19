@@ -206,7 +206,9 @@ public class GestorPlantillaCliente {
             @Override
             public void keyTyped(KeyEvent e){
                 char c = e.getKeyChar();
-                if (!Character.isAlphabetic(c)){
+                if (Character.isAlphabetic(c) | Character.isSpaceChar(c)){
+                    e.setKeyChar(c);
+                } else {
                     e.consume();
                 }
             }
