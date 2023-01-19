@@ -16,7 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import modelos.Almacenamiento;
 import vistas.Ppal;
-import vistas.RegistroVentas;
+import vistas.Carrito;
 import vistas.VentaProductos;
 
 
@@ -68,7 +68,7 @@ public class GestorVentaProductos {
     }
 
     public void irCarritoVenta() {
-        RegistroVentas vistaRegistroVentas = new RegistroVentas("Registro de Ventas", almacenamiento);
+        Carrito vistaCarrito = new Carrito("Registro de Ventas", almacenamiento);
         vistaVentaProductos.dispose();
     }
  

@@ -81,6 +81,10 @@ public class ListaClientes extends javax.swing.JFrame {
     public void addBtnRegresarListener(MouseListener listenerBotones){
         btnRegresar.addMouseListener(listenerBotones);
     }
+    
+    public void anadirFilaTabla(Object[] fila) {
+        modeloTabla.addRow(fila);
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -103,6 +107,7 @@ public class ListaClientes extends javax.swing.JFrame {
 
         tablaContenido.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         tablaContenido.setModel(modeloTabla);
+        tablaContenido.setRowHeight(30);
         tablaContenido.setRowSelectionAllowed(false);
         scroll.setViewportView(tablaContenido);
 

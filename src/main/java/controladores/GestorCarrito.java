@@ -16,19 +16,19 @@ package controladores;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import modelos.Almacenamiento;
-import vistas.RegistroVentas;
+import vistas.Carrito;
 import vistas.VentaProductos;
 
-public class GestorRegistroVentas {
+public class GestorCarrito {
     
-    private final RegistroVentas vistaRegistroVentas;
+    private final Carrito vistaCarrito;
     private final Almacenamiento almacenamiento;
 
-    public GestorRegistroVentas(RegistroVentas vistaRegistroVentas, Almacenamiento almacenamiento) {
-        this.vistaRegistroVentas = vistaRegistroVentas;
+    public GestorCarrito(Carrito vistaCarrito, Almacenamiento almacenamiento) {
+        this.vistaCarrito = vistaCarrito;
         this.almacenamiento = almacenamiento;
-        this.vistaRegistroVentas.addBtngetBtnRegresarVentaListener(new ManejadoraDeMouse());
-        this.vistaRegistroVentas.addBtnFinalizarVentaListener(new ManejadoraDeMouse());
+        this.vistaCarrito.addBtngetBtnRegresarVentaListener(new ManejadoraDeMouse());
+        this.vistaCarrito.addBtnFinalizarVentaListener(new ManejadoraDeMouse());
     }
     
     class ManejadoraDeMouse extends MouseAdapter{
@@ -36,13 +36,13 @@ public class GestorRegistroVentas {
         @Override
         public void mouseClicked(MouseEvent e){
             
-            if (e.getSource() == vistaRegistroVentas.getBtnRegresarVenta()){
+            if (e.getSource() == vistaCarrito.getBtnRegresarVenta()){
                 if (e.getButton() == 1){
                     irVentaProductos();  
                 }
             }
             
-            if (e.getSource() == vistaRegistroVentas.getBtnFinalizarVenta()){
+            if (e.getSource() == vistaCarrito.getBtnFinalizarVenta()){
                 if (e.getButton() == 1){
                     irFinalizarVenta();  
                 }
@@ -52,7 +52,7 @@ public class GestorRegistroVentas {
     
     public void irVentaProductos(){
         VentaProductos vistaVentaProductos = new VentaProductos("Venta de Productos", almacenamiento);
-        vistaRegistroVentas.dispose();
+        vistaCarrito.dispose();
     }
     
     public void irFinalizarVenta() {

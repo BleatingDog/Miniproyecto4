@@ -13,7 +13,7 @@
 
 package vistas;
 
-import controladores.GestorRegistroVentas;
+import controladores.GestorCarrito;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseListener;
@@ -24,16 +24,16 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import modelos.Almacenamiento;
 
-public class RegistroVentas extends javax.swing.JFrame {
+public class Carrito extends javax.swing.JFrame {
     
     private final DefaultTableModel modeloTabla = new DefaultTableModel();
     private JTableHeader th;
     
-    public RegistroVentas(String titulo, Almacenamiento almacenamiento) {
+    public Carrito(String titulo, Almacenamiento almacenamiento) {
         llenarColumnas();
         initComponents();
         diseñoTabla();
-        GestorRegistroVentas gestorRegistroVentas = new GestorRegistroVentas(this, almacenamiento);
+        GestorCarrito gestorRegistroVentas = new GestorCarrito(this, almacenamiento);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);

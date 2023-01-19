@@ -13,7 +13,7 @@
 
 package vistas;
 
-import controladores.GestorListaProductos;
+import controladores.GestorListaVentas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseListener;
@@ -23,16 +23,16 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import modelos.Almacenamiento;
 
-public class ListaProductos extends javax.swing.JFrame {
+public class ListaVentas extends javax.swing.JFrame {
     
     private final DefaultTableModel modeloTabla = new DefaultTableModel();
     private JTableHeader th;
     
-    public ListaProductos(String titulo, Almacenamiento almacenamiento) {
+    public ListaVentas(String titulo, Almacenamiento almacenamiento) {
         llenarColumnas();
         initComponents();
         diseñoTabla();
-        GestorListaProductos gestorListaProductos = new GestorListaProductos(this, almacenamiento);
+        GestorListaVentas gestorListaVentas = new GestorListaVentas(this, almacenamiento);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);
@@ -40,10 +40,9 @@ public class ListaProductos extends javax.swing.JFrame {
     }
     
     public final void llenarColumnas(){
-        modeloTabla.addColumn("Nombre");
-        modeloTabla.addColumn("Precio");
-        modeloTabla.addColumn("Stock");
-        modeloTabla.addColumn("Código");
+        modeloTabla.addColumn("Cliente");
+        modeloTabla.addColumn("Numero de factura");
+        modeloTabla.addColumn("Precio total");
     }
 
     public final void diseñoTabla(){
@@ -103,9 +102,8 @@ public class ListaProductos extends javax.swing.JFrame {
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitulo.setFont(new java.awt.Font("Agency FB", 1, 56)); // NOI18N
-        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Lista de productos");
-        panelFondo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 26, 900, -1));
+        lblTitulo.setText("Lista de ventas");
+        panelFondo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(311, 26, -1, -1));
 
         tablaContenido.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         tablaContenido.setModel(modeloTabla);
