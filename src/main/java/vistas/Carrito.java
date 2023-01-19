@@ -18,6 +18,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -29,11 +30,11 @@ public class Carrito extends javax.swing.JFrame {
     private final DefaultTableModel modeloTabla = new DefaultTableModel();
     private JTableHeader th;
     
-    public Carrito(String titulo, long cedula, Almacenamiento almacenamiento) {
+    public Carrito(String titulo, long identificador, String opcion, Almacenamiento almacenamiento) {
         llenarColumnas();
         initComponents();
         diseñoTabla();
-        GestorCarrito gestorCarrito = new GestorCarrito(this, cedula, almacenamiento);
+        GestorCarrito gestorCarrito = new GestorCarrito(this, identificador, opcion, almacenamiento);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);
@@ -41,10 +42,12 @@ public class Carrito extends javax.swing.JFrame {
     }
     
     public final void llenarColumnas(){
+        
         modeloTabla.addColumn("Producto");
         modeloTabla.addColumn("Cantidad");
         modeloTabla.addColumn("Precio Unitario");
-        modeloTabla.addColumn("Precio Total");
+        modeloTabla.addColumn("Subtotal");
+            
     }
 
     public final void diseñoTabla(){
@@ -64,6 +67,42 @@ public class Carrito extends javax.swing.JFrame {
         scroll.getViewport().setBackground(colorFondo);
     }
 
+    public void anadirFilaTabla(Object[] fila) {
+        modeloTabla.addRow(fila);
+    }
+    
+    public JLabel getLblNombre() {
+        return lblNombre;
+    }
+
+    public void setLblNombre(JLabel lblNombre) {
+        this.lblNombre = lblNombre;
+    }
+
+    public JButton getBtnEliminar() {
+        return btnEliminar;
+    }
+
+    public void setBtnEliminar(JButton btnEliminar) {
+        this.btnEliminar = btnEliminar;
+    }
+
+    public JTextField getTxtNombre() {
+        return txtNombre;
+    }
+
+    public void setTxtNombre(JTextField txtNombre) {
+        this.txtNombre = txtNombre;
+    }
+
+    public JTextField getTxtTotal() {
+        return txtTotal;
+    }
+
+    public void setTxtTotal(JTextField txtTotal) {
+        this.txtTotal = txtTotal;
+    }
+
     public JButton getBtnRegresarVenta() {
         return btnRegresarVenta;
     }
@@ -80,24 +119,6 @@ public class Carrito extends javax.swing.JFrame {
         this.btnFinalizarVenta = btnFinalizarVenta;
     }
     
-    public JTextField getjTextField1() {
-        return jTextField1;
-    }
-
-    public void setJTextField1(JTextField jTextField1) {
-        this.jTextField1 = jTextField1;
-    }
-    
-    public JTextField getjTextField2() {
-        return jTextField1;
-    }
-
-    public void setJTextField2(JTextField jTextField2) {
-        this.jTextField2 = jTextField2;
-    }
-    
-    
-
     public JTable getTablaContenido() {
         return tablaContenido;
     }
@@ -114,6 +135,10 @@ public class Carrito extends javax.swing.JFrame {
         btnFinalizarVenta.addMouseListener(listenerBotones);
     }
     
+    public void addBtnEliminarListener(MouseListener listenerBotones){
+        btnEliminar.addMouseListener(listenerBotones);
+    }
+    
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -123,16 +148,16 @@ public class Carrito extends javax.swing.JFrame {
         btnRegresarVenta = new javax.swing.JButton();
         panelBanner = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
-        lblTitulo1 = new javax.swing.JLabel();
+        lblTitulo2 = new javax.swing.JLabel();
         btnFinalizarVenta = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        lblTotal = new javax.swing.JLabel();
+        txtTotal = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        lblNombre = new javax.swing.JLabel();
         scroll = new javax.swing.JScrollPane();
         tablaContenido = new javax.swing.JTable();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,37 +177,39 @@ public class Carrito extends javax.swing.JFrame {
                 btnRegresarVentaActionPerformed(evt);
             }
         });
-        panelFondo.add(btnRegresarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 200, -1));
+        panelFondo.add(btnRegresarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 150, -1));
         btnRegresarVenta.setBackground(Color.WHITE);
 
         panelBanner.setForeground(new java.awt.Color(204, 204, 204));
 
         lblTitulo.setFont(new java.awt.Font("Agency FB", 1, 56)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Venta Productos");
+        lblTitulo.setText("Venta productos");
 
-        lblTitulo1.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
-        lblTitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo1.setText("Carrito de Ventas");
+        lblTitulo2.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        lblTitulo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo2.setText("Carrito");
 
         javax.swing.GroupLayout panelBannerLayout = new javax.swing.GroupLayout(panelBanner);
         panelBanner.setLayout(panelBannerLayout);
         panelBannerLayout.setHorizontalGroup(
             panelBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBannerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panelBannerLayout.createSequentialGroup()
-                .addComponent(lblTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(panelBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBannerLayout.createSequentialGroup()
+                        .addComponent(lblTitulo2, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBannerLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         panelBannerLayout.setVerticalGroup(
             panelBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBannerLayout.createSequentialGroup()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitulo2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -203,13 +230,13 @@ public class Carrito extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Total Venta : ");
+        lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTotal.setText("Total venta : ");
 
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setText("$$$$$$$$$$$$$$$$");
-        jTextField2.setBorder(null);
-        jTextField2.setEnabled(false);
+        txtTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTotal.setText("$$$$$$$$$$$$$$$$");
+        txtTotal.setBorder(null);
+        txtTotal.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -217,43 +244,50 @@ public class Carrito extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 427, Short.MAX_VALUE)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                    .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTotal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         panelFondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 850, 30));
 
-        jTextField1.setEnabled(false);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.setEnabled(false);
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtNombreActionPerformed(evt);
             }
         });
-        panelFondo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 690, 30));
+        panelFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 690, 30));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("Nombre cliente ");
-        panelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 150, 30));
+        lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblNombre.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblNombre.setText("Nombre cliente ");
+        panelFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 150, 30));
 
-        tablaContenido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tablaContenido.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         tablaContenido.setModel(modeloTabla);
-        tablaContenido.setRowSelectionAllowed(false);
         scroll.setViewportView(tablaContenido);
 
-        jScrollPane1.setViewportView(scroll);
+        panelFondo.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 850, 280));
 
-        panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 850, 300));
+        btnEliminar.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setFocusPainted(false);
+        btnEliminar.setRequestFocusEnabled(false);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        panelFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 510, -1, -1));
+        btnRegresarVenta.setBackground(Color.WHITE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -277,25 +311,29 @@ public class Carrito extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFinalizarVentaActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnFinalizarVenta;
     private javax.swing.JButton btnRegresarVenta;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblTitulo1;
+    private javax.swing.JLabel lblTitulo2;
+    private javax.swing.JLabel lblTotal;
     private javax.swing.JPanel panelBanner;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JScrollPane scroll;
     private javax.swing.JTable tablaContenido;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

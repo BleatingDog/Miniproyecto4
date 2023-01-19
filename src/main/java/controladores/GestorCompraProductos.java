@@ -125,7 +125,7 @@ public final class GestorCompraProductos {
             }
         }
         
-        if(vistaCompraProductos.getComboProveedor().getModel().getSize() == 0){
+        if(vistaCompraProductos.getComboProveedor().getModel().getSize() == 0){ //Se repite el mensaje varias veces
             System.out.println("Eyou");
             JOptionPane.showMessageDialog(null, "<html><p style = \" font:12px; \">No hay "
                     + "proveedores que ofrezcan el producto.</p></html>", "Aviso", 

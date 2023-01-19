@@ -112,7 +112,7 @@ public class ListaCompras extends javax.swing.JFrame {
         tablaContenido.setRowSelectionAllowed(false);
         scroll.setViewportView(tablaContenido);
 
-        panelFondo.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 130, 756, 300));
+        panelFondo.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 756, 300));
 
         jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
@@ -145,7 +145,7 @@ public class ListaCompras extends javax.swing.JFrame {
         btnConsultar.setFocusPainted(false);
         btnConsultar.setRequestFocusEnabled(false);
         panelFondo.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 460, -1, -1));
-        btnRegresar.setBackground(Color.WHITE);
+        btnConsultar.setBackground(Color.WHITE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

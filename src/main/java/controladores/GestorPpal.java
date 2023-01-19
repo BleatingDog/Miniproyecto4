@@ -20,6 +20,8 @@ import javax.swing.UIManager;
 import modelos.Almacenamiento;
 import vistas.CompraProductos;
 import vistas.GestionSupermercado;
+import vistas.ListaCompras;
+import vistas.ListaVentas;
 import vistas.Ppal;
 import vistas.VentaProductos;
 
@@ -127,11 +129,13 @@ public class GestorPpal {
     }
     
     public void irRegistroCompras() {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ListaCompras vistaListaCompras = new ListaCompras("Supermercado - Universidad del Valle", almacenamiento);
+        vistaPpal.dispose();
     }
 
     public void irRegistroVentas() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ListaVentas vistaListaVentas = new ListaVentas("Supermercado - Universidad del Valle", almacenamiento);
+        vistaPpal.dispose();
     }
     
     public void irCompraDeProductos(){
