@@ -17,8 +17,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 import modelos.Almacenamiento;
 import modelos.Venta;
+import vistas.Carrito;
 import vistas.GestionSupermercado;
 import vistas.ListaVentas;
 
@@ -46,6 +48,12 @@ public class GestorListaVentas {
                     irGestion();  
                 }
             }
+            
+            if (e.getSource() == vistaListaVentas.getBtnConsultar()){
+                if (e.getButton() == 1){
+                    irCarritoVentas();  
+                }
+            }
         }
     }
     
@@ -54,7 +62,7 @@ public class GestorListaVentas {
         vistaListaVentas.dispose();
     }
     
-    public void insertarVentas() {
+    public final void insertarVentas() {
         Iterator i = ventas.entrySet().iterator();
 
         while(i.hasNext()) {
@@ -66,5 +74,20 @@ public class GestorListaVentas {
             fila[2] = venta.getPrecioTotal();
             vistaListaVentas.anadirFilaTabla(fila);
         }
+    }
+    
+    
+    
+    public void irCarritoVentas() {
+        
+        int filaSeleccionada = vistaListaVentas.getTablaContenido().getSelectedRow();
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(null, "Ninguna entrada seleccionada.", "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        long numeroFactura = vistaListaVentas.ventaSeleccionada(filaSeleccionada);
+        Venta ventaSeleccionada = almacenamiento.getVentas().get(numeroFactura);
+        Carrito vistaCarrito = new Carrito("Supermercado - Universidad del Valle", ventaSeleccionada.getCliente().getCedula(), "Venta", almacenamiento, ventaSeleccionada.getInformacionDelProducto());
+        vistaListaVentas.dispose();
     }
 }

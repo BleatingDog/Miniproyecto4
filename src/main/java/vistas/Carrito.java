@@ -173,11 +173,6 @@ public class Carrito extends javax.swing.JFrame {
         btnRegresar.setText("Regresar");
         btnRegresar.setFocusPainted(false);
         btnRegresar.setRequestFocusEnabled(false);
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
         panelFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 150, -1));
         btnRegresar.setBackground(Color.WHITE);
 
@@ -220,11 +215,6 @@ public class Carrito extends javax.swing.JFrame {
         btnFinalizarVenta.setText("Finalizar Venta");
         btnFinalizarVenta.setFocusPainted(false);
         btnFinalizarVenta.setRequestFocusEnabled(false);
-        btnFinalizarVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFinalizarVentaActionPerformed(evt);
-            }
-        });
         panelFondo.add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 510, -1, -1));
         btnFinalizarVenta.setBackground(Color.WHITE);
 
@@ -263,11 +253,6 @@ public class Carrito extends javax.swing.JFrame {
 
         txtNombre.setEditable(false);
         txtNombre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
         panelFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 690, 30));
 
         lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -284,11 +269,6 @@ public class Carrito extends javax.swing.JFrame {
         btnEliminar.setText("Eliminar");
         btnEliminar.setFocusPainted(false);
         btnEliminar.setRequestFocusEnabled(false);
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
         panelFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 510, -1, -1));
         btnEliminar.setBackground(Color.WHITE);
 
@@ -305,22 +285,6 @@ public class Carrito extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegresarActionPerformed
-
-    private void btnFinalizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarVentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFinalizarVentaActionPerformed
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar;

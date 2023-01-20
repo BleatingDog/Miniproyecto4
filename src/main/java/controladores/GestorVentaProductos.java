@@ -127,8 +127,8 @@ public class GestorVentaProductos {
         }
         codigoAsignado = miCodigoFactura;
     }
-    public void irCarritoVenta(long cedulaCliente, HashMap<Long, >) {
-        Carrito vistaCarrito = new Carrito("Registro de Ventas", cedulaCliente, "Venta", almacenamiento);
+    public void irCarritoVenta(long cedulaCliente) {
+        Carrito vistaCarrito = new Carrito("Supermercado - Universidad del Valle", cedulaCliente, "Venta", almacenamiento, articulosCarrito);
         vistaVentaProductos.dispose();
     }
  
