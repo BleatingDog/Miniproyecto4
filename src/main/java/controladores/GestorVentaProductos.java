@@ -31,13 +31,16 @@ public class GestorVentaProductos {
     private final VentaProductos vistaVentaProductos;
     private final Almacenamiento almacenamiento;
     private ArrayList<Object[]> opcionComboProducto;
+    private HashMap<Long, HashMap<String, Object>> articulosCarrito;
     private final long cedula;
+    private long codigoAsignado;
     
     public GestorVentaProductos(VentaProductos vistaVentaProductos, long cedula, Almacenamiento almacenamiento){
         this.vistaVentaProductos = vistaVentaProductos;
         this.almacenamiento = almacenamiento;
         this.cedula = cedula;
         modificarVentana();
+        asignarCodigoFactura();
         produtosDisponibles();
         this.vistaVentaProductos.addBtnRegresarListener(new ManejadoraDeMouse());
         this.vistaVentaProductos.addBtnAgregarListener(new ManejadoraDeMouse());
@@ -100,10 +103,31 @@ public class GestorVentaProductos {
         }
     }
     public void agregarAlCarritoVenta() {
+        HashMap <String, Object> informacionDelProducto = new HashMap();
+        Producto productoSeleccionado = obtenerProductoEscogido();
+        
+        informacionDelProducto.put("Nombre", productoSeleccionado.getNombre());
+        informacionDelProducto.put("Precio", productoSeleccionado.getPrecio());
+        informacionDelProducto.put("Cantidad", productoSeleccionado.getCantidad());
+        informacionDelProducto.put("Producto", productoSeleccionado);
+        articulosCarrito.put(codigoAsignado, informacionDelProducto);
         vistaVentaProductos.getBtnIrCarrito().setEnabled(true);
+        
     }
 
-    public void irCarritoVenta(long cedulaCliente) {
+    public Producto obtenerProductoEscogido() {
+        int opcionElegida = vistaVentaProductos.getComboProducto().getSelectedIndex();
+        return (Producto)opcionComboProducto.get(opcionElegida)[0];
+    }
+    
+    public final void asignarCodigoFactura() {
+        long miCodigoFactura = 1;
+        while (almacenamiento.getVentas().containsKey(miCodigoFactura)) {
+            miCodigoFactura += 1;
+        }
+        codigoAsignado = miCodigoFactura;
+    }
+    public void irCarritoVenta(long cedulaCliente, HashMap<Long, >) {
         Carrito vistaCarrito = new Carrito("Registro de Ventas", cedulaCliente, "Venta", almacenamiento);
         vistaVentaProductos.dispose();
     }

@@ -205,7 +205,6 @@ public class GestorPlantillaProducto {
         }
         codigoAsignado = miCodigoProducto;
         vistaPlantillaProducto.getTxtCodigo().setText(String.valueOf(codigoAsignado));
-        System.out.println("hola");
     }
     
     public final void verificarTexto(JTextField a){
