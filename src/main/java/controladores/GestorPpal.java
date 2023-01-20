@@ -15,6 +15,8 @@ package controladores;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import modelos.Almacenamiento;
@@ -139,7 +141,8 @@ public class GestorPpal {
     }
     
     public void irCompraDeProductos(){
-        CompraProductos vistaCompraProductos = new CompraProductos("Supermercado - Universidad del Valle",almacenamiento);
+        HashMap <Long, HashMap <String, Object>> articulosCarrito = new HashMap();
+        CompraProductos vistaCompraProductos = new CompraProductos("Supermercado - Universidad del Valle", almacenamiento, articulosCarrito);
         vistaPpal.dispose();
     }
     

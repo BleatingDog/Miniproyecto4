@@ -34,10 +34,12 @@ public final class GestorCompraProductos {
     private final Almacenamiento almacenamiento;
     private ArrayList<Object[]> opcionComboProducto;
     private ArrayList<Object[]> opcionComboProveedor;
+    private HashMap <Long, HashMap <String, Object>> articulosCarrito;
     
-    public GestorCompraProductos(CompraProductos vistaCompraProductos, Almacenamiento almacenamiento){
+    public GestorCompraProductos(CompraProductos vistaCompraProductos, Almacenamiento almacenamiento, HashMap <Long, HashMap <String, Object>> articulosCarrito){
         this.vistaCompraProductos = vistaCompraProductos;
         this.almacenamiento = almacenamiento;
+        this.articulosCarrito = articulosCarrito;
         productosDisponibles();
         proveedoresDelProducto();
         this.vistaCompraProductos.addBtnRegresarListener(new ManejadoraDeMouse());
@@ -152,11 +154,17 @@ public final class GestorCompraProductos {
         return (Proveedor)opcionComboProveedor.get(opcionElegida)[0];
     }
     public void agregarAlCarritoCompra() {
+        HashMap <String, Object> informacionDelProducto = new HashMap();
+        informacionDelProducto.put("nombre", null);
+        informacionDelProducto.put("precio", null);
+        informacionDelProducto.put("cantidad", null);
+        informacionDelProducto.put("producto", null);
+        articulosCarrito.put(null, informacionDelProducto);
         vistaCompraProductos.getBtnIrCarrito().setEnabled(true);
     }
 
     public void irCarritoCompra() {
-        Carrito vistaCarrito = new Carrito("Registro de Ventas", obtenerProveedorEscogido().getNIT(), "Compra", almacenamiento);
+        Carrito vistaCarrito = new Carrito("Registro de Ventas", obtenerProveedorEscogido().getNIT(), "Compra", almacenamiento, articulosCarrito);
         vistaCompraProductos.dispose();
     }
  

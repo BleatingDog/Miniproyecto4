@@ -15,6 +15,7 @@ package controladores;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
 import modelos.Almacenamiento;
 import vistas.Carrito;
 import vistas.CompraProductos;
@@ -26,11 +27,14 @@ public class GestorCarrito {
     private final Almacenamiento almacenamiento;
     private final long identificador;
     private final String opcion;
-    public GestorCarrito(Carrito vistaCarrito, long identificador, String opcion, Almacenamiento almacenamiento) {
+    private HashMap <Long, HashMap <String, Object>> articulosCarrito;
+    
+    public GestorCarrito(Carrito vistaCarrito, long identificador, String opcion, Almacenamiento almacenamiento, HashMap <Long, HashMap <String, Object>> articulosCarrito) {
         this.vistaCarrito = vistaCarrito;
         this.almacenamiento = almacenamiento;
         this.identificador = identificador;
         this.opcion = opcion;
+        this.articulosCarrito = articulosCarrito;
         modificarPlantilla();
         this.vistaCarrito.addBtnRegresarVentaListener(new ManejadoraDeMouse());
         this.vistaCarrito.addBtnFinalizarVentaListener(new ManejadoraDeMouse());
@@ -100,7 +104,7 @@ public class GestorCarrito {
     }
     
     public void irCompraProductos(){
-        CompraProductos vistaCompraProductos = new CompraProductos("Supermercado - Universidad del Valle", almacenamiento);
+        CompraProductos vistaCompraProductos = new CompraProductos("Supermercado - Universidad del Valle", almacenamiento, articulosCarrito);
         vistaCarrito.dispose();
     }
     

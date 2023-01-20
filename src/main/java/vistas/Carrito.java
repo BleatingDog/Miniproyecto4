@@ -17,6 +17,7 @@ import controladores.GestorCarrito;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -30,11 +31,11 @@ public class Carrito extends javax.swing.JFrame {
     private final DefaultTableModel modeloTabla = new DefaultTableModel();
     private JTableHeader th;
     
-    public Carrito(String titulo, long identificador, String opcion, Almacenamiento almacenamiento) {
+    public Carrito(String titulo, long identificador, String opcion, Almacenamiento almacenamiento, HashMap <Long, HashMap <String, Object>> articulosCarrito) {
         llenarColumnas();
         initComponents();
         diseñoTabla();
-        GestorCarrito gestorCarrito = new GestorCarrito(this, identificador, opcion, almacenamiento);
+        GestorCarrito gestorCarrito = new GestorCarrito(this, identificador, opcion, almacenamiento, articulosCarrito);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);
