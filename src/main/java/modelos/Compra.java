@@ -14,17 +14,16 @@
 package modelos;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Compra implements Serializable{
     
     private Long nFactura;
     private Proveedor proveedor;
-    private HashMap <Long, ArrayList<Object>> informacionDelProducto;
+    private HashMap <Long, HashMap<String, Object>> informacionDelProducto;
     private int precioTotal;
 
-    public Compra(Long nFactura, Proveedor proveedor, HashMap<Long, ArrayList<Object>> informacionDelProducto, int precioTotal) {
+    public Compra(Long nFactura, Proveedor proveedor, HashMap<Long, HashMap<String, Object>> informacionDelProducto, int precioTotal) {
         this.nFactura = nFactura;
         this.proveedor = proveedor;
         this.informacionDelProducto = informacionDelProducto;
@@ -47,11 +46,11 @@ public class Compra implements Serializable{
         this.proveedor = proveedor;
     }
 
-    public HashMap<Long, ArrayList<Object>> getInformacionDelProducto() {
+    public HashMap<Long, HashMap<String, Object>> getInformacionDelProducto() {
         return informacionDelProducto;
     }
 
-    public void setInformacionDelProducto(HashMap<Long, ArrayList<Object>> informacionDelProducto) {
+    public void setInformacionDelProducto(HashMap<Long, HashMap<String, Object>> informacionDelProducto) {
         this.informacionDelProducto = informacionDelProducto;
     }
 

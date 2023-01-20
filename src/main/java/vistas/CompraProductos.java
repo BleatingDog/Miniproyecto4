@@ -17,6 +17,7 @@ import controladores.GestorCompraProductos;
 import java.awt.Color;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -29,16 +30,16 @@ public class CompraProductos extends javax.swing.JFrame {
     private DefaultComboBoxModel modeloComboProducto = new DefaultComboBoxModel();
     private DefaultComboBoxModel modeloComboProveedor = new DefaultComboBoxModel();
     
-    Object[] parametrosSpinner = establecerCantidadProducto();
+    private Object[] parametrosSpinner = establecerCantidadProducto();
     private int value = (Integer)parametrosSpinner[0];
     private int min = (Integer)parametrosSpinner[1];
     private int max = (Integer)parametrosSpinner[2];
     private int step = (Integer)parametrosSpinner[3];
     private SpinnerNumberModel modeloSpinner = new SpinnerNumberModel(value, min, max, step);
     
-    public CompraProductos(String titulo, Almacenamiento almacenamiento) {
+    public CompraProductos(String titulo, Almacenamiento almacenamiento, HashMap <Long, HashMap <String, Object>> articulosCarrito) {
         initComponents();
-        GestorCompraProductos gestorCompraProductos = new GestorCompraProductos(this,almacenamiento);
+        GestorCompraProductos gestorCompraProductos = new GestorCompraProductos(this, almacenamiento, articulosCarrito);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);
