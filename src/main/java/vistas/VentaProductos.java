@@ -20,6 +20,7 @@ import java.awt.event.MouseListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import modelos.Almacenamiento;
@@ -27,14 +28,20 @@ import modelos.Almacenamiento;
 public class VentaProductos extends javax.swing.JFrame {
 
     private DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
-    Object[] parametrosSpinner = establecerCantidadProducto();
-    private int value = (Integer)parametrosSpinner[0];
-    private int min = (Integer)parametrosSpinner[1];
-    private int max = (Integer)parametrosSpinner[2];
-    private int step = (Integer)parametrosSpinner[3];
-    private SpinnerNumberModel modeloSpinner = new SpinnerNumberModel(value, min, max, step);
+    private final Object[] parametrosSpinner;
+    private final int value;
+    private final int min;
+    private final int max;
+    private final int step;
+    private final SpinnerNumberModel modeloSpinner;
     
     public VentaProductos(String titulo, long cedula, Almacenamiento almacenamiento) {
+        this.parametrosSpinner = establecerCantidadProducto();
+        this.value = (Integer) parametrosSpinner[0];
+        this.min = (Integer) parametrosSpinner[1];
+        this.max = (Integer) parametrosSpinner[2];
+        this.step = (Integer) parametrosSpinner[3];
+        this.modeloSpinner = new SpinnerNumberModel(value, min, max, step);
         initComponents();
         GestorVentaProductos gestorVentaProductos = new GestorVentaProductos(this, cedula, almacenamiento);
         setVisible(true);
@@ -43,7 +50,7 @@ public class VentaProductos extends javax.swing.JFrame {
         setResizable(false);
     }
 
-    public Object[] establecerCantidadProducto(){
+    public final Object[] establecerCantidadProducto(){
         Object[] parametros = new Object[4];
         
         Integer value = 1;
@@ -108,6 +115,14 @@ public class VentaProductos extends javax.swing.JFrame {
 
     public void setTxtCliente(JTextField txtCliente) {
         this.txtCliente = txtCliente;
+    }
+
+    public JSpinner getSpinner() {
+        return spinner;
+    }
+
+    public void setSpinner(JSpinner spinner) {
+        this.spinner = spinner;
     }
     
     //Listeners

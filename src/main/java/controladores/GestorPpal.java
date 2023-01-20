@@ -15,7 +15,6 @@ package controladores;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -131,11 +130,21 @@ public class GestorPpal {
     }
     
     public void irRegistroCompras() {
+        if(almacenamiento.getCompras().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Aún no se han realizado compras", "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;  
+        }
         ListaCompras vistaListaCompras = new ListaCompras("Supermercado - Universidad del Valle", almacenamiento);
         vistaPpal.dispose();
     }
 
     public void irRegistroVentas() {
+        if(almacenamiento.getVentas().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Aún no se han realizado ventas", "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;  
+        }
         ListaVentas vistaListaVentas = new ListaVentas("Supermercado - Universidad del Valle", almacenamiento);
         vistaPpal.dispose();
     }

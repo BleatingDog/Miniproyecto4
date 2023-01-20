@@ -105,8 +105,9 @@ public class GestorGestionSupermercado {
                         try{
                             cedula = Long.parseLong(cedulaABuscar);
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "Por favor ingrese una cédula "
-                                    + "válida", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "<html><p style = \" font:12px; \">Por "
+                                    + "favor ingrese una cédula válida</p></html>", "Error", 
+                                    JOptionPane.ERROR_MESSAGE);
                             return;  
                         }
                         if(!almacenamiento.getClientes().containsKey(cedula)){
@@ -139,8 +140,9 @@ public class GestorGestionSupermercado {
                         try{
                             cedula = Long.parseLong(cedulaABuscar);
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "Por favor ingrese una cédula "
-                                    + "válida", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "<html><p style = \" font:12px; \">Por "
+                                    + "favor ingrese una cédula válida</p></html>", "Error", 
+                                    JOptionPane.ERROR_MESSAGE);
                             return;  
                         }
                         if(!almacenamiento.getClientes().containsKey(cedula)){
@@ -209,8 +211,9 @@ public class GestorGestionSupermercado {
                         try{
                             codigo = Long.parseLong(codigoABuscar);
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "Por favor ingrese un código "
-                                    + "válido", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "<html><p style = \" font:12px; \">Por "
+                                    + "favor ingrese un código válido</p></html>", "Error", 
+                                    JOptionPane.ERROR_MESSAGE);
                             return;  
                         }
                         if(!almacenamiento.getProductos().containsKey(codigo)){
@@ -243,8 +246,9 @@ public class GestorGestionSupermercado {
                         try{
                             codigo = Long.parseLong(codigoABuscar);
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "Por favor ingrese un código "
-                                    + "válido", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "<html><p style = \" font:12px; \">Por "
+                                    + "favor ingrese un código válido</p></html>", "Error", 
+                                    JOptionPane.ERROR_MESSAGE);
                             return;  
                         }
                         if(!almacenamiento.getProductos().containsKey(codigo)){
@@ -296,9 +300,9 @@ public class GestorGestionSupermercado {
             switch(resp) {
                 case "Agregar" -> {
                     if(almacenamiento.getProductos().isEmpty()){
-                        JOptionPane.showMessageDialog(null, "Antes de agregar un proveedor, "
-                                + "agregue un producto.", "Datos requeridos", 
-                                JOptionPane.ERROR_MESSAGE);                    
+                        JOptionPane.showMessageDialog(null, "<html><p style = \" font:12px; \">Antes "
+                                + "de agregar un proveedor, agregue un producto</p></html>", "Error", 
+                                JOptionPane.ERROR_MESSAGE);                
                         return;
                     }
                     irAgregarProveedor();
@@ -320,8 +324,9 @@ public class GestorGestionSupermercado {
                         try{
                             nit = Long.parseLong(nitABuscar);
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "Por favor ingrese un NIT "
-                                    + "válido", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "<html><p style = \" font:12px; \">Por "
+                                    + "favor ingrese un NIT válido</p></html>", "Error", 
+                                JOptionPane.ERROR_MESSAGE);
                             return;  
                         }
                         if(!almacenamiento.getProveedores().containsKey(nit)){
@@ -354,8 +359,9 @@ public class GestorGestionSupermercado {
                         try{
                             nit = Long.parseLong(nitABuscar);
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "Por favor ingrese un NIT "
-                                    + "válido", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "<html><p style = \" font:12px; \">Por "
+                                    + "favor ingrese un NIT válido</p></html>", "Error", 
+                                    JOptionPane.ERROR_MESSAGE);
                             return;  
                         }
                         if(!almacenamiento.getProveedores().containsKey(nit)){

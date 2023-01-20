@@ -251,9 +251,6 @@
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegresarActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="btnRegresar.setBackground(Color.WHITE);"/>
           </AuxValues>
@@ -272,9 +269,6 @@
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="btnAgregar.setBackground(Color.WHITE);"/>
           </AuxValues>
@@ -294,9 +288,6 @@
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIrCarritoActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="btnIrCarrito.setBackground(Color.WHITE);"/>
           </AuxValues>

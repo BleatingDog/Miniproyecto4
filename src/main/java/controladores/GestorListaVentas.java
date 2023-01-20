@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import modelos.Almacenamiento;
+import modelos.Producto;
 import modelos.Venta;
 import vistas.Carrito;
 import vistas.GestionSupermercado;
@@ -68,15 +69,14 @@ public class GestorListaVentas {
         while(i.hasNext()) {
             HashMap.Entry <String, Venta> mapa = (HashMap.Entry) i.next();
             Venta venta = mapa.getValue();
-            Object[] fila = new Object[3];
-            fila[0] = venta.getCliente();
+            Object[] fila = new Object[4];
+            fila[0] = venta.getCliente().getCedula();
             fila[1] = venta.getnFactura();
-            fila[2] = venta.getPrecioTotal();
+            fila[2] = //Fecha de venta
+            fila[3] = venta.getPrecioTotal();
             vistaListaVentas.anadirFilaTabla(fila);
         }
     }
-    
-    
     
     public void irCarritoVentas() {
         
@@ -87,6 +87,7 @@ public class GestorListaVentas {
         }
         long numeroFactura = vistaListaVentas.ventaSeleccionada(filaSeleccionada);
         Venta ventaSeleccionada = almacenamiento.getVentas().get(numeroFactura);
+        
         Carrito vistaCarrito = new Carrito("Supermercado - Universidad del Valle", ventaSeleccionada.getCliente().getCedula(), "Venta", almacenamiento, ventaSeleccionada.getInformacionDelProducto());
         vistaListaVentas.dispose();
     }

@@ -32,7 +32,11 @@ public class GestorCarrito {
     public GestorCarrito(Carrito vistaCarrito, long identificador, String opcion, Almacenamiento almacenamiento, HashMap <Long, HashMap <String, Object>> articulosCarrito) {
         this.vistaCarrito = vistaCarrito;
         this.almacenamiento = almacenamiento;
-        this.identificador = identificador;
+        if(opcion.equals("Compra")){
+            this.identificador = 0;
+        } else {
+            this.identificador = identificador;
+        }
         this.opcion = opcion;
         this.articulosCarrito = articulosCarrito;
         modificarPlantilla();
@@ -63,8 +67,9 @@ public class GestorCarrito {
     }
     
     public void plantillaCompra(){
-        vistaCarrito.getLblNombre().setText("Proveedor");
-        vistaCarrito.getTxtNombre().setText(almacenamiento.getProveedores().get(identificador).getNombre());
+        vistaCarrito.getLblNombre().setVisible(false);
+        vistaCarrito.getTxtNombre().setVisible(false);
+        vistaCarrito.getLblTitulo().setText("Compra productos");
         vistaCarrito.getTxtTotal().setText("10000");
     }
     class ManejadoraDeMouse extends MouseAdapter{

@@ -71,6 +71,14 @@ public class Carrito extends javax.swing.JFrame {
     public void anadirFilaTabla(Object[] fila) {
         modeloTabla.addRow(fila);
     }
+
+    public JLabel getLblTitulo() {
+        return lblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        this.lblTitulo = lblTitulo;
+    }
     
     public JLabel getLblNombre() {
         return lblNombre;
@@ -224,11 +232,12 @@ public class Carrito extends javax.swing.JFrame {
         lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTotal.setText("Total venta : ");
 
+        txtTotal.setEditable(false);
+        txtTotal.setBackground(new java.awt.Color(204, 204, 204));
         txtTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTotal.setText("$$$$$$$$$$$$$$$$");
         txtTotal.setBorder(null);
-        txtTotal.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

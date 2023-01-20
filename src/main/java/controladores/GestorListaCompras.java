@@ -17,8 +17,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 import modelos.Almacenamiento;
 import modelos.Compra;
+import vistas.Carrito;
 import vistas.GestionSupermercado;
 import vistas.ListaCompras;
 
@@ -46,6 +48,12 @@ public class GestorListaCompras {
                     irGestion();  
                 }
             }
+            
+            if (e.getSource() == vistaListaCompras.getBtnConsultar()){
+                if (e.getButton() == 1){
+                    irCarritoCompras();  
+                }
+            }
         }
     }
     
@@ -54,17 +62,31 @@ public class GestorListaCompras {
         vistaListaCompras.dispose();
     }
     
-    public void insertarCompras() {
+    public final void insertarCompras() {
         Iterator i = compras.entrySet().iterator();
 
         while(i.hasNext()) {
             HashMap.Entry <String, Compra> mapa = (HashMap.Entry) i.next();
             Compra compra = mapa.getValue();
             Object[] fila = new Object[3];
-            fila[0] = compra.getProveedor();
-            fila[1] = compra.getnFactura();
+            fila[0] = compra.getnFactura();
+            fila[1] = //fecha de compra
             fila[2] = compra.getPrecioTotal();
             vistaListaCompras.anadirFilaTabla(fila);
         }
+    }
+    
+    public void irCarritoCompras() {
+        
+        int filaSeleccionada = vistaListaCompras.getTablaContenido().getSelectedRow();
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(null, "Ninguna entrada seleccionada.", "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        long numeroFactura = vistaListaCompras.compraSeleccionada(filaSeleccionada);
+        Compra compraSeleccionada = compras.get(numeroFactura);
+        HashMap <Long, HashMap<String, Object>> informacionDeCompra = compraSeleccionada.getInformacionDelProducto();
+        Carrito vistaCarrito = new Carrito("Supermercado - Universidad del Valle", 0, "Compra", almacenamiento, informacionDeCompra);
+        vistaListaCompras.dispose();
     }
 }

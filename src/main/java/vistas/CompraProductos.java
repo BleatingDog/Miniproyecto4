@@ -27,17 +27,22 @@ import modelos.Almacenamiento;
 
 public class CompraProductos extends javax.swing.JFrame {
 
-    private DefaultComboBoxModel modeloComboProducto = new DefaultComboBoxModel();
-    private DefaultComboBoxModel modeloComboProveedor = new DefaultComboBoxModel();
-    
-    private Object[] parametrosSpinner = establecerCantidadProducto();
-    private int value = (Integer)parametrosSpinner[0];
-    private int min = (Integer)parametrosSpinner[1];
-    private int max = (Integer)parametrosSpinner[2];
-    private int step = (Integer)parametrosSpinner[3];
-    private SpinnerNumberModel modeloSpinner = new SpinnerNumberModel(value, min, max, step);
+    private final DefaultComboBoxModel modeloComboProducto = new DefaultComboBoxModel();
+    private final DefaultComboBoxModel modeloComboProveedor = new DefaultComboBoxModel();
+    private final Object[] parametrosSpinner;
+    private final int value;
+    private final int min;
+    private final int max;
+    private final int step;
+    private final SpinnerNumberModel modeloSpinner;
     
     public CompraProductos(String titulo, Almacenamiento almacenamiento, HashMap <Long, HashMap <String, Object>> articulosCarrito) {
+        this.parametrosSpinner = establecerCantidadProducto();
+        this.value = (Integer) parametrosSpinner[0];
+        this.min = (Integer) parametrosSpinner[1];
+        this.max = (Integer) parametrosSpinner[2];
+        this.step = (Integer) parametrosSpinner[3];
+        this.modeloSpinner = new SpinnerNumberModel(value, min, max, step);
         initComponents();
         GestorCompraProductos gestorCompraProductos = new GestorCompraProductos(this, almacenamiento, articulosCarrito);
         setVisible(true);
@@ -46,7 +51,7 @@ public class CompraProductos extends javax.swing.JFrame {
         setResizable(false);
     }
 
-    public Object[] establecerCantidadProducto(){
+    public final Object[] establecerCantidadProducto(){
         Object[] parametros = new Object[4];
         
         Integer value = 1;
@@ -261,11 +266,6 @@ public class CompraProductos extends javax.swing.JFrame {
         btnRegresar.setText("Regresar");
         btnRegresar.setFocusPainted(false);
         btnRegresar.setRequestFocusEnabled(false);
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
         panelFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 170, 40));
         btnRegresar.setBackground(Color.WHITE);
 
@@ -273,11 +273,6 @@ public class CompraProductos extends javax.swing.JFrame {
         btnAgregar.setText("Agregar al carrito");
         btnAgregar.setFocusPainted(false);
         btnAgregar.setRequestFocusEnabled(false);
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
         panelFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 410, 190, 40));
         btnAgregar.setBackground(Color.WHITE);
 
@@ -286,11 +281,6 @@ public class CompraProductos extends javax.swing.JFrame {
         btnIrCarrito.setEnabled(false);
         btnIrCarrito.setFocusPainted(false);
         btnIrCarrito.setRequestFocusEnabled(false);
-        btnIrCarrito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIrCarritoActionPerformed(evt);
-            }
-        });
         panelFondo.add(btnIrCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 410, 170, 40));
         btnIrCarrito.setBackground(Color.WHITE);
 
@@ -309,18 +299,6 @@ public class CompraProductos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegresarActionPerformed
-
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
-    private void btnIrCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIrCarritoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnIrCarritoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;

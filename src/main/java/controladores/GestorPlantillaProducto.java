@@ -48,12 +48,12 @@ public class GestorPlantillaProducto {
         verificarNumero(vistaPlantillaProducto.getTxtPrecio());
     }
     
-    public void modificarPlantilla(){
+    public final void modificarPlantilla(){
         switch(opcion){
             case "Actualizar" -> {
-                
                 plantillaActualizarProducto();
             }
+            
             case "Eliminar" -> {
                 plantillaEliminarProducto();
                 
@@ -198,7 +198,7 @@ public class GestorPlantillaProducto {
         vistaPlantillaProducto.dispose();
     }
     
-    public void asignarCodigoProducto() {
+    public final void asignarCodigoProducto() {
         long miCodigoProducto = 1;
         while (almacenamiento.getProductos().containsKey(miCodigoProducto)) {
             miCodigoProducto += 1;

@@ -63,6 +63,18 @@ public class ListaCompras extends javax.swing.JFrame {
         scroll.getViewport().setBackground(colorFondo);
     }
 
+    public long compraSeleccionada(int fila) {
+        return (long) tablaContenido.getValueAt(fila,0);
+    }
+
+    public JButton getBtnConsultar() {
+        return btnConsultar;
+    }
+
+    public void setBtnConsultar(JButton btnConsultar) {
+        this.btnConsultar = btnConsultar;
+    }
+    
     public JButton getBtnRegresar() {
         return btnRegresar;
     }

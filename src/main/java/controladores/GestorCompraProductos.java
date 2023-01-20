@@ -34,7 +34,7 @@ public final class GestorCompraProductos {
     private final Almacenamiento almacenamiento;
     private ArrayList<Object[]> opcionComboProducto;
     private ArrayList<Object[]> opcionComboProveedor;
-    private HashMap <Long, HashMap <String, Object>> articulosCarrito;
+    private final HashMap <Long, HashMap <String, Object>> articulosCarrito;
     
     public GestorCompraProductos(CompraProductos vistaCompraProductos, Almacenamiento almacenamiento, HashMap <Long, HashMap <String, Object>> articulosCarrito){
         this.vistaCompraProductos = vistaCompraProductos;
@@ -105,21 +105,22 @@ public final class GestorCompraProductos {
         }
     }
     
-    //Ingresa al comboBox los proveedores que ofrecen ese producto
+    //Ingresa al comboBox los proveedores que ofrecen el producto seleccionado
     public void proveedoresDelProducto(){
         vistaCompraProductos.limpiarProveedoresCombo();
         opcionComboProveedor = new ArrayList();
+        
         Iterator i = almacenamiento.getProveedores().entrySet().iterator();
-        //ArrayList<Proveedor> misProveedores = new ArrayList();
         Producto miProducto = obtenerProductoEscogido();
+        
         while(i.hasNext()) {
             HashMap.Entry <Long, Proveedor> mapa = (HashMap.Entry) i.next();
             Proveedor proveedor = mapa.getValue();
             ArrayList<Producto> productoDelProveedor = proveedor.getProductos();
+            
             //Obteniendo los proveedores que ofrecen el producto escogido
             for (int o = 0; o < productoDelProveedor.size(); o++){
                 if (String.valueOf(productoDelProveedor.get(o)).equals(miProducto.getNombre())) {
-                    //misProveedores.add(proveedor);
                     Object[] proveedorEscogido = new Object[1];
                     proveedorEscogido[0] = proveedor;
                     opcionComboProveedor.add(proveedorEscogido);
@@ -153,6 +154,7 @@ public final class GestorCompraProductos {
         int opcionElegida = vistaCompraProductos.getComboProveedor().getSelectedIndex();
         return (Proveedor)opcionComboProveedor.get(opcionElegida)[0];
     }
+    
     public void agregarAlCarritoCompra() {
         HashMap <String, Object> informacionDelProducto = new HashMap();
         informacionDelProducto.put("nombre", null);
