@@ -23,6 +23,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class Almacenamiento {
     
@@ -248,10 +249,14 @@ public class Almacenamiento {
         //Medidas de eliminación
         Iterator iteradorCompras = compras.entrySet().iterator();
         while (iteradorCompras.hasNext()) {
-            HashMap.Entry <Long, Compra> mapa = (HashMap.Entry) iteradorCompras.next();
-            Compra compra = mapa.getValue();
-            if (compra.getProveedor().getNIT().equals(NIT)) {
-                sePuedeEliminar = false;
+            HashMap.Entry <Long, Compra> mapaCompras = (HashMap.Entry) iteradorCompras.next();
+            Compra compra = mapaCompras.getValue();
+            Iterator iteradorProductos = compra.getInformacionDelProducto().entrySet().iterator();
+            while (iteradorProductos.hasNext()) {
+                HashMap.Entry <Long, HashMap<String, Object>> mapaProductos = (HashMap.Entry) iteradorProductos.next();
+                if (NIT.equals(((Proveedor) mapaProductos.getValue().get("proveedor")).getNIT())) {
+                    sePuedeEliminar = false;
+                }
             }
         }
         if (sePuedeEliminar) {

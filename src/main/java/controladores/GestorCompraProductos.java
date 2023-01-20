@@ -159,6 +159,7 @@ public final class GestorCompraProductos {
         informacionDelProducto.put("precio", null);
         informacionDelProducto.put("cantidad", null);
         informacionDelProducto.put("producto", null);
+        informacionDelProducto.put("proveedor", null);
         articulosCarrito.put(null, informacionDelProducto);
         vistaCompraProductos.getBtnIrCarrito().setEnabled(true);
     }
