@@ -19,13 +19,11 @@ import java.util.HashMap;
 public class Compra implements Serializable{
     
     private Long nFactura;
-    private Proveedor proveedor;
     private HashMap <Long, HashMap<String, Object>> informacionDelProducto;
     private int precioTotal;
 
-    public Compra(Long nFactura, Proveedor proveedor, HashMap<Long, HashMap<String, Object>> informacionDelProducto, int precioTotal) {
+    public Compra(Long nFactura, HashMap<Long, HashMap<String, Object>> informacionDelProducto, int precioTotal) {
         this.nFactura = nFactura;
-        this.proveedor = proveedor;
         this.informacionDelProducto = informacionDelProducto;
         this.precioTotal = precioTotal;
     }
@@ -36,14 +34,6 @@ public class Compra implements Serializable{
 
     public void setnFactura(Long nFactura) {
         this.nFactura = nFactura;
-    }
-
-    public Proveedor getProveedor() {
-        return proveedor;
-    }
-
-    public void setProveedor(Proveedor proveedor) {
-        this.proveedor = proveedor;
     }
 
     public HashMap<Long, HashMap<String, Object>> getInformacionDelProducto() {
