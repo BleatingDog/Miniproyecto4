@@ -88,7 +88,7 @@ public class GestorListaVentas {
         long numeroFactura = vistaListaVentas.ventaSeleccionada(filaSeleccionada);
         Venta ventaSeleccionada = almacenamiento.getVentas().get(numeroFactura);
         
-        Carrito vistaCarrito = new Carrito("Supermercado - Universidad del Valle", ventaSeleccionada.getCliente().getCedula(), "Venta", almacenamiento, ventaSeleccionada.getInformacionDelProducto());
+        Carrito vistaCarrito = new Carrito(ventaSeleccionada.getCliente().getCedula(), "Venta", almacenamiento, ventaSeleccionada.getInformacionDelProducto());
         vistaListaVentas.dispose();
     }
 }

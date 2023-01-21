@@ -31,13 +31,13 @@ public class Carrito extends javax.swing.JFrame {
     private final DefaultTableModel modeloTabla = new DefaultTableModel();
     private JTableHeader th;
     
-    public Carrito(String titulo, long identificador, String opcion, Almacenamiento almacenamiento, HashMap <Long, HashMap <String, Object>> articulosCarrito) {
+    public Carrito(long identificador, String opcion, Almacenamiento almacenamiento, HashMap <Long, HashMap <String, Object>> articulosCarrito) {
         llenarColumnas();
         initComponents();
         diseñoTabla();
         GestorCarrito gestorCarrito = new GestorCarrito(this, identificador, opcion, almacenamiento, articulosCarrito);
         setVisible(true);
-        setTitle(titulo);
+        setTitle("Supermercado - Universidad del Valle");
         setLocationRelativeTo(null);
         setResizable(false);
     }
@@ -45,6 +45,7 @@ public class Carrito extends javax.swing.JFrame {
     public final void llenarColumnas(){
         
         modeloTabla.addColumn("Producto");
+        modeloTabla.addColumn("Código");
         modeloTabla.addColumn("Cantidad");
         modeloTabla.addColumn("Precio Unitario");
         modeloTabla.addColumn("Subtotal");
@@ -70,6 +71,10 @@ public class Carrito extends javax.swing.JFrame {
 
     public void anadirFilaTabla(Object[] fila) {
         modeloTabla.addRow(fila);
+    }
+    
+    public void anadirColumnaTabla(String nombre) {
+        modeloTabla.addColumn(nombre);
     }
 
     public JLabel getLblTitulo() {
@@ -136,6 +141,10 @@ public class Carrito extends javax.swing.JFrame {
         this.tablaContenido = tablaContenido;
     }
     
+    public DefaultTableModel getModeloTablaContenido() {
+        return modeloTabla;
+    }
+    
     public void addBtnRegresarVentaListener(MouseListener listenerBotones){
         btnRegresar.addMouseListener(listenerBotones);
     }
@@ -146,6 +155,18 @@ public class Carrito extends javax.swing.JFrame {
     
     public void addBtnEliminarListener(MouseListener listenerBotones){
         btnEliminar.addMouseListener(listenerBotones);
+    }
+    
+    public JButton getBtnCambiarCantidad() {
+        return btnCambiarCantidad;
+    }
+
+    public void setBtnCambiarCantidad(JButton btnCambiarCantidad) {
+        this.btnCambiarCantidad = btnCambiarCantidad;
+    }
+    
+    public void addBtnCambiarCantidadListener(MouseListener listenerBotones){
+        btnCambiarCantidad.addMouseListener(listenerBotones);
     }
     
     
@@ -167,6 +188,7 @@ public class Carrito extends javax.swing.JFrame {
         scroll = new javax.swing.JScrollPane();
         tablaContenido = new javax.swing.JTable();
         btnEliminar = new javax.swing.JButton();
+        btnCambiarCantidad = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -223,7 +245,7 @@ public class Carrito extends javax.swing.JFrame {
         btnFinalizarVenta.setText("Finalizar Venta");
         btnFinalizarVenta.setFocusPainted(false);
         btnFinalizarVenta.setRequestFocusEnabled(false);
-        panelFondo.add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 510, -1, -1));
+        panelFondo.add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 510, -1, -1));
         btnFinalizarVenta.setBackground(Color.WHITE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -270,6 +292,7 @@ public class Carrito extends javax.swing.JFrame {
         panelFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 150, 30));
 
         tablaContenido.setModel(modeloTabla);
+        tablaContenido.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         scroll.setViewportView(tablaContenido);
 
         panelFondo.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 850, 280));
@@ -278,8 +301,16 @@ public class Carrito extends javax.swing.JFrame {
         btnEliminar.setText("Eliminar");
         btnEliminar.setFocusPainted(false);
         btnEliminar.setRequestFocusEnabled(false);
-        panelFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 510, -1, -1));
+        panelFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 510, -1, -1));
         btnEliminar.setBackground(Color.WHITE);
+
+        btnCambiarCantidad.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        btnCambiarCantidad.setText("Cambiar Cantidad");
+        btnCambiarCantidad.setContentAreaFilled(false);
+        btnCambiarCantidad.setFocusPainted(false);
+        btnCambiarCantidad.setRequestFocusEnabled(false);
+        panelFondo.add(btnCambiarCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 510, -1, -1));
+        btnFinalizarVenta.setBackground(Color.WHITE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -296,6 +327,7 @@ public class Carrito extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCambiarCantidad;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnFinalizarVenta;
     private javax.swing.JButton btnRegresar;

@@ -162,6 +162,7 @@ public final class GestorCompraProductos {
         informacionDelProducto.put("nombre", productoSeleccionado.getNombre());
         informacionDelProducto.put("precio", productoSeleccionado.getPrecio());
         informacionDelProducto.put("producto", productoSeleccionado);
+        informacionDelProducto.put("proveedor", obtenerProveedorEscogido());
         
         try {
             int cantidadProducto = (int)vistaCompraProductos.getSpinner().getValue();
@@ -178,7 +179,7 @@ public final class GestorCompraProductos {
                 return;
             }
             
-            informacionDelProducto.put("Cantidad", cantidadProducto);
+            informacionDelProducto.put("cantidad", cantidadProducto);
         } catch(NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad válida", "Error", 
                     JOptionPane.ERROR_MESSAGE);
@@ -190,7 +191,7 @@ public final class GestorCompraProductos {
     }
 
     public void irCarritoCompra() {
-        Carrito vistaCarrito = new Carrito("Registro de Ventas", obtenerProveedorEscogido().getNIT(), "Compra", almacenamiento, articulosCarrito);
+        Carrito vistaCarrito = new Carrito(0, "Compra", almacenamiento, articulosCarrito);
         vistaCompraProductos.dispose();
     }
  

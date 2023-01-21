@@ -86,7 +86,7 @@ public class GestorListaCompras {
         long numeroFactura = vistaListaCompras.compraSeleccionada(filaSeleccionada);
         Compra compraSeleccionada = compras.get(numeroFactura);
         HashMap <Long, HashMap<String, Object>> informacionDeCompra = compraSeleccionada.getInformacionDelProducto();
-        Carrito vistaCarrito = new Carrito("Supermercado - Universidad del Valle", 0, "Compra", almacenamiento, informacionDeCompra);
+        Carrito vistaCarrito = new Carrito(0, "Compra", almacenamiento, informacionDeCompra);
         vistaListaCompras.dispose();
     }
 }
