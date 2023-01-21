@@ -154,6 +154,9 @@ public class VentaProductos extends javax.swing.JFrame {
         lblCantidad = new javax.swing.JLabel();
         comboProducto = new javax.swing.JComboBox<>();
         spinner = new javax.swing.JSpinner();
+        lblNombre3 = new javax.swing.JLabel();
+        lblNombre4 = new javax.swing.JLabel();
+        lblNombre5 = new javax.swing.JLabel();
         lblCliente = new javax.swing.JLabel();
         txtCliente = new javax.swing.JTextField();
 
@@ -225,36 +228,55 @@ public class VentaProductos extends javax.swing.JFrame {
         spinner.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         spinner.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        lblNombre3.setFont(new java.awt.Font("Agency FB", 1, 15)); // NOI18N
+        lblNombre3.setText("Máximo 1000 productos, si desea ingresar");
+
+        lblNombre4.setFont(new java.awt.Font("Agency FB", 1, 15)); // NOI18N
+        lblNombre4.setText("la cantidad por teclado recuerde presionar");
+
+        lblNombre5.setFont(new java.awt.Font("Agency FB", 1, 15)); // NOI18N
+        lblNombre5.setText("enter para confirmar");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(72, 72, 72)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCantidad)
-                    .addComponent(lblProducto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                    .addComponent(lblProducto)
+                    .addComponent(lblCantidad))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombre5, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61))
+                .addGap(19, 19, 19))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(comboProducto))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCantidad)
-                    .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(comboProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProducto))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(lblNombre3)
+                        .addGap(0, 0, 0)
+                        .addComponent(lblNombre4)
+                        .addGap(0, 0, 0)
+                        .addComponent(lblNombre5))
+                    .addComponent(lblCantidad))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
-        panelFondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 610, 160));
+        panelFondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 610, 210));
 
         lblCliente.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
         lblCliente.setText("Cliente");
@@ -290,6 +312,9 @@ public class VentaProductos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblCliente;
+    private javax.swing.JLabel lblNombre3;
+    private javax.swing.JLabel lblNombre4;
+    private javax.swing.JLabel lblNombre5;
     private javax.swing.JLabel lblProducto;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelFondo;

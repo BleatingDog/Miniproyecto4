@@ -171,42 +171,53 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="190" width="610" height="160"/>
+              <AbsoluteConstraints x="30" y="190" width="610" height="210"/>
             </Constraint>
           </Constraints>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblCantidad" min="-2" max="-2" attributes="0"/>
                           <Component id="lblProducto" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCantidad" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="160" max="32767" attributes="0"/>
+                      <EmptySpace pref="156" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblNombre5" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
+                          <Component id="lblNombre4" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
+                          <Component id="lblNombre3" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
                           <Component id="comboProducto" min="-2" pref="227" max="-2" attributes="0"/>
                           <Component id="spinner" min="-2" pref="80" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblProducto" max="32767" attributes="0"/>
-                          <Component id="comboProducto" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="comboProducto" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="lblProducto" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="spinner" min="-2" pref="36" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="32767" attributes="0"/>
+                              <Component id="lblNombre3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                              <Component id="lblNombre4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                              <Component id="lblNombre5" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="lblCantidad" min="-2" max="-2" attributes="0"/>
-                          <Component id="spinner" min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                      <EmptySpace pref="10" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -259,6 +270,30 @@
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Default Cursor"/>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblNombre3">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Agency FB" size="15" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="M&#xe1;ximo 1000 productos, si desea ingresar"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblNombre4">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Agency FB" size="15" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="la cantidad por teclado recuerde presionar"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblNombre5">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Agency FB" size="15" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="enter para confirmar"/>
               </Properties>
             </Component>
           </SubComponents>

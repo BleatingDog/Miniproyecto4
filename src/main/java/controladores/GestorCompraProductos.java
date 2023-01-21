@@ -47,6 +47,9 @@ public final class GestorCompraProductos {
         this.vistaCompraProductos.addBtnIrCarritoListener(new ManejadoraDeMouse());
         this.vistaCompraProductos.addProductoComboListener(new ManejadoraDeLista());
         this.vistaCompraProductos.addProveedorComboListener(new ManejadoraDeLista());
+        if (!this.articulosCarrito.isEmpty()) {
+            this.vistaCompraProductos.getBtnIrCarrito().setEnabled(true);
+        }
     }
     
     class ManejadoraDeMouse extends MouseAdapter{
@@ -55,19 +58,19 @@ public final class GestorCompraProductos {
         public void mouseClicked(MouseEvent e){
             
             if (e.getSource() == vistaCompraProductos.getBtnRegresar()){
-                if (e.getButton() == 1){
+                if (e.getButton() == 1 && vistaCompraProductos.getBtnRegresar().isEnabled()){
                     irPpal();
                 }
             }
 
             if (e.getSource() == vistaCompraProductos.getBtnAgregar()){
-                if (e.getButton() == 1){
+                if (e.getButton() == 1 && vistaCompraProductos.getBtnAgregar().isEnabled()){
                     agregarAlCarritoCompra();
                 }
             }
             
             if (e.getSource() == vistaCompraProductos.getBtnIrCarrito()){
-                if (e.getButton() == 1){
+                if (e.getButton() == 1 && vistaCompraProductos.getBtnIrCarrito().isEnabled()){
                     irCarritoCompra();
                 }
             }
@@ -164,30 +167,13 @@ public final class GestorCompraProductos {
         informacionDelProducto.put("producto", productoSeleccionado);
         informacionDelProducto.put("proveedor", obtenerProveedorEscogido());
         
-        try {
-            int cantidadProducto = (int)vistaCompraProductos.getSpinner().getValue();
-            
-            if(cantidadProducto < 1) {
-                JOptionPane.showMessageDialog(null, "Sólo puede comprar de 1 a 1000 unidades por producto", "Error", 
-                        JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            if(cantidadProducto > 1000 ){ //Cant. de productos > existencias
-                JOptionPane.showMessageDialog(null, "Superó la cantidad de existencias disponibles", "Error", 
-                        JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            informacionDelProducto.put("cantidad", cantidadProducto);
-        } catch(NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad válida", "Error", 
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        int cantidadProducto = (int)vistaCompraProductos.getSpinner().getValue();
+        
+        informacionDelProducto.put("cantidad", cantidadProducto);
         
         articulosCarrito.put(productoSeleccionado.getCodigo(), informacionDelProducto);
         vistaCompraProductos.getBtnIrCarrito().setEnabled(true);
+        JOptionPane.showMessageDialog(null, "Producto agregado al carrito con éxito", "Éxito",JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void irCarritoCompra() {
