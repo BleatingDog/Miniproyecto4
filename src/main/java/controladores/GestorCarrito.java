@@ -137,7 +137,7 @@ public class GestorCarrito {
             
             if (e.getSource() == vistaCarrito.getBtnEliminar()){
                 if (e.getButton() == 1){
-                    //Eliminar producto de la lista  
+                    eliminarProducto();
                 }
             }
             
@@ -164,7 +164,16 @@ public class GestorCarrito {
     }
     
     public void eliminarProducto(){
+        int filaSeleccionada =  vistaCarrito.getTablaContenido().getSelectedRow();
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione un producto", "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Long codigoProductoSeleccionado = (Long) vistaCarrito.getTablaContenido().getModel().getValueAt(filaSeleccionada, 1);
         
+        articulosCarrito.remove(codigoProductoSeleccionado);
+        refrescarCarrito();
     }
     
     public void cambiarCantidad() {
