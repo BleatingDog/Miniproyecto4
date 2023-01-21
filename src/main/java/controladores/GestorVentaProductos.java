@@ -116,12 +116,12 @@ public class GestorVentaProductos {
             int cantidadProducto = (int)vistaVentaProductos.getSpinner().getValue();
             
             if(cantidadProducto < 1) {
-                JOptionPane.showMessageDialog(null, "Sólo puede comprar de 1 a 100 unidades por producto", "Error", 
+                JOptionPane.showMessageDialog(null, "Sólo puede comprar de 1 a 1000 unidades por producto", "Error", 
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
-            if(cantidadProducto > 1000 ){ //Cant. de productos > existencias
+            if(cantidadProducto > productoSeleccionado.getCantidad() ||  cantidadProducto > 1000){ //Cant. de productos > existencias
                 JOptionPane.showMessageDialog(null, "Superó la cantidad de existencias disponibles", "Error", 
                         JOptionPane.ERROR_MESSAGE);
                 return;
@@ -134,7 +134,7 @@ public class GestorVentaProductos {
             return;
         }
         
-        articulosCarrito.put(codigoAsignado, informacionDelProducto);
+        articulosCarrito.put(productoSeleccionado.getCodigo(), informacionDelProducto);
         vistaVentaProductos.getBtnIrCarrito().setEnabled(true);
         
     }

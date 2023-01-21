@@ -157,12 +157,35 @@ public final class GestorCompraProductos {
     
     public void agregarAlCarritoCompra() {
         HashMap <String, Object> informacionDelProducto = new HashMap();
-        informacionDelProducto.put("nombre", null);
-        informacionDelProducto.put("precio", null);
-        informacionDelProducto.put("cantidad", null);
-        informacionDelProducto.put("producto", null);
-        informacionDelProducto.put("proveedor", null);
-        articulosCarrito.put(null, informacionDelProducto);
+        Producto productoSeleccionado = obtenerProductoEscogido();
+        
+        informacionDelProducto.put("nombre", productoSeleccionado.getNombre());
+        informacionDelProducto.put("precio", productoSeleccionado.getPrecio());
+        informacionDelProducto.put("producto", productoSeleccionado);
+        
+        try {
+            int cantidadProducto = (int)vistaCompraProductos.getSpinner().getValue();
+            
+            if(cantidadProducto < 1) {
+                JOptionPane.showMessageDialog(null, "Sólo puede comprar de 1 a 1000 unidades por producto", "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            if(cantidadProducto > 1000 ){ //Cant. de productos > existencias
+                JOptionPane.showMessageDialog(null, "Superó la cantidad de existencias disponibles", "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            informacionDelProducto.put("Cantidad", cantidadProducto);
+        } catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad válida", "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        articulosCarrito.put(productoSeleccionado.getCodigo(), informacionDelProducto);
         vistaCompraProductos.getBtnIrCarrito().setEnabled(true);
     }
 
