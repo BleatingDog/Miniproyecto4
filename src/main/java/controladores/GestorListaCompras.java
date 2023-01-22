@@ -28,7 +28,7 @@ public class GestorListaCompras {
     
     private final ListaCompras vistaListaCompras;
     private final Almacenamiento almacenamiento;
-    private HashMap <Long, Compra> compras;
+    private final HashMap <Long, Compra> compras;
 
     public GestorListaCompras(ListaCompras vistaListaCompras, Almacenamiento almacenamiento) {
         this.vistaListaCompras = vistaListaCompras;
@@ -58,11 +58,6 @@ public class GestorListaCompras {
         }
     }
     
-    public void irPpal(){
-        Ppal vistaPpal = new Ppal("Supermercado - Universidad del Valle", almacenamiento);
-        vistaListaCompras.dispose();
-    }
-    
     public final void insertarCompras() {
         Iterator i = compras.entrySet().iterator();
 
@@ -89,6 +84,11 @@ public class GestorListaCompras {
         Compra compraSeleccionada = compras.get(numeroFactura);
         HashMap <Long, HashMap<String, Object>> informacionDeCompra = compraSeleccionada.getInformacionDelProducto();
         Carrito vistaCarrito = new Carrito(0, "Lista Compra", almacenamiento, informacionDeCompra);
+        vistaListaCompras.dispose();
+    }
+    
+    public void irPpal(){
+        Ppal vistaPpal = new Ppal("Supermercado - Universidad del Valle", almacenamiento);
         vistaListaCompras.dispose();
     }
 }

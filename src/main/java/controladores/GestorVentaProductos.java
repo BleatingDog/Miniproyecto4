@@ -32,7 +32,7 @@ public class GestorVentaProductos {
     private final VentaProductos vistaVentaProductos;
     private final Almacenamiento almacenamiento;
     private ArrayList<Object[]> opcionComboProducto;
-    private HashMap<Long, HashMap<String, Object>> articulosCarrito;
+    private final HashMap<Long, HashMap<String, Object>> articulosCarrito;
     private final long cedula;
     
     public GestorVentaProductos(VentaProductos vistaVentaProductos, long cedula, Almacenamiento almacenamiento, HashMap <Long, HashMap <String, Object>> articulosCarrito){

@@ -38,7 +38,7 @@ public class GestorCarrito {
     private final Almacenamiento almacenamiento;
     private final long identificador;
     private final String opcion;
-    private HashMap <Long, HashMap <String, Object>> articulosCarrito;
+    private final HashMap <Long, HashMap <String, Object>> articulosCarrito;
     
     public GestorCarrito(Carrito vistaCarrito, long identificador, String opcion, Almacenamiento almacenamiento, HashMap <Long, HashMap <String, Object>> articulosCarrito) {
         this.vistaCarrito = vistaCarrito;
