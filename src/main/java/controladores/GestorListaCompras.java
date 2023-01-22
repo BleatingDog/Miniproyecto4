@@ -21,8 +21,8 @@ import javax.swing.JOptionPane;
 import modelos.Almacenamiento;
 import modelos.Compra;
 import vistas.Carrito;
-import vistas.GestionSupermercado;
 import vistas.ListaCompras;
+import vistas.Ppal;
 
 public class GestorListaCompras {
     
@@ -46,7 +46,7 @@ public class GestorListaCompras {
             
             if (e.getSource() == vistaListaCompras.getBtnRegresar()){
                 if (e.getButton() == 1){
-                    irGestion();  
+                    irPpal();  
                 }
             }
             
@@ -58,8 +58,8 @@ public class GestorListaCompras {
         }
     }
     
-    public void irGestion(){
-        GestionSupermercado vistaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle", almacenamiento);
+    public void irPpal(){
+        Ppal vistaPpal = new Ppal("Supermercado - Universidad del Valle", almacenamiento);
         vistaListaCompras.dispose();
     }
     
@@ -83,6 +83,7 @@ public class GestorListaCompras {
         if (filaSeleccionada == -1) {
             JOptionPane.showMessageDialog(null, "Ninguna entrada seleccionada.", "Error", 
                     JOptionPane.ERROR_MESSAGE);
+            return;
         }
         long numeroFactura = vistaListaCompras.compraSeleccionada(filaSeleccionada);
         Compra compraSeleccionada = compras.get(numeroFactura);

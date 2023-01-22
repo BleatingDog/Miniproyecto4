@@ -74,7 +74,7 @@ public class GestorCarrito {
         }
     }
     
-    public void insertarProductos(){
+    public final void insertarProductos(){
         switch(opcion) {
             case "Venta" -> {
                 Iterator i = articulosCarrito.entrySet().iterator();
@@ -87,7 +87,7 @@ public class GestorCarrito {
                     fila[1] = mapa.getKey();
                     fila[2] = informacion.get("cantidad");
                     fila[3] = ((Producto) informacion.get("producto")).getPrecio();
-                    fila[4] = ((int) fila[1]) * ((int) fila[2]);
+                    fila[4] = ((int)fila[2]) * ((int) fila[3]);
                     vistaCarrito.anadirFilaTabla(fila);
                 }
             }
@@ -120,7 +120,7 @@ public class GestorCarrito {
                     fila[1] = mapa.getKey();
                     fila[2] = informacion.get("cantidad");
                     fila[3] = ((Producto) informacion.get("producto")).getPrecio();
-                    fila[4] = ((int) fila[1]) * ((int) fila[2]);
+                    fila[4] = ((int)fila[2]) * ((int) fila[3]);
                     vistaCarrito.anadirFilaTabla(fila);
                 }
             }
@@ -192,7 +192,7 @@ public class GestorCarrito {
                 }
             }
             
-            if (e.getSource() == vistaCarrito.getBtnRegresar() && opcion.equals("Lsita Venta")){
+            if (e.getSource() == vistaCarrito.getBtnRegresar() && opcion.equals("Lista Venta")){
                 if (e.getButton() == 1){
                     irListaVentaProductos();  
                 }
@@ -204,19 +204,19 @@ public class GestorCarrito {
                 }
             }
             
-            if (e.getSource() == vistaCarrito.getBtnFinalizarVenta()){
+            if (e.getSource() == vistaCarrito.getBtnFinalizarVenta() && vistaCarrito.getBtnFinalizarVenta().isEnabled()){
                 if (e.getButton() == 1){
                     irFinalizar();  
                 }
             }
             
-            if (e.getSource() == vistaCarrito.getBtnEliminar()){
+            if (e.getSource() == vistaCarrito.getBtnEliminar() && vistaCarrito.getBtnEliminar().isEnabled()){
                 if (e.getButton() == 1){
                     eliminarProducto();
                 }
             }
             
-            if (e.getSource() == vistaCarrito.getBtnCambiarCantidad()){
+            if (e.getSource() == vistaCarrito.getBtnCambiarCantidad() && vistaCarrito.getBtnCambiarCantidad().isEnabled()){
                 if (e.getButton() == 1){
                     cambiarCantidad();
                 }
@@ -224,31 +224,22 @@ public class GestorCarrito {
         }
     }
     
-    public void irVentaProductos(){
-        VentaProductos vistaVentaProductos = new VentaProductos("Supermercado - Universidad del Valle", identificador, almacenamiento, articulosCarrito);
-        vistaCarrito.dispose();
-    }
-    
-    public void irCompraProductos(){
-        CompraProductos vistaCompraProductos = new CompraProductos("Supermercado - Universidad del Valle", almacenamiento, articulosCarrito);
-        vistaCarrito.dispose();
-    }
-    
-    public void irListaVentaProductos(){
-        ListaVentas vistaListaVentas = new ListaVentas("Supermercado - Universidad del Valle", almacenamiento);
-        vistaCarrito.dispose();
-    }
-    
-    public void irListaCompraProductos(){
-        ListaCompras vistaListaVentas = new ListaCompras("Supermercado - Universidad del Valle", almacenamiento);
-        vistaCarrito.dispose();
-    }
-    
     public void irFinalizar() {
         if (opcion.equals("Venta")) {
             Long codigo = asignarCodigoFactura();
             Cliente cliente = almacenamiento.getClientes().get(identificador);
             int precioTotal = Integer.parseInt(vistaCarrito.getTxtTotal().getText());
+            
+            //Eliminando existencias de los productos vendidos
+            Iterator iteradorProductos = articulosCarrito.entrySet().iterator();
+            while (iteradorProductos.hasNext()) {
+                HashMap.Entry <Long, HashMap<String, Object>> mapa = (HashMap.Entry) iteradorProductos.next();
+                HashMap <String, Object> informacion = mapa.getValue();
+                long codigoProducto = mapa.getKey();
+                int unidadesVendidas = (int)informacion.get("cantidad");
+                almacenamiento.getProductos().get(codigoProducto).removerExistencias(unidadesVendidas);
+            }
+            
             Venta venta = new Venta(codigo, cliente, articulosCarrito, precioTotal);
             try {
                 almacenamiento.anadirVenta(venta);
@@ -262,6 +253,17 @@ public class GestorCarrito {
         } else {
             Long codigo = asignarCodigoFactura();
             int precioTotal = Integer.parseInt(vistaCarrito.getTxtTotal().getText());
+            
+            //Eliminando existencias de los productos comprados
+            Iterator iteradorProductos = articulosCarrito.entrySet().iterator();
+            while (iteradorProductos.hasNext()) {
+                HashMap.Entry <Long, HashMap<String, Object>> mapa = (HashMap.Entry) iteradorProductos.next();
+                HashMap <String, Object> informacion = mapa.getValue();
+                long codigoProducto = mapa.getKey();
+                int unidadesCompradas = (int)informacion.get("cantidad");
+                almacenamiento.getProductos().get(codigoProducto).agregarExistencias(unidadesCompradas);
+                
+            }
             Compra compra = new Compra(codigo, articulosCarrito, precioTotal);
             try {
                 almacenamiento.anadirCompra(compra);
@@ -287,20 +289,29 @@ public class GestorCarrito {
         
         articulosCarrito.remove(codigoProductoSeleccionado);
         refrescarCarrito();
+        if(vistaCarrito.getTablaContenido().getRowCount() == 0){
+            vistaCarrito.getBtnEliminar().setEnabled(false);
+            vistaCarrito.getBtnCambiarCantidad().setEnabled(false);
+            vistaCarrito.getBtnFinalizarVenta().setEnabled(false);
+        }
     }
     
     public void cambiarCantidad() {
         int filaSeleccionada =  vistaCarrito.getTablaContenido().getSelectedRow();
+        
         if (filaSeleccionada == -1) {
             JOptionPane.showMessageDialog(null, "Por favor seleccione un producto", "Error", 
                         JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+        //Obteniendo las existencias del producto seleccionado
         Long codigoProductoSeleccionado = (Long) vistaCarrito.getTablaContenido().getModel().getValueAt(filaSeleccionada, 1);
+        int existenciasDelProducto = almacenamiento.getProductos().get(codigoProductoSeleccionado).getCantidad();
         
         String cantidad = (String) JOptionPane.showInputDialog(null, 
                                 "<html><p style = \" font:12px; \">Ingrese la nueva cantidad:"
-                                        + "</p></html>", "Actualizar cliente", 
+                                        + "</p></html>", "Cambiar cantidad", 
                                 JOptionPane.DEFAULT_OPTION);
         
         try {
@@ -311,8 +322,14 @@ public class GestorCarrito {
                 return;
             }
             
-            if(Integer.parseInt(cantidad) > 1000 ){ //Cant. de productos > existencias
-                JOptionPane.showMessageDialog(null, "Superó la cantidad de existencias disponibles", "Error", 
+            if(opcion.equals("Venta") && (Integer.parseInt(cantidad) > existenciasDelProducto) ){
+                JOptionPane.showMessageDialog(null, "Superó la cantidad de existencias disponibles: " + existenciasDelProducto + " ", "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            if((Integer.parseInt(cantidad) > 1000) ){
+                JOptionPane.showMessageDialog(null, "Sólo puede comprar de 1 a 1000 unidades por producto", "Error", 
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -322,7 +339,6 @@ public class GestorCarrito {
         } catch(NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad válida", "Error", 
                     JOptionPane.ERROR_MESSAGE);
-            return;
         }
     }
     
@@ -361,6 +377,26 @@ public class GestorCarrito {
         }
         
         return miCodigoFactura;
+    }
+    
+    public void irVentaProductos(){
+        VentaProductos vistaVentaProductos = new VentaProductos("Supermercado - Universidad del Valle", identificador, almacenamiento, articulosCarrito);
+        vistaCarrito.dispose();
+    }
+    
+    public void irCompraProductos(){
+        CompraProductos vistaCompraProductos = new CompraProductos("Supermercado - Universidad del Valle", almacenamiento, articulosCarrito);
+        vistaCarrito.dispose();
+    }
+    
+    public void irListaVentaProductos(){
+        ListaVentas vistaListaVentas = new ListaVentas("Supermercado - Universidad del Valle", almacenamiento);
+        vistaCarrito.dispose();
+    }
+    
+    public void irListaCompraProductos(){
+        ListaCompras vistaListaVentas = new ListaCompras("Supermercado - Universidad del Valle", almacenamiento);
+        vistaCarrito.dispose();
     }
     
     public void irPpal() {

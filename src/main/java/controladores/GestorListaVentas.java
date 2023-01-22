@@ -19,11 +19,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import modelos.Almacenamiento;
-import modelos.Producto;
 import modelos.Venta;
 import vistas.Carrito;
-import vistas.GestionSupermercado;
 import vistas.ListaVentas;
+import vistas.Ppal;
 
 public class GestorListaVentas {
     
@@ -37,6 +36,7 @@ public class GestorListaVentas {
         ventas = almacenamiento.getVentas();
         insertarVentas();
         this.vistaListaVentas.addBtnRegresarListener(new ManejadoraDeMouse());
+        this.vistaListaVentas.addBtnConsultarListener(new ManejadoraDeMouse());
     }
     
     class ManejadoraDeMouse extends MouseAdapter{
@@ -46,7 +46,7 @@ public class GestorListaVentas {
             
             if (e.getSource() == vistaListaVentas.getBtnRegresar()){
                 if (e.getButton() == 1){
-                    irGestion();  
+                    irPpal();  
                 }
             }
             
@@ -58,8 +58,8 @@ public class GestorListaVentas {
         }
     }
     
-    public void irGestion(){
-        GestionSupermercado vistaGestionSupermercado = new GestionSupermercado("Supermercado - Universidad del Valle", almacenamiento);
+    public void irPpal(){
+        Ppal vistaPpal = new Ppal("Supermercado - Universidad del Valle", almacenamiento);
         vistaListaVentas.dispose();
     }
     
@@ -84,6 +84,7 @@ public class GestorListaVentas {
         if (filaSeleccionada == -1) {
             JOptionPane.showMessageDialog(null, "Ninguna entrada seleccionada.", "Error", 
                     JOptionPane.ERROR_MESSAGE);
+            return;
         }
         long numeroFactura = vistaListaVentas.ventaSeleccionada(filaSeleccionada);
         Venta ventaSeleccionada = almacenamiento.getVentas().get(numeroFactura);

@@ -34,7 +34,6 @@ public class GestorVentaProductos {
     private ArrayList<Object[]> opcionComboProducto;
     private HashMap<Long, HashMap<String, Object>> articulosCarrito;
     private final long cedula;
-    private long codigoAsignado;
     
     public GestorVentaProductos(VentaProductos vistaVentaProductos, long cedula, Almacenamiento almacenamiento, HashMap <Long, HashMap <String, Object>> articulosCarrito){
         this.vistaVentaProductos = vistaVentaProductos;
@@ -42,22 +41,14 @@ public class GestorVentaProductos {
         this.cedula = cedula;
         this.articulosCarrito = articulosCarrito;
         modificarVentana();
-        System.out.println("gestor 1");
         produtosDisponibles();
-        System.out.println("gestor 2");
         this.vistaVentaProductos.addBtnRegresarListener(new ManejadoraDeMouse());
-        System.out.println("marca 3");
         this.vistaVentaProductos.addBtnAgregarListener(new ManejadoraDeMouse());
-        System.out.println("marca 4");
         this.vistaVentaProductos.addBtnIrCarritoListener(new ManejadoraDeMouse());
-        System.out.println("marca 5");
         this.vistaVentaProductos.addComboListener(new ManejadoraDeLista());
-        System.out.println("marca 6");
         if (!this.articulosCarrito.isEmpty()) {
-            System.out.println("if");
             this.vistaVentaProductos.getBtnIrCarrito().setEnabled(true);
         }
-        System.out.println("constructor");
     }
     
     class ManejadoraDeMouse extends MouseAdapter{
@@ -94,6 +85,7 @@ public class GestorVentaProductos {
             }
         }
     }
+    
     public final void modificarVentana(){
         vistaVentaProductos.getTxtCliente().setText(almacenamiento.getClientes().get(cedula).getNombre());
     }
@@ -119,20 +111,25 @@ public class GestorVentaProductos {
         HashMap <String, Object> informacionDelProducto = new HashMap();
         Producto productoSeleccionado = obtenerProductoEscogido();
         
-        informacionDelProducto.put("Nombre", productoSeleccionado.getNombre());
-        informacionDelProducto.put("Precio", productoSeleccionado.getPrecio());
-        informacionDelProducto.put("Producto", productoSeleccionado);
+        informacionDelProducto.put("nombre", productoSeleccionado.getNombre());
+        informacionDelProducto.put("precio", productoSeleccionado.getPrecio());
+        informacionDelProducto.put("producto", productoSeleccionado);
         
         int cantidadProducto = (int)vistaVentaProductos.getSpinner().getValue();
-        System.out.println("Cantidad escogida: " + cantidadProducto);
-        System.out.println("Cantidad del producto: " + productoSeleccionado.getCantidad());
-        if(cantidadProducto > productoSeleccionado.getCantidad()) {
-            JOptionPane.showMessageDialog(null, "Superó la cantidad de existencias disponibles", "Error", 
+        int existenciasProducto = productoSeleccionado.getCantidad();
+        
+        if(productoSeleccionado.getCantidad() == 0){
+            JOptionPane.showMessageDialog(null, "Existencias agotadas", "Error", 
+                       JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(cantidadProducto > existenciasProducto) {
+            JOptionPane.showMessageDialog(null, "Superó la cantidad de existencias disponibles: " + existenciasProducto + " ", "Error", 
                        JOptionPane.ERROR_MESSAGE);
                return;
         }
-        
-        informacionDelProducto.put("Cantidad", cantidadProducto);
+        informacionDelProducto.put("cantidad", cantidadProducto);
         
         articulosCarrito.put(productoSeleccionado.getCodigo(), informacionDelProducto);
         vistaVentaProductos.getBtnIrCarrito().setEnabled(true);

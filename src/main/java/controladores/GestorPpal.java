@@ -132,10 +132,8 @@ public class GestorPpal {
     }
     
     public void irVentaDeProductos(long cedula){
-        System.out.println("hola");
         HashMap <Long, HashMap <String, Object>> articulosCarrito = new HashMap();
         VentaProductos vistaVentaProductos = new VentaProductos("Supermercado - Universidad del Valle", cedula, almacenamiento, articulosCarrito);
-        System.out.println("ventana creada");
         vistaPpal.dispose();
     }
     

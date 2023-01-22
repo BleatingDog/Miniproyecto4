@@ -36,6 +36,7 @@ public class Carrito extends javax.swing.JFrame {
         initComponents();
         diseñoTabla();
         GestorCarrito gestorCarrito = new GestorCarrito(this, identificador, opcion, almacenamiento, articulosCarrito);
+        isCellEditable(tablaContenido.getRowCount(), tablaContenido.getColumnCount());
         setVisible(true);
         setTitle("Supermercado - Universidad del Valle");
         setLocationRelativeTo(null);
@@ -69,6 +70,15 @@ public class Carrito extends javax.swing.JFrame {
         scroll.getViewport().setBackground(colorFondo);
     }
 
+    public boolean isCellEditable(int row, int column){
+        for(int i = 0; i < tablaContenido.getRowCount(); i++){
+            if(row < 0){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public void anadirFilaTabla(Object[] fila) {
         modeloTabla.addRow(fila);
     }
@@ -291,8 +301,22 @@ public class Carrito extends javax.swing.JFrame {
         lblNombre.setText("Nombre cliente ");
         panelFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 150, 30));
 
+        tablaContenido = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int column){
+                for(int i = 0; i < tablaContenido.getRowCount(); i++){
+                    if(row < 0){
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
+        tablaContenido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tablaContenido.setModel(modeloTabla);
+        tablaContenido.setFocusable(false);
+        tablaContenido.setRowHeight(25);
         tablaContenido.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaContenido.getTableHeader().setReorderingAllowed(false);
         scroll.setViewportView(tablaContenido);
 
         panelFondo.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 850, 280));

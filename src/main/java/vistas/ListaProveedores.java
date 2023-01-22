@@ -106,11 +106,18 @@ public class ListaProveedores extends javax.swing.JFrame {
         lblTitulo.setText("Lista de proveedores");
         panelFondo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 26, 900, -1));
 
+        tablaContenido = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         tablaContenido.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         tablaContenido.setModel(modeloTabla);
+        tablaContenido.setFocusable(false);
         tablaContenido.setRowHeight(30);
         tablaContenido.setRowSelectionAllowed(false);
         tablaContenido.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaContenido.getTableHeader().setReorderingAllowed(false);
         scroll.setViewportView(tablaContenido);
 
         panelFondo.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 130, 756, 300));

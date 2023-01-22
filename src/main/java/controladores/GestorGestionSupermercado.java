@@ -29,7 +29,7 @@ import vistas.Ppal;
 
 public class GestorGestionSupermercado {
     
-    private GestionSupermercado vistaGestionSupermercado;
+    private final GestionSupermercado vistaGestionSupermercado;
     private final Almacenamiento almacenamiento;
     private final String[] opciones = {
                                     "Agregar",
