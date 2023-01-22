@@ -36,19 +36,28 @@ public class GestorVentaProductos {
     private final long cedula;
     private long codigoAsignado;
     
-    public GestorVentaProductos(VentaProductos vistaVentaProductos, long cedula, Almacenamiento almacenamiento){
+    public GestorVentaProductos(VentaProductos vistaVentaProductos, long cedula, Almacenamiento almacenamiento, HashMap <Long, HashMap <String, Object>> articulosCarrito){
         this.vistaVentaProductos = vistaVentaProductos;
         this.almacenamiento = almacenamiento;
         this.cedula = cedula;
+        this.articulosCarrito = articulosCarrito;
         modificarVentana();
+        System.out.println("gestor 1");
         produtosDisponibles();
+        System.out.println("gestor 2");
         this.vistaVentaProductos.addBtnRegresarListener(new ManejadoraDeMouse());
+        System.out.println("marca 3");
         this.vistaVentaProductos.addBtnAgregarListener(new ManejadoraDeMouse());
+        System.out.println("marca 4");
         this.vistaVentaProductos.addBtnIrCarritoListener(new ManejadoraDeMouse());
+        System.out.println("marca 5");
         this.vistaVentaProductos.addComboListener(new ManejadoraDeLista());
+        System.out.println("marca 6");
         if (!this.articulosCarrito.isEmpty()) {
+            System.out.println("if");
             this.vistaVentaProductos.getBtnIrCarrito().setEnabled(true);
         }
+        System.out.println("constructor");
     }
     
     class ManejadoraDeMouse extends MouseAdapter{
@@ -115,7 +124,8 @@ public class GestorVentaProductos {
         informacionDelProducto.put("Producto", productoSeleccionado);
         
         int cantidadProducto = (int)vistaVentaProductos.getSpinner().getValue();
-        
+        System.out.println("Cantidad escogida: " + cantidadProducto);
+        System.out.println("Cantidad del producto: " + productoSeleccionado.getCantidad());
         if(cantidadProducto > productoSeleccionado.getCantidad()) {
             JOptionPane.showMessageDialog(null, "Superó la cantidad de existencias disponibles", "Error", 
                        JOptionPane.ERROR_MESSAGE);

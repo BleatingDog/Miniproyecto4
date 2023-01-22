@@ -88,6 +88,13 @@ public class GestorPpal {
                         UIManager.getIcon("OptionPane.errorIcon"));
                 return;
             }
+           if(almacenamiento.getCompras().isEmpty()){
+               JOptionPane.showMessageDialog(vistaPpal, 
+                        "<html><p style = \" font:12px; \">No hay existencias de ningún producto aún</p></html>", 
+                        "Error", JOptionPane.OK_OPTION, 
+                        UIManager.getIcon("OptionPane.errorIcon"));
+                return;
+           }
             String cedulaABuscar = (String) JOptionPane.showInputDialog(vistaPpal, 
                     "<html><p style = \" font:14px; \">Ingrese la cédula del cliente </p></html>", "Datos requeridos", 
                     JOptionPane.DEFAULT_OPTION);
@@ -125,7 +132,10 @@ public class GestorPpal {
     }
     
     public void irVentaDeProductos(long cedula){
-        VentaProductos vistaVentaProductos = new VentaProductos("Supermercado - Universidad del Valle", cedula, almacenamiento);
+        System.out.println("hola");
+        HashMap <Long, HashMap <String, Object>> articulosCarrito = new HashMap();
+        VentaProductos vistaVentaProductos = new VentaProductos("Supermercado - Universidad del Valle", cedula, almacenamiento, articulosCarrito);
+        System.out.println("ventana creada");
         vistaPpal.dispose();
     }
     

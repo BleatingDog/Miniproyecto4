@@ -56,7 +56,7 @@ public class CompraProductos extends javax.swing.JFrame {
         
         Integer value = 1;
         Integer min = 1;
-        Integer max = 1000; //Cantidad de existencias del producto
+        Integer max = 1000;
         Integer step = 1;
         
         parametros[0] = value;

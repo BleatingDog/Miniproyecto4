@@ -17,6 +17,7 @@ import controladores.GestorVentaProductos;
 import java.awt.Color;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -35,7 +36,7 @@ public class VentaProductos extends javax.swing.JFrame {
     private final int step;
     private final SpinnerNumberModel modeloSpinner;
     
-    public VentaProductos(String titulo, long cedula, Almacenamiento almacenamiento) {
+    public VentaProductos(String titulo, long cedula, Almacenamiento almacenamiento, HashMap <Long, HashMap <String, Object>> articulosCarrito) {
         this.parametrosSpinner = establecerCantidadProducto();
         this.value = (Integer) parametrosSpinner[0];
         this.min = (Integer) parametrosSpinner[1];
@@ -43,7 +44,7 @@ public class VentaProductos extends javax.swing.JFrame {
         this.step = (Integer) parametrosSpinner[3];
         this.modeloSpinner = new SpinnerNumberModel(value, min, max, step);
         initComponents();
-        GestorVentaProductos gestorVentaProductos = new GestorVentaProductos(this, cedula, almacenamiento);
+        GestorVentaProductos gestorVentaProductos = new GestorVentaProductos(this, cedula, almacenamiento, articulosCarrito);
         setVisible(true);
         setTitle(titulo);
         setLocationRelativeTo(null);

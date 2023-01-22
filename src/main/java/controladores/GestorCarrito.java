@@ -225,7 +225,7 @@ public class GestorCarrito {
     }
     
     public void irVentaProductos(){
-        VentaProductos vistaVentaProductos = new VentaProductos("Supermercado - Universidad del Valle", identificador, almacenamiento);
+        VentaProductos vistaVentaProductos = new VentaProductos("Supermercado - Universidad del Valle", identificador, almacenamiento, articulosCarrito);
         vistaCarrito.dispose();
     }
     
