@@ -242,10 +242,10 @@ public class Carrito extends javax.swing.JFrame {
         panelFondo.add(panelBanner, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 110));
 
         btnFinalizarVenta.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
-        btnFinalizarVenta.setText("Finalizar Venta");
+        btnFinalizarVenta.setText("Finalizar");
         btnFinalizarVenta.setFocusPainted(false);
         btnFinalizarVenta.setRequestFocusEnabled(false);
-        panelFondo.add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 510, -1, -1));
+        panelFondo.add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 510, -1, -1));
         btnFinalizarVenta.setBackground(Color.WHITE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -301,7 +301,7 @@ public class Carrito extends javax.swing.JFrame {
         btnEliminar.setText("Eliminar");
         btnEliminar.setFocusPainted(false);
         btnEliminar.setRequestFocusEnabled(false);
-        panelFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 510, -1, -1));
+        panelFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 510, -1, -1));
         btnEliminar.setBackground(Color.WHITE);
 
         btnCambiarCantidad.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
@@ -309,7 +309,7 @@ public class Carrito extends javax.swing.JFrame {
         btnCambiarCantidad.setContentAreaFilled(false);
         btnCambiarCantidad.setFocusPainted(false);
         btnCambiarCantidad.setRequestFocusEnabled(false);
-        panelFondo.add(btnCambiarCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 510, -1, -1));
+        panelFondo.add(btnCambiarCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 510, -1, -1));
         btnFinalizarVenta.setBackground(Color.WHITE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

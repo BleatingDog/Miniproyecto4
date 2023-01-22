@@ -41,7 +41,6 @@ public class GestorVentaProductos {
         this.almacenamiento = almacenamiento;
         this.cedula = cedula;
         modificarVentana();
-        asignarCodigoFactura();
         produtosDisponibles();
         this.vistaVentaProductos.addBtnRegresarListener(new ManejadoraDeMouse());
         this.vistaVentaProductos.addBtnAgregarListener(new ManejadoraDeMouse());
@@ -136,13 +135,6 @@ public class GestorVentaProductos {
         return (Producto)opcionComboProducto.get(opcionElegida)[0];
     }
     
-    public final void asignarCodigoFactura() {
-        long miCodigoFactura = 1;
-        while (almacenamiento.getVentas().containsKey(miCodigoFactura)) {
-            miCodigoFactura += 1;
-        }
-        codigoAsignado = miCodigoFactura;
-    }
     public void irCarritoVenta(long cedulaCliente) {
         Carrito vistaCarrito = new Carrito(cedulaCliente, "Venta", almacenamiento, articulosCarrito);
         vistaVentaProductos.dispose();

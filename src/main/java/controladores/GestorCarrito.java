@@ -15,14 +15,19 @@ package controladores;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import modelos.Almacenamiento;
+import modelos.Cliente;
+import modelos.Compra;
 import modelos.Producto;
 import modelos.Proveedor;
+import modelos.Venta;
 import vistas.Carrito;
 import vistas.CompraProductos;
+import vistas.Ppal;
 import vistas.VentaProductos;
 
 public class GestorCarrito {
@@ -131,7 +136,7 @@ public class GestorCarrito {
             
             if (e.getSource() == vistaCarrito.getBtnFinalizarVenta()){
                 if (e.getButton() == 1){
-                    irFinalizarVenta();  
+                    irFinalizar();  
                 }
             }
             
@@ -159,8 +164,36 @@ public class GestorCarrito {
         vistaCarrito.dispose();
     }
     
-    public void irFinalizarVenta() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void irFinalizar() {
+        if (opcion.equals("Venta")) {
+            Long codigo = asignarCodigoFactura();
+            Cliente cliente = almacenamiento.getClientes().get(identificador);
+            int precioTotal = Integer.parseInt(vistaCarrito.getTxtTotal().getText());
+            Venta venta = new Venta(codigo, cliente, articulosCarrito, precioTotal);
+            try {
+                almacenamiento.anadirVenta(venta);
+                JOptionPane.showMessageDialog(null, "Venta realizada con éxito", "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error al realizar la venta", "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } else {
+            Long codigo = asignarCodigoFactura();
+            int precioTotal = Integer.parseInt(vistaCarrito.getTxtTotal().getText());
+            Compra compra = new Compra(codigo, articulosCarrito, precioTotal);
+            try {
+                almacenamiento.anadirCompra(compra);
+                JOptionPane.showMessageDialog(null, "Compra realizada con éxito", "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error al realizar la compra", "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        irPpal();
     }
     
     public void eliminarProducto(){
@@ -233,5 +266,25 @@ public class GestorCarrito {
             precioTotal += cantidad * precio;
         }
         vistaCarrito.getTxtTotal().setText(String.valueOf(precioTotal));
+    }
+    
+    public final long asignarCodigoFactura() {
+        long miCodigoFactura = 1;
+        if (opcion.equals("Venta")) {
+            while (almacenamiento.getVentas().containsKey(miCodigoFactura)) {
+                miCodigoFactura += 1;
+            }
+        } else {
+            while (almacenamiento.getCompras().containsKey(miCodigoFactura)) {
+                miCodigoFactura += 1;
+            }
+        }
+        
+        return miCodigoFactura;
+    }
+    
+    public void irPpal() {
+        Ppal vistaPpal = new Ppal("Supermercado - Universidad del Valle", almacenamiento);
+        vistaCarrito.dispose();
     }
 }
