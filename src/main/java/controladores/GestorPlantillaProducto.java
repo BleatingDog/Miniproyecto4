@@ -184,8 +184,9 @@ public class GestorPlantillaProducto {
                        JOptionPane.INFORMATION_MESSAGE);
             irGestion(); 
             } else {
-                JOptionPane.showMessageDialog(null, "No se puede eliminar el producto porque"
-                        + "", "Resultado de actualizar", JOptionPane.ERROR_MESSAGE);                
+                JOptionPane.showMessageDialog(null, "No se puede eliminar ningún producto que tenga incidencia en alguna factura "
+                        + "o proveedor", 
+                        "Resultado de eliminar", JOptionPane.ERROR_MESSAGE);          
             }
             
         } catch(IOException e){

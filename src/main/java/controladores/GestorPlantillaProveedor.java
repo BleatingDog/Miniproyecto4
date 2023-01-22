@@ -208,9 +208,15 @@ public class GestorPlantillaProveedor {
     public void eliminarProveedor() {
         //Eliminando el proveedor
         try{
-            almacenamiento.eliminarProveedor(nit);
-            JOptionPane.showMessageDialog(null, "Proveedor eliminado con éxito", "Resultado de eliminar", JOptionPane.INFORMATION_MESSAGE);
-            irGestion();
+            if(almacenamiento.eliminarProveedor(nit)){
+                JOptionPane.showMessageDialog(null, "Proveedor eliminado con éxito", "Resultado de eliminar", JOptionPane.INFORMATION_MESSAGE);
+                irGestion();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se puede eliminar ningún proveedor que tenga incidencia en alguna "
+                        + "factura o producto", 
+                        "Resultado de eliminar", JOptionPane.ERROR_MESSAGE);
+            }
+            
         } catch(IOException e){
             JOptionPane.showMessageDialog(null, "Error al eliminar: " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }

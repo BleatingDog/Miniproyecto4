@@ -176,9 +176,15 @@ public class GestorPlantillaCliente {
     public void eliminarCliente() {
         //Eliminando el cliente
         try{
-            almacenamiento.eliminarCliente(cedula);
-            JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito", "Resultado de eliminar", JOptionPane.INFORMATION_MESSAGE);
-            irGestion();
+            if(almacenamiento.eliminarCliente(cedula)){
+                JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito", "Resultado de eliminar", JOptionPane.INFORMATION_MESSAGE);
+                irGestion();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se puede eliminar ningún cliente que tenga incidencia "
+                        + "en alguna factura", 
+                        "Resultado de eliminar", JOptionPane.ERROR_MESSAGE);
+            }
+            
         } catch(IOException e){
             JOptionPane.showMessageDialog(null, "Error al eliminar: " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
