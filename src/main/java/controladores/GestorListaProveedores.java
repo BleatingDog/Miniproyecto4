@@ -68,8 +68,7 @@ public class GestorListaProveedores {
             String productosString = "";
             Iterator o = productos.iterator();
             while (o.hasNext()) {
-                Producto producto = (Producto) o.next();
-                productosString += producto.getNombre();
+                productosString += o.next();
                 if (o.hasNext()) {
                     productosString += ", ";
                 } else {

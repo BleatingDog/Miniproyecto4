@@ -78,7 +78,6 @@
                   <Connection code="modeloTabla" type="code"/>
                 </Property>
                 <Property name="rowHeight" type="int" value="30"/>
-                <Property name="rowSelectionAllowed" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>

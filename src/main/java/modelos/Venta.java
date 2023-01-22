@@ -14,6 +14,8 @@
 package modelos;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 
 public class Venta implements Serializable{
@@ -22,12 +24,16 @@ public class Venta implements Serializable{
     private Cliente cliente;
     private HashMap <Long, HashMap<String, Object>> informacionDelProducto;
     private int precioTotal;
+    private LocalDate fecha;
+    private LocalTime hora;
 
     public Venta(Long nFactura, Cliente cliente, HashMap<Long, HashMap<String, Object>> informacionDelProducto, int precioTotal) {
         this.nFactura = nFactura;
         this.cliente = cliente;
         this.informacionDelProducto = informacionDelProducto;
         this.precioTotal = precioTotal;
+        fecha = LocalDate.now();
+        hora = LocalTime.now();
     }
 
     public Long getnFactura() {
@@ -60,6 +66,14 @@ public class Venta implements Serializable{
 
     public void setPrecioTotal(int precioTotal) {
         this.precioTotal = precioTotal;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public LocalTime getHora() {
+        return hora;
     }
     
 }

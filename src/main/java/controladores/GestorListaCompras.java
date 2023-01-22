@@ -36,6 +36,7 @@ public class GestorListaCompras {
         compras = almacenamiento.getCompras();
         insertarCompras();
         this.vistaListaCompras.addBtnRegresarListener(new ManejadoraDeMouse());
+        this.vistaListaCompras.addBtnConsultarListener(new ManejadoraDeMouse());
     }
     
     class ManejadoraDeMouse extends MouseAdapter{
@@ -70,7 +71,7 @@ public class GestorListaCompras {
             Compra compra = mapa.getValue();
             Object[] fila = new Object[3];
             fila[0] = compra.getnFactura();
-            fila[1] = //fecha de compra
+            fila[1] = compra.getFecha().toString() + ", " + compra.getHora().getHour() + ":" + compra.getHora().getMinute() + ":" + compra.getHora().getSecond();
             fila[2] = compra.getPrecioTotal();
             vistaListaCompras.anadirFilaTabla(fila);
         }
@@ -86,7 +87,7 @@ public class GestorListaCompras {
         long numeroFactura = vistaListaCompras.compraSeleccionada(filaSeleccionada);
         Compra compraSeleccionada = compras.get(numeroFactura);
         HashMap <Long, HashMap<String, Object>> informacionDeCompra = compraSeleccionada.getInformacionDelProducto();
-        Carrito vistaCarrito = new Carrito(0, "Compra", almacenamiento, informacionDeCompra);
+        Carrito vistaCarrito = new Carrito(0, "Lista Compra", almacenamiento, informacionDeCompra);
         vistaListaCompras.dispose();
     }
 }

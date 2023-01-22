@@ -40,7 +40,6 @@ public class ListaCompras extends javax.swing.JFrame {
     }
     
     public final void llenarColumnas(){
-        modeloTabla.addColumn("Proveedor");
         modeloTabla.addColumn("N.° factura");
         modeloTabla.addColumn("Fecha de compra");
         modeloTabla.addColumn("Precio total");
@@ -98,6 +97,10 @@ public class ListaCompras extends javax.swing.JFrame {
     public void anadirFilaTabla(Object[] fila) {
         modeloTabla.addRow(fila);
     }
+    
+    public void addBtnConsultarListener(MouseListener listenerBotones){
+        btnConsultar.addMouseListener(listenerBotones);
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -122,7 +125,6 @@ public class ListaCompras extends javax.swing.JFrame {
         tablaContenido.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         tablaContenido.setModel(modeloTabla);
         tablaContenido.setRowHeight(30);
-        tablaContenido.setRowSelectionAllowed(false);
         scroll.setViewportView(tablaContenido);
 
         panelFondo.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 756, 300));

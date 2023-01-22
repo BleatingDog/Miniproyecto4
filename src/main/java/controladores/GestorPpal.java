@@ -71,7 +71,7 @@ public class GestorPpal {
                 }
             }
             
-            if (e.getSource() == vistaPpal.getBtnRegistroCompras()){
+            if (e.getSource() == vistaPpal.getBtnRegistroVentas()){
                 if (e.getButton() == 1){
                     irRegistroVentas();
                 }

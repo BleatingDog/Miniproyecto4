@@ -72,7 +72,7 @@ public class GestorListaVentas {
             Object[] fila = new Object[4];
             fila[0] = venta.getCliente().getCedula();
             fila[1] = venta.getnFactura();
-            fila[2] = //Fecha de venta
+            fila[2] = venta.getFecha().toString() + ", " + venta.getHora().getHour() + ":" + venta.getHora().getMinute() + ":" + venta.getHora().getSecond();
             fila[3] = venta.getPrecioTotal();
             vistaListaVentas.anadirFilaTabla(fila);
         }
@@ -88,7 +88,7 @@ public class GestorListaVentas {
         long numeroFactura = vistaListaVentas.ventaSeleccionada(filaSeleccionada);
         Venta ventaSeleccionada = almacenamiento.getVentas().get(numeroFactura);
         
-        Carrito vistaCarrito = new Carrito(ventaSeleccionada.getCliente().getCedula(), "Venta", almacenamiento, ventaSeleccionada.getInformacionDelProducto());
+        Carrito vistaCarrito = new Carrito(ventaSeleccionada.getCliente().getCedula(), "Lista Venta", almacenamiento, ventaSeleccionada.getInformacionDelProducto());
         vistaListaVentas.dispose();
     }
 }

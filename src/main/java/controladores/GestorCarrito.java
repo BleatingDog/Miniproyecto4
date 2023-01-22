@@ -27,6 +27,8 @@ import modelos.Proveedor;
 import modelos.Venta;
 import vistas.Carrito;
 import vistas.CompraProductos;
+import vistas.ListaCompras;
+import vistas.ListaVentas;
 import vistas.Ppal;
 import vistas.VentaProductos;
 
@@ -60,6 +62,14 @@ public class GestorCarrito {
             
             case "Compra" -> {
                 plantillaCompra();
+            }
+            
+            case "Lista Venta" -> {
+                plantillaListaVenta();
+            }
+            
+            case "Lista Compra" -> {
+                plantillaListaCompra();
             }
         }
     }
@@ -98,16 +108,53 @@ public class GestorCarrito {
                     vistaCarrito.anadirFilaTabla(fila);
                 }
             }
+            
+            case "Lista Venta" -> {
+                Iterator i = articulosCarrito.entrySet().iterator();
+
+                while(i.hasNext()) {
+                    HashMap.Entry <Long, HashMap<String, Object>> mapa = (HashMap.Entry) i.next();
+                    HashMap <String, Object> informacion = mapa.getValue();
+                    Object[] fila = new Object[5];
+                    fila[0] = informacion.get("nombre");
+                    fila[1] = mapa.getKey();
+                    fila[2] = informacion.get("cantidad");
+                    fila[3] = ((Producto) informacion.get("producto")).getPrecio();
+                    fila[4] = ((int) fila[1]) * ((int) fila[2]);
+                    vistaCarrito.anadirFilaTabla(fila);
+                }
+            }
+            
+            case "Lista Compra" -> {
+                Iterator i = articulosCarrito.entrySet().iterator();
+
+                while(i.hasNext()) {
+                    HashMap.Entry <Long, HashMap<String, Object>> mapa = (HashMap.Entry) i.next();
+                    HashMap <String, Object> informacion = mapa.getValue();
+                    Object[] fila = new Object[6];
+                    fila[0] = informacion.get("nombre");
+                    fila[1] = mapa.getKey();
+                    fila[2] = informacion.get("cantidad");
+                    fila[3] = ((Producto) informacion.get("producto")).getPrecio();
+                    fila[4] = ((int) fila[2]) * ((int) fila[3]);
+                    fila[5] = ((Proveedor) informacion.get("proveedor")).getNombre();
+                    vistaCarrito.anadirFilaTabla(fila);
+                }
+            }
         }
     }
     
     public void plantillaVenta(){
         vistaCarrito.getTxtNombre().setText(almacenamiento.getClientes().get(identificador).getNombre());
-        
-        Iterator i = articulosCarrito.entrySet().iterator();
-        int precioTotal = 0;
         asignarPrecioTotal();
-        vistaCarrito.getTxtTotal().setText(String.valueOf(precioTotal));
+    }
+    
+    public void plantillaListaVenta(){
+        vistaCarrito.getTxtNombre().setText(almacenamiento.getClientes().get(identificador).getNombre());
+        vistaCarrito.getBtnCambiarCantidad().setVisible(false);
+        vistaCarrito.getBtnEliminar().setVisible(false);
+        vistaCarrito.getBtnFinalizarVenta().setVisible(false);
+        asignarPrecioTotal();
     }
     
     public void plantillaCompra(){
@@ -117,6 +164,17 @@ public class GestorCarrito {
         asignarPrecioTotal();
         vistaCarrito.anadirColumnaTabla("Proveedor");
     }
+    
+    public void plantillaListaCompra(){
+        vistaCarrito.getLblTitulo().setText("Compra productos");
+        vistaCarrito.getLblNombre().setVisible(false);
+        vistaCarrito.getTxtNombre().setVisible(false);
+        vistaCarrito.getBtnCambiarCantidad().setVisible(false);
+        vistaCarrito.getBtnEliminar().setVisible(false);
+        vistaCarrito.getBtnFinalizarVenta().setVisible(false);
+        asignarPrecioTotal();
+    }
+    
     class ManejadoraDeMouse extends MouseAdapter{
         
         @Override
@@ -131,6 +189,18 @@ public class GestorCarrito {
             if (e.getSource() == vistaCarrito.getBtnRegresar() && opcion.equals("Compra")){
                 if (e.getButton() == 1){
                     irCompraProductos();  
+                }
+            }
+            
+            if (e.getSource() == vistaCarrito.getBtnRegresar() && opcion.equals("Lsita Venta")){
+                if (e.getButton() == 1){
+                    irListaVentaProductos();  
+                }
+            }
+            
+            if (e.getSource() == vistaCarrito.getBtnRegresar() && opcion.equals("Lista Compra")){
+                if (e.getButton() == 1){
+                    irListaCompraProductos();  
                 }
             }
             
@@ -161,6 +231,16 @@ public class GestorCarrito {
     
     public void irCompraProductos(){
         CompraProductos vistaCompraProductos = new CompraProductos("Supermercado - Universidad del Valle", almacenamiento, articulosCarrito);
+        vistaCarrito.dispose();
+    }
+    
+    public void irListaVentaProductos(){
+        ListaVentas vistaListaVentas = new ListaVentas("Supermercado - Universidad del Valle", almacenamiento);
+        vistaCarrito.dispose();
+    }
+    
+    public void irListaCompraProductos(){
+        ListaCompras vistaListaVentas = new ListaCompras("Supermercado - Universidad del Valle", almacenamiento);
         vistaCarrito.dispose();
     }
     
