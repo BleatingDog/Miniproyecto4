@@ -158,6 +158,11 @@ public class GestorPpal {
     }
     
     public void irCompraDeProductos(){
+        if(almacenamiento.getProveedores().isEmpty() || almacenamiento.getProductos().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe agregar primero un proveedor y un producto", "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;  
+        }
         HashMap <Long, HashMap <String, Object>> articulosCarrito = new HashMap();
         CompraProductos vistaCompraProductos = new CompraProductos("Supermercado - Universidad del Valle", almacenamiento, articulosCarrito);
         vistaPpal.dispose();

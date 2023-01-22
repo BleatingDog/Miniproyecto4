@@ -81,7 +81,7 @@ public final class GestorCompraProductos {
 
         @Override
         public void itemStateChanged(ItemEvent e) {
-            if(e.getSource() == vistaCompraProductos.getComboProducto()){
+            if(e.getSource() == vistaCompraProductos.getComboProducto() && e.getStateChange() == ItemEvent.SELECTED){
                 vistaCompraProductos.reiniciarSpinner();
                 proveedoresDelProducto();
             }
@@ -132,8 +132,7 @@ public final class GestorCompraProductos {
             }
         }
         
-        if(vistaCompraProductos.getComboProveedor().getModel().getSize() == 0){ //Se repite el mensaje varias veces
-            System.out.println("Eyou");
+        if(vistaCompraProductos.getComboProveedor().getModel().getSize() == 0){
             JOptionPane.showMessageDialog(null, "<html><p style = \" font:12px; \">No hay "
                     + "proveedores que ofrezcan el producto.</p></html>", "Aviso", 
                     JOptionPane.OK_OPTION, UIManager.getIcon("OptionPane.informationIcon"));
