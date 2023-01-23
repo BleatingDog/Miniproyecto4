@@ -139,9 +139,11 @@ public class Almacenamiento {
         }
         Iterator iteradorProveedores = proveedores.entrySet().iterator();
         while (iteradorProveedores.hasNext()) {
+            System.out.println("iteré en proveedores");
             HashMap.Entry <Long, Proveedor> mapa = (HashMap.Entry) iteradorProveedores.next();
             Proveedor proveedor = mapa.getValue();
-            if (proveedor.getProductos().contains(productos.get(codigo))) {
+            if (proveedor.getProductos().contains(productos.get(codigo).getNombre())) {
+                System.out.println("un proveedor tiene este item");
                 sePuedeEliminar = false;
             }
         }
